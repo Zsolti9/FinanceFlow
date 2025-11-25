@@ -1,0 +1,19 @@
+# Visual Studio mindenhol
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.log
+
+# .NET Core
+*.dll
+*.exe
+*.pdb
+*.cache
+*.db
+
+# Node / React
+node_modules/
+dist/
+.env

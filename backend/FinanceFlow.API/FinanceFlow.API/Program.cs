@@ -11,10 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Configs
 var configuration = builder.Configuration;
 
-// DB
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+// --------------------
+// DB (XAMPP MySQL / MariaDB)
+var connectionString = configuration.GetConnectionString("DefaultConnection");
 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+// --------------------
 // Identity
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
@@ -27,9 +31,11 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
+// --------------------
 // JWT auth
 var jwtSection = configuration.GetSection("Jwt");
 var key = Encoding.UTF8.GetBytes(jwtSection["Key"]);
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = "JwtBearer";
@@ -50,14 +56,33 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// --------------------
 // Services
 builder.Services.AddScoped<IJwtService, JwtService>();
 
+// --------------------
+// Controllers & Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// --------------------
+// CORS (React)
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173") // React app portja
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
+
+// --------------------
+// Middleware
+app.UseCors("AllowReactApp");
 
 if (app.Environment.IsDevelopment())
 {

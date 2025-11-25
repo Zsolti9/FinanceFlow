@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Laskovics Zsot\\Mestermunka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj": {}
+    "C:\\Laskovics Zsolt\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj": {}
   },
   "projects": {
-    "C:\\Laskovics Zsot\\Mestermunka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj": {
+    "C:\\Laskovics Zsolt\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Laskovics Zsot\\Mestermunka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj",
+        "projectUniqueName": "C:\\Laskovics Zsolt\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj",
         "projectName": "FinanceFlow.API",
-        "projectPath": "C:\\Laskovics Zsot\\Mestermunka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj",
-        "packagesPath": "C:\\Users\\diak\\.nuget\\packages\\",
-        "outputPath": "C:\\Laskovics Zsot\\Mestermunka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\obj\\",
+        "projectPath": "C:\\Laskovics Zsolt\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj",
+        "packagesPath": "C:\\Users\\zsolt\\.nuget\\packages\\",
+        "outputPath": "C:\\Laskovics Zsolt\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\diak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\zsolt\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -56,21 +57,25 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.0, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -104,7 +109,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

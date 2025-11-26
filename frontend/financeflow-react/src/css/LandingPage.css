@@ -1,45 +1,53 @@
-/* Oldal háttér */
-.LandingWrapper {
-  min-height: 100vh;
-  background: black; /* GitHub dark stílus, de mehet türkiz is ha szeretnéd */
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  
-}
-
-/* NAVBAR (GitHub szerű) */
+/* NAVBAR */
 .Navbar {
-  width: 99%;
-  padding: 18px 10px;
+  width: 100%;
+  padding: 18px 40px;
   background: black;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
-/* Logo */
-.Logo {
+/* Logo konténer */
+.LogoContainer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.NavLogo {
+  height: 40px;          /* logó mérete */
+  margin-right: 10px;    /* távolság a szövegtől */
+}
+
+.LogoText {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #6366F1; /* mustársárga */
+  color: #E1AD01; /* mustársárga */
 }
 
 /* Jobb oldali linkek */
+.NavLinks {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
 .NavLinks span {
   font-size: 1rem;
   color: #009F9D; /* türkiz */
-  margin-left: 25px;
   cursor: pointer;
+  white-space: nowrap;
   transition: 0.25s;
 }
 
 .NavLinks span:hover {
-  color: #0EA5E9; /* mustársárga */
+  color: #E1AD01; /* mustársárga */
 }
 
-/* HERO – GitHub-stílus nagy tipográfiával */
+/* HERO */
 .Hero {
   margin: auto;
   text-align: center;
@@ -50,11 +58,11 @@
 .Hero h1 {
   font-size: 3rem;
   font-weight: bold;
-  color: #E1AD01; /* mustársárga */
+  color: #E1AD01;
   margin-bottom: 20px;
 }
 
 .Hero p {
   font-size: 1.3rem;
-  color: #009F9D; /* türkiz */
+  color: #009F9D;
 }

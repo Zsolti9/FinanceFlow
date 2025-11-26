@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "../css/LandingPage.css";
+import logo from "../assets/FinanceFlowLogo.png";
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -7,8 +8,10 @@ export default function LandingPage() {
   return (
     <div className="LandingDiv">
       {/* NAVBAR (GitHub-stílus) */}
-      <nav className="Navbar">
-        <div className="Logo">FinanceFlow</div>
+      <nav className="Navbar"><div className="LogoContainer" onClick={() => navigate("/")}>
+          <img src={logo} alt="Logo" className="NavLogo" />
+          <span className="LogoText">FinanceFlow</span>
+        </div>
 
         <div className="NavLinks">
           <span onClick={() => navigate("/login")}>Bejelentkezés</span>

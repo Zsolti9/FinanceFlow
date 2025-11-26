@@ -1,0 +1,60 @@
+/* Oldal háttér */
+.LandingWrapper {
+  min-height: 100vh;
+  background: black; /* GitHub dark stílus, de mehet türkiz is ha szeretnéd */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+/* NAVBAR (GitHub szerű) */
+.Navbar {
+  width: 99%;
+  padding: 18px 10px;
+  background: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+/* Logo */
+.Logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #6366F1; /* mustársárga */
+}
+
+/* Jobb oldali linkek */
+.NavLinks span {
+  font-size: 1rem;
+  color: #009F9D; /* türkiz */
+  margin-left: 25px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.NavLinks span:hover {
+  color: #0EA5E9; /* mustársárga */
+}
+
+/* HERO – GitHub-stílus nagy tipográfiával */
+.Hero {
+  margin: auto;
+  text-align: center;
+  padding: 40px;
+  max-width: 800px;
+}
+
+.Hero h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #E1AD01; /* mustársárga */
+  margin-bottom: 20px;
+}
+
+.Hero p {
+  font-size: 1.3rem;
+  color: #009F9D; /* türkiz */
+}

@@ -1,12 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  overflow-x: hidden; /* ≫ Kilógást teljesen megszünteti */
+}
+/* Teljes oldal – sötét pulzáló háttér */
+.LandingDiv {
+  min-height: 100vh;
+  background: #0d0d0d;
+  animation: bgPulse 8s infinite alternate;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes bgPulse {
+  0% { background: #0d0d0d; }
+  100% { background: #0f1a0f; }
+}
+
 /* NAVBAR */
 .Navbar {
   width: 100%;
-  padding: 18px 40px;
-  background: black;
+  padding: 20px 40px;
+  background: #0d0d0d;
+  border-bottom: 1px solid rgba(74, 222, 128, 0.35);
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  box-sizing: border-box;
+  align-items: center;
+  box-shadow: 0 3px 20px rgba(74, 222, 128, 0.15);
+  animation: fadeIn 0.7s ease;
 }
 
 /* Logo konténer */
@@ -17,52 +43,76 @@
 }
 
 .NavLogo {
-  height: 40px;          /* logó mérete */
-  margin-right: 10px;    /* távolság a szövegtől */
+  height: 70px;
+  transition: 0.25s;
 }
 
-.LogoText {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #E1AD01; /* mustársárga */
+.NavLogo:hover {
+  filter: drop-shadow(0 0 8px #4ade80);
 }
 
-/* Jobb oldali linkek */
+/* NAV LINKS */
 .NavLinks {
   display: flex;
-  gap: 20px;
+  gap: 22px;
   align-items: center;
-  flex-wrap: nowrap;
 }
 
 .NavLinks span {
-  font-size: 1rem;
-  color: #009F9D; /* türkiz */
+  color: #4ade80;
+  font-size: 17px;
   cursor: pointer;
-  white-space: nowrap;
   transition: 0.25s;
 }
 
 .NavLinks span:hover {
-  color: #E1AD01; /* mustársárga */
+  color: #69f497;
+  text-shadow: 0 0 8px rgba(74, 222, 128, 0.8);
 }
 
-/* HERO */
+/* HERO – központi üzenet */
 .Hero {
   margin: auto;
   text-align: center;
-  padding: 40px;
-  max-width: 800px;
+  padding: 40px 20px;
+  max-width: 900px;
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .Hero h1 {
   font-size: 3rem;
-  font-weight: bold;
-  color: #E1AD01;
+  font-weight: 700;
+  color: #4ade80;
+  text-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
   margin-bottom: 20px;
 }
 
 .Hero p {
-  font-size: 1.3rem;
-  color: #009F9D;
+  font-size: 1.4rem;
+  color: #b4ffcc;
+  opacity: 0.85;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .Navbar {
+    padding: 15px 20px;
+  }
+
+  .NavLogo {
+    height: 55px;
+  }
+
+  .Hero h1 {
+    font-size: 2.3rem;
+  }
+
+  .Hero p {
+    font-size: 1.1rem;
+  }
 }

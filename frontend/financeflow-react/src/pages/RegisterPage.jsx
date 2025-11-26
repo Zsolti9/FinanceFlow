@@ -1,5 +1,7 @@
+import "../css/RegisterPage.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/FinanceFlowLogo.png";
 
 export default function RegisterPage() {
   const [displayName, setDisplayName] = useState("");
@@ -14,11 +16,10 @@ export default function RegisterPage() {
 
     try {
       const response = await fetch(`${API_URL}/register`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ displayName, email, password }),
-});
-
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ displayName, email, password }),
+      });
 
       if (response.ok) {
         alert("Sikeres regisztráció!");
@@ -34,35 +35,53 @@ export default function RegisterPage() {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h2>Regisztráció</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Név"
-          value={displayName}
-          onChange={(e) => setDisplayName(e.target.value)}
-          required
-        />
-        <br />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <br />
-        <input
-          type="password"
-          placeholder="Jelszó"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <br />
-        <button type="submit">Regisztrálok</button>
-      </form>
+    <div className="RegisterWrapper">
+      <div className="CornerLogo" onClick={() => navigate("/")}>
+  <img src={logo} alt="Logo" />
+</div>
+
+      <div className="RegisterBox">
+
+        <h2 className="RegisterTitle">Regisztráció</h2>
+
+        <form onSubmit={handleSubmit}>
+          <input
+            className="RegisterInput"
+            type="text"
+            placeholder="Név"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            required
+          />
+
+          <input
+            className="RegisterInput"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <input
+            className="RegisterInput"
+            type="password"
+            placeholder="Jelszó"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button className="RegisterBtn" type="submit">
+            Regisztrálok
+          </button>
+        </form>
+
+        <span className="RegisterSwitchLink" onClick={() => navigate("/login")}>
+          Van már fiókod? Jelentkezz be!
+        </span>
+
+      </div>
     </div>
   );
 }

@@ -82,3 +82,25 @@
 .LoginSwitchLink:hover {
   text-decoration: underline;
 }
+
+
+.CornerLogo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 999; /* mindig felül legyen */
+  transition: 0.25s;
+}
+
+.CornerLogo img {
+  height: 60px;
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.5));
+  transition: 0.25s;
+}
+
+.CornerLogo:hover img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(74, 222, 128, 0.9));
+}

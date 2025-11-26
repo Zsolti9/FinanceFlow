@@ -1,84 +1,111 @@
-/* GLOBAL RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+/* Teljes oldal háttér */
+.RegisterWrapper {
+  min-height: 100vh;
+  background: #0d0d0d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: bgPulse 8s infinite alternate;
 }
 
-body {
-  background: #0D0D0D;
-  color: white;
+@keyframes bgPulse {
+  0% { background: #0d0d0d; }
+  100% { background: #0f1a0f; }
 }
 
-/* Központi konténer */
-.auth-container {
-  width: 100%;
-  max-width: 420px;
-  margin: 100px auto;
+/* Doboz */
+.RegisterBox {
   background: #111;
   padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0px 0px 25px rgba(74, 222, 128, 0.2);
+  width: 380px;
+  border-radius: 18px;
   border: 1px solid rgba(74, 222, 128, 0.3);
+  box-shadow: 0px 0px 25px rgba(74, 222, 128, 0.15);
+  animation: fadeIn 0.8s ease;
 }
 
-.auth-title {
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cím */
+.RegisterTitle {
   text-align: center;
-  margin-bottom: 25px;
+  color: #4ade80;
   font-size: 28px;
   font-weight: 700;
-  color: #4ADE80;
+  margin-bottom: 25px;
 }
 
 /* Inputok */
-.auth-input {
+.RegisterInput {
   width: 100%;
   padding: 14px;
   margin-bottom: 18px;
-  border-radius: 10px;
+  background: #0d0d0d;
   border: 1px solid rgba(74, 222, 128, 0.4);
-  background: #0D0D0D;
+  border-radius: 10px;
   color: white;
   font-size: 15px;
-  transition: 0.2s;
+  transition: 0.25s;
 }
 
-.auth-input:focus {
-  border-color: #4ADE80;
-  box-shadow: 0px 0px 8px rgba(74, 222, 128, 0.5);
+.RegisterInput:focus {
   outline: none;
+  border-color: #4ade80;
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
 }
 
 /* Gomb */
-.auth-btn {
+.RegisterBtn {
   width: 100%;
-  padding: 14px;
+  background: #4ade80;
   border: none;
+  padding: 14px;
   border-radius: 10px;
-  cursor: pointer;
-  background: #4ADE80;
-  color: black;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
   transition: 0.2s;
 }
 
-.auth-btn:hover {
+.RegisterBtn:hover {
   background: #3ec76f;
-  box-shadow: 0px 0px 10px rgba(74, 222, 128, 0.7);
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.7);
 }
 
-/* Linkek */
-.auth-link {
-  margin-top: 15px;
+/* Link */
+.RegisterSwitchLink {
   text-align: center;
-  font-size: 14px;
-  color: #4ADE80;
+  color: #4ade80;
+  margin-top: 15px;
   cursor: pointer;
   display: block;
+  transition: 0.25s;
 }
 
-.auth-link:hover {
+.RegisterSwitchLink:hover {
   text-decoration: underline;
+}
+
+.CornerLogo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 999; /* mindig felül legyen */
+  transition: 0.25s;
+}
+
+.CornerLogo img {
+  height: 60px;
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.5));
+  transition: 0.25s;
+}
+
+.CornerLogo:hover img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(74, 222, 128, 0.9));
 }

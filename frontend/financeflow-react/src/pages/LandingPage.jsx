@@ -10,7 +10,7 @@ export default function LandingPage() {
       {/* NAVBAR (GitHub-stílus) */}
       <nav className="Navbar"><div className="LogoContainer" onClick={() => navigate("/")}>
           <img src={logo} alt="Logo" className="NavLogo" />
-          <span className="LogoText">FinanceFlow</span>
+
         </div>
 
         <div className="NavLinks">

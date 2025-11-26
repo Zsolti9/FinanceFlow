@@ -21,7 +21,6 @@ export default function HomePage() {
         {/* Bal oldali logo */}
         <div className="HomeNavLeft" onClick={() => navigate("/")}>
           <img src={logo} alt="Logo" className="HomeNavLogo" />
-          <span className="HomeNavTitle">FinanceFlow</span>
         </div>
 
         {/* Hamburger ikon */}

@@ -57,3 +57,15 @@
 .LoginSwitchLink:hover {
   color: #69f497;
 }
+.TopLogo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 999;
+  transition: 0.25s;
+}
+
+.TopLogo:hover {
+  filter: drop-shadow(0 0 8px #4ade80);
+}

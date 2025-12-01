@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./home.module.css";
-import logo from "../../public/FinanceFlowLogo.png";
 
 export default function HomePage() {
   const router = useRouter();
@@ -19,8 +18,7 @@ export default function HomePage() {
 
       <nav className={styles.HomeNavbar}>
         <div className={styles.HomeNavLeft} onClick={() => router.push("/")}>
-          <Image src={logo} alt="Logo" className={styles.HomeNavLogo} />
-          <span className={styles.HomeNavTitle}>FinanceFlow</span>
+          <Image src="/FinanceFlowLogo.png" alt="Logo" width={80} height={80} />
         </div>
 
         <div className={styles.Burger} onClick={() => setOpen(!open)}>

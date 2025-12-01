@@ -1,5 +1,3 @@
-
-/* Háttér – pulzáló, mint a landing */
 .HomeBackground {
   min-height: 100vh;
   background: #0d0d0d;
@@ -11,29 +9,21 @@
   100% { background: #0f1a0f; }
 }
 
-/* NAVBAR – ugyanolyan stílus, csak fixálva + hamburger */
+/* NAVBAR */
 .HomeNavbar {
   position: fixed;
   top: 0;
-  left: 0;
-
   width: 100%;
   padding: 20px 40px;
-
   background: #0d0d0d;
   border-bottom: 1px solid rgba(74, 222, 128, 0.35);
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   box-shadow: 0 3px 20px rgba(74, 222, 128, 0.15);
   z-index: 1000;
-
-  animation: fadeIn 0.7s ease;
 }
 
-/* Logo + Szöveg */
 .HomeNavLeft {
   display: flex;
   align-items: center;
@@ -42,7 +32,6 @@
 }
 
 .HomeNavLogo {
-  height: 70px;
   transition: 0.25s;
 }
 
@@ -51,8 +40,8 @@
 }
 
 .HomeNavTitle {
-  color: #4ade80;
   font-size: 1.6rem;
+  color: #4ade80;
   font-weight: 700;
   text-shadow: 0 0 10px rgba(74, 222, 128, 0.7);
 }
@@ -75,55 +64,81 @@
   transition: 0.3s;
 }
 
-/* hamburger -> X animáció */
-.bar.open:nth-child(1) {
+/* Hamburger -> X */
+.open:nth-child(1) {
   transform: translateY(11px) rotate(45deg);
 }
-.bar.open:nth-child(2) {
+.open:nth-child(2) {
   opacity: 0;
 }
-.bar.open:nth-child(3) {
+.open:nth-child(3) {
   transform: translateY(-11px) rotate(-45deg);
 }
 
-/* OLDALSÓ MENÜ */
-.HomeMenu {
+/* OVERLAY háttér */
+.Overlay {
   position: fixed;
-  top: 70px;
-  right: -250px;
-
-  width: 250px;
-  height: 100vh;
-  background: #111;
-
-  border-left: 1px solid rgba(74, 222, 128, 0.35);
-  box-shadow: -3px 0 20px rgba(74, 222, 128, 0.2);
-
-  display: flex;
-  flex-direction: column;
-  padding-top: 40px;
-  gap: 22px;
-
-  transition: 0.3s ease;
-  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 900;
+  animation: fadeIn 0.3s ease;
 }
 
-.HomeMenu.show {
+/* BLUR MENÜ */
+.BlurMenu {
+  position: fixed;
+  top: 0;
+  right: -300px;
+
+  width: 300px;
+  height: 100vh;
+
+  backdrop-filter: blur(18px);
+  background: rgba(17, 17, 17, 0.45);
+
+  border-left: 1px solid rgba(74, 222, 128, 0.3);
+  box-shadow: -3px 0 30px rgba(74, 222, 128, 0.25);
+
+  padding-top: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  transition: right 0.35s ease;
+  z-index: 1001;
+}
+
+.BlurMenu.show {
   right: 0;
 }
 
-.HomeMenu span {
-  color: #4ade80;
-  font-size: 1.2rem;
-  padding: 14px 25px;
+.BlurMenu span {
+  padding: 15px 30px;
+  font-size: 1.3rem;
+  color: #b4ffc9;
   cursor: pointer;
   transition: 0.25s;
 }
 
-.HomeMenu span:hover {
-  color: #69f497;
+.BlurMenu span:hover {
+  color: #4ade80;
   background: rgba(74, 222, 128, 0.15);
-  text-shadow: 0 0 10px rgba(74, 222, 128, 0.8);
+  text-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
+}
+
+/* Logout pirosabb árnyalat */
+.Logout {
+  color: #ff8f8f !important;
+}
+
+.Logout:hover {
+  background: rgba(255, 120, 120, 0.15);
+  color: #ff6c6c !important;
+  text-shadow: 0 0 12px rgba(255, 90, 90, 0.5);
 }
 
 /* Tartalom */
@@ -131,45 +146,14 @@
   padding-top: 130px;
   text-align: center;
   color: #c4ffd4;
-  animation: fadeIn 1s ease;
 }
 
 .HomeContent h1 {
   font-size: 2.5rem;
   color: #4ade80;
-  text-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
 }
 
 .HomeContent p {
   font-size: 1.2rem;
   opacity: 0.8;
-}
-
-/* Fade in animáció */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .HomeNavbar {
-    padding: 15px 20px;
-  }
-
-  .HomeNavLogo {
-    height: 55px;
-  }
-
-  .HomeNavTitle {
-    font-size: 1.3rem;
-  }
-
-  .HomeContent h1 {
-    font-size: 2rem;
-  }
-
-  .HomeContent p {
-    font-size: 1rem;
-  }
 }

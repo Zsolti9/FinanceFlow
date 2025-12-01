@@ -1,11 +1,8 @@
-
-/* Teljes oldal – sötét pulzáló háttér */
-.LandingDiv {
-  min-height: 100vh;
-  background: #0d0d0d;
-  animation: bgPulse 8s infinite alternate;
-  display: flex;
-  flex-direction: column;
+/* ---------------------------------------------------
+   GLOBAL DARK BACKGROUND + PULSE
+--------------------------------------------------- */
+.LandingWrapper {
+  padding-top: calc(70px + 40px); /* navbar height + extra tér (pl. 40px) */
 }
 
 @keyframes bgPulse {
@@ -13,20 +10,28 @@
   100% { background: #0f1a0f; }
 }
 
-/* NAVBAR */
+
+
+
+
+/* ---------------------------------------------------
+   NAVBAR (ugyanaz mint eddig)
+--------------------------------------------------- */
 .Navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 20px 40px;
-  background: #0d0d0d;
-  border-bottom: 1px solid rgba(74, 222, 128, 0.35);
+  height: 70px;              /* fontos: fix magasság */
+  padding: 0 40px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  box-shadow: 0 3px 20px rgba(74, 222, 128, 0.15);
-  animation: fadeIn 0.7s ease;
+  z-index: 1000;
 }
 
-/* Logo konténer */
+.NavbarHide {
+  transform: translateY(-100%);
+}
 .LogoContainer {
   display: flex;
   align-items: center;
@@ -34,7 +39,9 @@
 }
 
 .NavLogo {
-  height: 70px;
+  width: 160px;   /* új – fix szélesség */
+  height: auto;   /* új – arány helyes */
+  object-fit: contain;
   transition: 0.25s;
 }
 
@@ -42,18 +49,16 @@
   filter: drop-shadow(0 0 8px #4ade80);
 }
 
-/* NAV LINKS */
 .NavLinks {
   display: flex;
   gap: 22px;
-  align-items: center;
 }
 
 .NavLinks span {
   color: #4ade80;
   font-size: 17px;
   cursor: pointer;
-  transition: 0.25s;
+  transition: .25s;
 }
 
 .NavLinks span:hover {
@@ -61,49 +66,189 @@
   text-shadow: 0 0 8px rgba(74, 222, 128, 0.8);
 }
 
-/* HERO – központi üzenet */
-.Hero {
-  margin: auto;
+
+/* ---------------------------------------------------
+   SECTION 1 – FEATURE CARDS (Glass Style)
+--------------------------------------------------- */
+.SectionFeatures {
+  padding: 140px 40px;
   text-align: center;
-  padding: 40px 20px;
-  max-width: 900px;
-  animation: fadeIn 1s ease;
+  backdrop-filter: blur(4px);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.Hero h1 {
-  font-size: 3rem;
-  font-weight: 700;
+.SectionFeatures h2 {
+  font-size: 2.6rem;
   color: #4ade80;
-  text-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  text-shadow: 0 0 12px rgba(74,212,128,.6);
 }
 
-.Hero p {
+.FeatureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 30px;
+}
+
+.CardGlass {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(74,222,128,0.25);
+  border-radius: 16px;
+  padding: 25px;
+  backdrop-filter: blur(6px);
+  transition: .3s;
+}
+
+.CardGlass:hover {
+  background: rgba(74,222,128,0.08);
+  transform: translateY(-4px);
+}
+
+
+/* ---------------------------------------------------
+   SECTION 2 – SCREENSHOTS (Glow Circles)
+--------------------------------------------------- */
+.SectionScreenshots {
+  padding: 180px 40px;
+  position: relative;
+  text-align: center;
+}
+
+.SectionScreenshots h2 {
+  color: #4ade80;
+  font-size: 2.6rem;
+  margin-bottom: 40px;
+}
+
+/* glowing circles */
+.SectionScreenshots::before,
+.SectionScreenshots::after {
+  content: "";
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(74, 222, 128, 0.22),
+    rgba(74, 222, 128, 0)
+  );
+  filter: blur(50px);
+  z-index: 0;
+}
+
+.SectionScreenshots::before {
+  top: -30px;
+  left: -80px;
+}
+
+.SectionScreenshots::after {
+  bottom: -30px;
+  right: -60px;
+}
+
+.ScreenshotArea {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ---------------------------------------------------
+   SECTION 3 – PRICING (Wave Separator)
+--------------------------------------------------- */
+.SectionPricing {
+  padding: 200px 40px;
+  position: relative;
+  text-align: center;
+}
+
+.SectionPricing::before {
+  content: "";
+  position: absolute;
+  top: -70px;
+  left: 0;
+  width: 100%;
+  height: 110px;
+  background: url("data:image/svg+xml,%3Csvg width='1440' height='120' viewBox='0 0 1440 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,40 C360,140 1080,-60 1440,40 L1440,120 L0,120 Z' fill='%230f1a0f'/%3E%3C/svg%3E") no-repeat center;
+  background-size: cover;
+  opacity: .35;
+}
+
+.SectionPricing h2 {
+  color: #4ade80;
+  font-size: 2.6rem;
+  margin-bottom: 50px;
+}
+
+.PriceGrid {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  flex-wrap: wrap;
+}
+
+.PriceCard {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(74,222,128,0.3);
+  padding: 40px;
+  border-radius: 20px;
+  width: 280px;
+  transition: .3s;
+}
+
+.PriceCard:hover {
+  background: rgba(74, 222, 128, 0.08);
+  transform: translateY(-4px);
+}
+
+
+/* ---------------------------------------------------
+   SECTION 4 – CTA (Big Glow)
+--------------------------------------------------- */
+.SectionCTA {
+  padding: 200px 40px;
+  text-align: center;
+  position: relative;
+}
+
+.SectionCTA::before {
+  content: "";
+  position: absolute;
+  top: -160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 450px;
+  background: radial-gradient(circle,
+    rgba(74,222,128,0.35),
+    rgba(74,222,128,0)
+  );
+  filter: blur(90px);
+  z-index: 0;
+}
+
+.SectionCTA h2 {
+  color: #4ade80;
+  font-size: 3rem;
+  margin-bottom: 25px;
+}
+
+.SectionCTA p {
+  color: #c8ffd5;
   font-size: 1.4rem;
-  color: #b4ffcc;
-  opacity: 0.85;
+  margin-bottom: 45px;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .Navbar {
-    padding: 15px 20px;
-  }
+.CTAButton {
+  padding: 16px 40px;
+  background: #4ade80;
+  color: #0d0d0d;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: 700;
+  transition: 0.3s;
+}
 
-  .NavLogo {
-    height: 55px;
-  }
-
-  .Hero h1 {
-    font-size: 2.3rem;
-  }
-
-  .Hero p {
-    font-size: 1.1rem;
-  }
+.CTAButton:hover {
+  background: #3ec76f;
+  box-shadow: 0 0 18px rgba(74,222,128,0.8);
 }

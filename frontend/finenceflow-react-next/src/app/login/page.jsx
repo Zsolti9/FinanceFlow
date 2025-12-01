@@ -43,8 +43,8 @@ export default function LoginPage() {
       <div className={styles.TopLogo} onClick={() => router.push("/")}>
         <Image
           src="/FinanceFlowLogo.png"
-          width={65}
-          height={65}
+          width={100}
+          height={100}
           alt="FinanceFlow Logo"
         />
       </div>

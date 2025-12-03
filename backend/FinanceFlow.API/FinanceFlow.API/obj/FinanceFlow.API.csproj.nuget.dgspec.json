@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj": {}
+    "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj": {}
   },
   "projects": {
-    "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj": {
+    "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj",
+        "projectUniqueName": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj",
         "projectName": "FinanceFlow.API",
-        "projectPath": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj",
-        "packagesPath": "C:\\Users\\Csongi\\.nuget\\packages\\",
-        "outputPath": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\obj\\",
+        "projectPath": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj",
+        "packagesPath": "C:\\Users\\diak\\.nuget\\packages\\",
+        "outputPath": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\vstudio\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Csongi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\diak\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -42,9 +42,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -108,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

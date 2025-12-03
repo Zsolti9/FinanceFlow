@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using FinanceFlow.Api.Models;
+using FinanceFlow.API.Interfaces;
 
 namespace FinanceFlow.Api.Services
 {

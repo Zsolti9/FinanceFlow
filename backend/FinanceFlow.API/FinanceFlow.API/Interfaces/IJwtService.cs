@@ -1,6 +1,6 @@
 ﻿using FinanceFlow.Api.Models;
 
-namespace FinanceFlow.Api.Services
+namespace FinanceFlow.API.Interfaces
 {
     public interface IJwtService
     {

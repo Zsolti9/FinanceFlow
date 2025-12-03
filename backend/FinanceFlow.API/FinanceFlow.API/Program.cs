@@ -5,6 +5,7 @@ using System.Text;
 using FinanceFlow.Api.Data;
 using FinanceFlow.Api.Models;
 using FinanceFlow.Api.Services;
+using FinanceFlow.API.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

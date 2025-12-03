@@ -8,7 +8,7 @@ namespace FinanceFlow.API.Models
         [Key] 
         public int Id { get; set; }
         [ForeignKey("AppUser")]
-
+        [Column(TypeName ="varchar(255)")]
         public string UserId { get; set; }
         public int Fizetes { get; set; }
         public bool Auto { get; set; }
@@ -18,6 +18,6 @@ namespace FinanceFlow.API.Models
         public int Szamlak { get; set; }
         public int Egyeb { get; set; }
 
-
+        
     }
 }

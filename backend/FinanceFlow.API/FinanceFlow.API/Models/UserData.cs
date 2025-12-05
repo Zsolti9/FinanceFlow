@@ -11,9 +11,9 @@ namespace FinanceFlow.API.Models
         [Column(TypeName ="varchar(255)")]
         public string UserId { get; set; }
         public int Fizetes { get; set; }
-        public bool Auto { get; set; }
+        public bool Auto { get; set; } = false;
         public int BenzinKolt { get; set; }
-        public bool Lakas { get; set; }
+        public bool Lakas { get; set; } = false;
         public int LakasKolt { get; set; }
         public int Szamlak { get; set; }
         public int Egyeb { get; set; }

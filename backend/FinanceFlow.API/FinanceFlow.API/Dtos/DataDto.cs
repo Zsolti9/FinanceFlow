@@ -2,12 +2,14 @@
 {
     public class DataDto
     {
-        public int fizetes { get; set; } 
-        public bool auto { get; set; } = false;
-        public int benzinkolt { get; set; }
-        public bool lakhatas { get; set; }=false;
-        public int lakaskolt { get; set; } 
-        public int szamlak { get; set; } 
-        public int egyeb { get; set; } 
+
+        public string UserId { get; set; }
+        public int Fizetes { get; set; } 
+        public bool Auto { get; set; } = false;
+        public int Benzinkolt { get; set; }
+        public bool Lakhatas { get; set; }=false;
+        public int Lakaskolt { get; set; } 
+        public int Szamlak { get; set; } 
+        public int Egyeb { get; set; } 
     }
 }

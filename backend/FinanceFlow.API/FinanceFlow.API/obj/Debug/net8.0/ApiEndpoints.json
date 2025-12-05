@@ -30,5 +30,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FinanceFlow.API.Controllers.DataController",
+    "Method": "CreateUserDataAsync",
+    "RelativePath": "api/Data/addUserData",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "FinanceFlow.API.Dtos.DataDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

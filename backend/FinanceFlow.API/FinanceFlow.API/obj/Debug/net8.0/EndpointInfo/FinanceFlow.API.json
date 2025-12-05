@@ -66,10 +66,77 @@
           }
         }
       }
+    },
+    "/api/Data/addUserData": {
+      "post": {
+        "tags": [
+          "Data"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "DataDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fizetes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "auto": {
+            "type": "boolean"
+          },
+          "benzinkolt": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lakhatas": {
+            "type": "boolean"
+          },
+          "lakaskolt": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "szamlak": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "egyeb": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginDto": {
         "type": "object",
         "properties": {
@@ -107,6 +174,9 @@
   "tags": [
     {
       "name": "Auth"
+    },
+    {
+      "name": "Data"
     }
   ]
 }

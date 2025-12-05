@@ -3,8 +3,45 @@
   "WorkspaceRootPath": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api\\controllers\\datacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\controllers\\datacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+<<<<<<< Updated upstream
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+=======
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|d:\\mestermunka\\munka\\financeflow\\backend\\financeflow.api\\financeflow.api\\migrations\\20251202171814_userdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\migrations\\20251202171814_userdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|d:\\mestermunka\\munka\\financeflow\\backend\\financeflow.api\\financeflow.api\\models\\userdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\models\\userdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|d:\\mestermunka\\munka\\financeflow\\backend\\financeflow.api\\financeflow.api\\models\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\models\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|d:\\mestermunka\\munka\\financeflow\\backend\\financeflow.api\\financeflow.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|d:\\mestermunka\\munka\\financeflow\\backend\\financeflow.api\\financeflow.api\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|d:\\mestermunka\\munka\\financeflow\\backend\\financeflow.api\\financeflow.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|d:\\mestermunka\\munka\\financeflow\\backend\\financeflow.api\\financeflow.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|d:\\mestermunka\\munka\\financeflow\\backend\\financeflow.api\\financeflow.api\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+>>>>>>> Stashed changes
+      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> 10f888c4a7881a8f7db3959056ba0332515430f2
     },
     {
       "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api\\dtos\\datadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -78,6 +115,7 @@
           "Children": [
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 4,
               "Title": "UserDataService.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Services\\UserDataService.cs",
@@ -85,6 +123,24 @@
               "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Services\\UserDataService.cs",
               "RelativeToolTip": "FinanceFlow.API\\Services\\UserDataService.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAAwBoAAAA4AAAAAAAAAA==",
+=======
+<<<<<<< Updated upstream
+              "DocumentIndex": 7,
+              "Title": "20251202171814_userdata.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Migrations\\20251202171814_userdata.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Migrations\\20251202171814_userdata.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Migrations\\20251202171814_userdata.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Migrations\\20251202171814_userdata.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+=======
+              "DocumentIndex": 0,
+              "Title": "20251202171814_userdata.cs",
+              "DocumentMoniker": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Migrations\\20251202171814_userdata.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Migrations\\20251202171814_userdata.cs",
+              "ToolTip": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Migrations\\20251202171814_userdata.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Migrations\\20251202171814_userdata.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+>>>>>>> 10f888c4a7881a8f7db3959056ba0332515430f2
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-03T10:56:19.442Z"
             },
@@ -104,6 +160,7 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+<<<<<<< HEAD
               "Title": "DataDto.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Dtos\\DataDto.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Dtos\\DataDto.cs",
@@ -112,10 +169,22 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-03T10:46:06.53Z",
+=======
+              "Title": "UserData.cs",
+              "DocumentMoniker": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Models\\UserData.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Models\\UserData.cs",
+              "ToolTip": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Models\\UserData.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Models\\UserData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAjAAAAAAAAAA==",
+>>>>>>> Stashed changes
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T17:18:15.084Z",
+>>>>>>> 10f888c4a7881a8f7db3959056ba0332515430f2
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 2,
               "Title": "IUserService.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Interfaces\\IUserService.cs",
@@ -130,6 +199,10 @@
             {
               "$type": "Document",
               "DocumentIndex": 8,
+=======
+<<<<<<< Updated upstream
+              "DocumentIndex": 4,
+>>>>>>> 10f888c4a7881a8f7db3959056ba0332515430f2
               "Title": "RegisterDto.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Dtos\\RegisterDto.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Dtos\\RegisterDto.cs",
@@ -141,6 +214,7 @@
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 7,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\AuthController.cs",
@@ -148,12 +222,25 @@
               "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\AuthController.cs",
               "RelativeToolTip": "FinanceFlow.API\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
+=======
+              "DocumentIndex": 6,
+=======
+              "DocumentIndex": 2,
+>>>>>>> Stashed changes
+              "Title": "AppUser.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Models\\AppUser.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Models\\AppUser.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Models\\AppUser.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Models\\AppUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+>>>>>>> 10f888c4a7881a8f7db3959056ba0332515430f2
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-21T11:56:39.766Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+<<<<<<< HEAD
               "Title": "IJwtService.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Interfaces\\IJwtService.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Interfaces\\IJwtService.cs",
@@ -166,19 +253,38 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
+=======
+<<<<<<< Updated upstream
+>>>>>>> 10f888c4a7881a8f7db3959056ba0332515430f2
               "Title": "UserData.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Models\\UserData.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Models\\UserData.cs",
               "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Models\\UserData.cs",
               "RelativeToolTip": "FinanceFlow.API\\Models\\UserData.cs",
+<<<<<<< HEAD
               "ViewState": "AgIAAAUAAAAAAAAAAABAwBYAAAABAAAAAAAAAA==",
+=======
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAjAAAAAAAAAA==",
+=======
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Program.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Program.cs",
+              "ToolTip": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Program.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF8AAAAXAAAAAAAAAA==",
+>>>>>>> Stashed changes
+>>>>>>> 10f888c4a7881a8f7db3959056ba0332515430f2
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-02T17:02:33.562Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 11,
+=======
+              "DocumentIndex": 4,
+>>>>>>> 10f888c4a7881a8f7db3959056ba0332515430f2
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Data\\ApplicationDbContext.cs",
@@ -190,7 +296,65 @@
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 6,
+=======
+<<<<<<< Updated upstream
+              "DocumentIndex": 2,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAA1wDkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T11:56:39.766Z",
+=======
+              "DocumentIndex": 8,
+              "Title": "IJwtService.cs",
+              "DocumentMoniker": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Services\\IJwtService.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Services\\IJwtService.cs",
+              "ToolTip": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Services\\IJwtService.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Services\\IJwtService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T11:55:36.478Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\appsettings.json",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\appsettings.json",
+              "ToolTip": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\appsettings.json",
+              "RelativeToolTip": "FinanceFlow.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-21T11:50:07.633Z",
+>>>>>>> Stashed changes
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+<<<<<<< Updated upstream
+              "DocumentIndex": 1,
+              "Title": "IJwtService.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Services\\IJwtService.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Services\\IJwtService.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Services\\IJwtService.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Services\\IJwtService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T11:55:36.478Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+=======
+              "DocumentIndex": 7,
+>>>>>>> Stashed changes
+>>>>>>> 10f888c4a7881a8f7db3959056ba0332515430f2
               "Title": "JwtService.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Services\\JwtService.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Services\\JwtService.cs",
@@ -198,10 +362,45 @@
               "RelativeToolTip": "FinanceFlow.API\\Services\\JwtService.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAAAA0AAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+              "WhenOpened": "2025-11-21T11:56:07.798Z",
+              "EditorCaption": ""
+=======
+>>>>>>> 10f888c4a7881a8f7db3959056ba0332515430f2
               "WhenOpened": "2025-11-21T11:56:07.798Z"
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
+=======
+              "DocumentIndex": 6,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAADkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T11:56:39.766Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RegisterDto.cs",
+              "DocumentMoniker": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Dtos\\RegisterDto.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Dtos\\RegisterDto.cs",
+              "ToolTip": "D:\\MESTERMUNKA\\Munka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Dtos\\RegisterDto.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Dtos\\RegisterDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T11:58:21.704Z"
+>>>>>>> Stashed changes
+            },
+            {
+              "$type": "Document",
+>>>>>>> 10f888c4a7881a8f7db3959056ba0332515430f2
               "DocumentIndex": 9,
               "Title": "LoginDto.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Dtos\\LoginDto.cs",
@@ -262,7 +461,26 @@
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 15,
+=======
+<<<<<<< Updated upstream
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Program.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Program.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Program.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF8AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T11:52:39.859Z"
+            },
+            {
+              "$type": "Document",
+=======
+>>>>>>> Stashed changes
+              "DocumentIndex": 11,
+>>>>>>> 10f888c4a7881a8f7db3959056ba0332515430f2
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\appsettings.Development.json",
               "RelativeDocumentMoniker": "FinanceFlow.API\\appsettings.Development.json",

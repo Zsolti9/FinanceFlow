@@ -7,7 +7,7 @@
         public int Fizetes { get; set; } 
         public bool Auto { get; set; } = false;
         public int Benzinkolt { get; set; }
-        public bool Lakhatas { get; set; }=false;
+        public bool Lakhatas { get; set; } = false;
         public int Lakaskolt { get; set; } 
         public int Szamlak { get; set; } 
         public int Egyeb { get; set; } 

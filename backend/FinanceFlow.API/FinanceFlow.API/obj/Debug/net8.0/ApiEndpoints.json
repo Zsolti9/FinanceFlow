@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "FinanceFlow.Api.Controllers.AuthController",
+    "Method": "DeleteUser",
+    "RelativePath": "api/Auth/delete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FinanceFlow.Api.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/login",
     "HttpMethod": "POST",
@@ -32,6 +48,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "FinanceFlow.Api.Controllers.AuthController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/Auth/update/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "FinanceFlow.API.Dtos.UpdateUserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FinanceFlow.Api.Controllers.AuthController",
+    "Method": "GetUser",
+    "RelativePath": "api/Auth/user/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FinanceFlow.API.Controllers.DataController",
     "Method": "CreateUserDataAsync",
     "RelativePath": "api/Data/addUserData",
@@ -39,6 +92,59 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "FinanceFlow.API.Dtos.DataDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FinanceFlow.API.Controllers.DataController",
+    "Method": "DeleteUserData",
+    "RelativePath": "api/Data/delete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FinanceFlow.API.Controllers.DataController",
+    "Method": "GetUserData",
+    "RelativePath": "api/Data/getUserData/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FinanceFlow.API.Controllers.DataController",
+    "Method": "UpdateUserData",
+    "RelativePath": "api/Data/update/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
       {
         "Name": "dto",
         "Type": "FinanceFlow.API.Dtos.DataDto",

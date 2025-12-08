@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using FinanceFlow.Api.Models;
 using FinanceFlow.Api.DTOs;
 using FinanceFlow.API.Interfaces;
+using FinanceFlow.API.Dtos;
 
 namespace FinanceFlow.Api.Controllers
 {
@@ -54,6 +55,67 @@ namespace FinanceFlow.Api.Controllers
             return Ok(new { token });
         }
 
-        
+        // ------------------ GET USER ----------------------
+        [HttpGet("user/{id}")]
+        public async Task<IActionResult> GetUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+                return NotFound(new { message = "User not found" });
+
+            return Ok(new
+            {
+                user.Id,
+                user.Email,
+                user.DisplayName
+            });
+        }
+
+        // ------------------ UPDATE USER ----------------------
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateUser(string id, [FromBody] UpdateUserDto dto)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+                return NotFound(new { message = "User not found" });
+
+            // Email és DisplayName frissítése
+            user.DisplayName = dto.DisplayName ?? user.DisplayName;
+            user.Email = dto.Email ?? user.Email;
+            user.UserName = dto.Email ?? user.UserName;
+
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+                return BadRequest(updateResult.Errors);
+
+            // Jelszó csak akkor, ha meg van adva
+            if (!string.IsNullOrWhiteSpace(dto.NewPassword))
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var passwordResult = await _userManager.ResetPasswordAsync(user, token, dto.NewPassword);
+
+                if (!passwordResult.Succeeded)
+                    return BadRequest(passwordResult.Errors);
+            }
+
+            return Ok(new { message = "User updated successfully" });
+        }
+
+        // ------------------ DELETE USER ----------------------
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+                return NotFound(new { message = "User not found" });
+
+            var result = await _userManager.DeleteAsync(user);
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
+
+            return Ok(new { message = "User deleted successfully" });
+        }
+
+
     }
 }

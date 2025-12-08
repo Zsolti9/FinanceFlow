@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "c/Y6ZDQuUr8=",
+  "dgSpecHash": "hxQNyQq9Pxc=",
   "success": true,
-  "projectFilePath": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj",
+  "projectFilePath": "C:\\Laskovics Zsot\\Mestermunka\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\FinanceFlow.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\diak\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\diak\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

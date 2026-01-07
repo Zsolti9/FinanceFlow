@@ -69,7 +69,9 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit" className={styles.LoginBtn}>
+          <button type="submit" 
+            className={styles.LoginBtn}
+            onClick={() => router.push("/home")}>
             Bejelentkezés
           </button>
         </form>

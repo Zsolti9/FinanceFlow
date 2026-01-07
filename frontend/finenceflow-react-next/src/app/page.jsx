@@ -60,18 +60,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 3. SECTION – PRICING */}
-      <section className={styles.SectionPricing}>
-        <h2>Árazás</h2>
-
-        <div className={styles.PriceGrid}>
-          <div className={styles.PriceCard}>Free</div>
-          <div className={styles.PriceCard}>Pro</div>
-          <div className={styles.PriceCard}>Ultimate</div>
-        </div>
-      </section>
-
-      {/* 4. SECTION – CTA */}
+      {/* 3. SECTION – CTA */}
       <section className={styles.SectionCTA}>
         <h2>Készen állsz?</h2>
         <p>Csatlakozz és kezeld pénzügyeidet profin!</p>

@@ -75,8 +75,10 @@ export default function RegisterPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
-          <button type="submit" className={styles.RegisterBtn}>
+đ
+          <button type="submit" 
+           className={styles.RegisterBtn}
+           onClick={() => router.push("/home")}>
             Regisztráció
           </button>
         </form>

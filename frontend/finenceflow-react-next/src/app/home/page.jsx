@@ -1,11 +1,27 @@
 "use client";
 
+import { useEffect } from "react";
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styles from "./home.module.css";
 
 export default function HomePage() {
+  const [showNavbar, setShowNavbar] = useState(true);
+
+
+  useEffect(() => {
+  const handleScroll = () => {
+    // csak akkor látszik, ha fent vagyunk
+    setShowNavbar(window.scrollY === 0);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
+
+
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
 
@@ -68,7 +84,11 @@ export default function HomePage() {
     <div className={styles.HomeBackground}>
       
       {/* NAVBAR */}
-      <nav className={styles.HomeNavbar}>
+      <nav
+  className={`${styles.HomeNavbar} ${
+    showNavbar ? styles.NavVisible : styles.NavHidden
+  }`}
+>
         <div className={styles.HomeNavLeft} onClick={() => router.push("/")}>
           <Image
             src="/FinanceFlowLogo.png"
@@ -79,16 +99,20 @@ export default function HomePage() {
           />
         </div>
 
-        {/* HAMBURGER */}
-        <div 
-          className={styles.Burger} 
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
-          <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
-          <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
-        </div>
+       
+
       </nav>
+ {/* HAMBURGER */}
+        
+      <div
+  className={styles.FloatingBurger}
+  onClick={() => setMenuOpen(!menuOpen)}
+>
+  <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
+  <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
+  <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
+</div>
+
 
       {/* OVERLAY háttér */}
       {menuOpen && <div className={styles.Overlay} onClick={() => setMenuOpen(false)} />}
@@ -260,7 +284,15 @@ export default function HomePage() {
               <hr />
 
               <p>📉 Összes havi költés: <b>{result.totalExpenses.toLocaleString()} Ft</b></p>
-              <p>💰 Megmaradt pénz: <b>{result.remaining.toLocaleString()} Ft</b></p>
+              <p
+                className={
+                result.remaining < 0
+                ? styles.Negative
+                : styles.Positive
+                }
+              >
+                💰 Megmaradt pénz: <b>{result.remaining.toLocaleString()} Ft</b>
+              </p>
             </div>
           )}
         </div>

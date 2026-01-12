@@ -9,6 +9,20 @@
   100% { background: #0f1a0f; }
 }
 
+@media (max-width: 600px) {
+  .HomeNavbar {
+    padding: 15px 20px;
+  }
+
+  .HomeContent h1 {
+    font-size: 2rem;
+  }
+
+  .CalcCard {
+    padding: 20px;
+  }
+}
+
 /* NAVBAR */
 .HomeNavbar {
   position: fixed;
@@ -22,7 +36,36 @@
   align-items: center;
   box-shadow: 0 3px 20px rgba(74, 222, 128, 0.15);
   z-index: 1000;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
+
+.FloatingBurger {
+  position: fixed;
+  top: 20px;
+  right: 25px;
+  width: 40px;
+  height: 30px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  cursor: pointer;
+  z-index: 2000;
+
+  background: rgba(13,13,13,0.6);
+  padding: 8px;
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+
+  box-shadow: 0 0 20px rgba(74,222,128,0.35);
+  transition: transform 0.3s ease;
+}
+
+.FloatingBurger:hover {
+  box-shadow: 0 0 30px rgba(74,222,128,0.6);
+}
+
 
 .HomeNavLeft {
   display: flex;
@@ -34,6 +77,15 @@
 .HomeNavLogo {
   transition: 0.25s;
 }
+
+.NavVisible {
+  transform: translateY(0);
+}
+
+.NavHidden {
+  transform: translateY(-120%);
+}
+
 
 .HomeNavLogo:hover {
   filter: drop-shadow(0 0 8px #4ade80);
@@ -158,6 +210,7 @@
   opacity: 0.8;
 }
 
+
 /* KALKULÁTOR DOBOZ */
 .CalcCard {
   margin-top: 40px;
@@ -166,6 +219,16 @@
   border-radius: 18px;
   border: 1px solid rgba(74,222,128,0.3);
   backdrop-filter: blur(8px);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+
+.CalcCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px rgba(74,222,128,0.25);
 }
 
 .CalcCard h2 {
@@ -173,7 +236,12 @@
   margin-bottom: 20px;
   color: #4ade80;
   text-shadow: 0 0 10px rgba(74,222,128,0.5);
+  margin-top: 30px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(74,222,128,0.25);
 }
+
+
 
 .CalcCard label {
   display: block;
@@ -191,6 +259,16 @@
   color: white;
 }
 
+.CalcCard input:focus {
+  outline: none;
+  border-color: #4ade80;
+  box-shadow: 0 0 12px rgba(74,222,128,0.35);
+}
+
+.CalcCard input:hover {
+  border-color: rgba(74,222,128,0.6);
+}
+
 .SwitchRow {
   display: flex;
   gap: 10px;
@@ -205,6 +283,10 @@
   background: rgba(255,255,255,0.04);
   color: white;
   cursor: pointer;
+}
+
+.SwitchRow button:hover {
+  background: rgba(74,222,128,0.12);
 }
 
 .ActiveBtn {
@@ -225,6 +307,15 @@
   font-weight: 700;
 }
 
+.CalcBtn:hover {
+  background: #5ff59c;
+  box-shadow: 0 0 20px rgba(74,222,128,0.6);
+}
+
+.CalcBtn:active {
+  transform: scale(0.98);
+}
+
 .ResultBox {
   margin-top: 20px;
   padding: 20px;
@@ -236,4 +327,14 @@
 .ResultBox p {
   margin: 8px 0;
   font-size: 18px;
+}
+
+.Positive {
+  color: #4ade80;
+  text-shadow: 0 0 10px rgba(74,222,128,0.5);
+}
+
+.Negative {
+  color: #ff7b7b;
+  text-shadow: 0 0 10px rgba(255,120,120,0.4);
 }

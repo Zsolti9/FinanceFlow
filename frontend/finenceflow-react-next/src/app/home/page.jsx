@@ -7,6 +7,21 @@ import { useRouter } from "next/navigation";
 import styles from "./home.module.css";
 
 export default function HomePage() {
+
+  const [user, setUser] = useState(null);
+
+useEffect(() => {
+  const storedUser = localStorage.getItem("user");
+  const token = localStorage.getItem("token");
+
+  if (!storedUser || !token) {
+    router.push("/login");
+    return;
+  }
+
+  setUser(JSON.parse(storedUser));
+}, []);
+
   const [showNavbar, setShowNavbar] = useState(true);
 
 
@@ -82,7 +97,7 @@ export default function HomePage() {
 
   return (
     <div className={styles.HomeBackground}>
-      
+      <h1>Szia, {user?.displayName} 👋</h1>
       {/* NAVBAR */}
       <nav
   className={`${styles.HomeNavbar} ${

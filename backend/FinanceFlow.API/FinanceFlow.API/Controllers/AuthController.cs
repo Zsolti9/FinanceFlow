@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using FinanceFlow.Api.DTOs;
 using FinanceFlow.Api.Models;
-using FinanceFlow.Api.DTOs;
-using FinanceFlow.API.Interfaces;
 using FinanceFlow.API.Dtos;
+using FinanceFlow.API.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FinanceFlow.Api.Controllers
 {
@@ -37,7 +39,16 @@ namespace FinanceFlow.Api.Controllers
 
             // automatikus beléptetés / token kiadása
             var token = _jwtService.GenerateToken(user);
-            return Ok(new { token });
+            return Ok(new
+            {
+                token,
+                user = new
+                {
+                    user.Id,
+                    user.Email,
+                    user.DisplayName
+                }
+            });
         }
 
         [HttpPost("login")]
@@ -114,6 +125,22 @@ namespace FinanceFlow.Api.Controllers
                 return BadRequest(result.Errors);
 
             return Ok(new { message = "User deleted successfully" });
+        }
+
+
+        [HttpGet("me")]
+        [Authorize]
+        public async Task<IActionResult> Me()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userId);
+
+            return Ok(new
+            {
+                user.Id,
+                user.Email,
+                user.DisplayName
+            });
         }
 
 

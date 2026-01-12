@@ -12,18 +12,23 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   const API_URL = "https://localhost:7183/api/Auth";
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(`${API_URL}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email:email ,
-        password: password,
-      }),
-    });
+    const res = await fetch("http://localhost:5005/api/auth/login", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email, password })
+});
+
+const data = await res.json();
+
+localStorage.setItem("token", data.token);
+localStorage.setItem("user", JSON.stringify(data.user));
+
+router.push("/home");
 
     if (res.ok) {
       const data = await res.json();

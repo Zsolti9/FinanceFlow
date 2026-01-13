@@ -11,33 +11,52 @@ export default function RegisterPage() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);  // ✅ Loading state
+  const [error, setError] = useState("");         // ✅ Hiba state
 
   const API_URL = "https://localhost:7183/api/Auth";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
 
-    const res = await fetch(`${API_URL}/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: fullName,
-        email : email,
-        password: password,
-      }),
-    });
+    // ✅ Password validáció
+    if (password.length < 8) {
+      setError("A jelszó legalább 8 karakter legyen!");
+      setLoading(false);
+      return;
+    }
 
-    if (res.ok) {
-      alert("Sikeres regisztráció!");
-      router.push("/login");
-    } else {
-      alert("Hiba történt.");
+    try {
+      const res = await fetch(`${API_URL}/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fullName,
+          email: email,
+          password: password,
+        }),
+      });
+
+      if (res.ok) {
+        alert("Sikeres regisztráció!");
+        router.push("/login");
+      } else {
+        // ✅ RÉSZLETES HIBAÜZENET!
+        const errorData = await res.json();
+        setError(errorData.message || "Regisztráció sikertelen!");
+      }
+    } catch (error) {
+      setError("Szerver hiba! Ellenőrizd a kapcsolatot.");
+      console.error("Regisztráció hiba:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className={styles.RegisterWrapper}>
-      
       {/* BAL FELSŐ FIX LOGO */}
       <div className={styles.TopLogo} onClick={() => router.push("/")}>
         <Image 
@@ -51,6 +70,12 @@ export default function RegisterPage() {
       <div className={styles.RegisterBox}>
         <h2 className={styles.RegisterTitle}>Regisztráció</h2>
 
+        {error && (
+          <div className={styles.ErrorMessage}>
+            ❌ {error}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -58,6 +83,7 @@ export default function RegisterPage() {
             className={styles.RegisterInput}
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
+            required
           />
 
           <input
@@ -66,20 +92,24 @@ export default function RegisterPage() {
             className={styles.RegisterInput}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
 
           <input
             type="password"
-            placeholder="Jelszó"
+            placeholder="Jelszó (min. 8 karakter)"
             className={styles.RegisterInput}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
-đ
-          <button type="submit" 
-           className={styles.RegisterBtn}
-           onClick={() => router.push("/home")}>
-            Regisztráció
+
+          <button 
+            type="submit" 
+            className={`${styles.RegisterBtn} ${loading ? styles.Loading : ""}`}
+            disabled={loading}
+          >
+            {loading ? "Regisztrálás..." : "Regisztráció"}
           </button>
         </form>
 

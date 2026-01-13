@@ -338,3 +338,64 @@
   color: #ff7b7b;
   text-shadow: 0 0 10px rgba(255,120,120,0.4);
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 18px;
+}
+
+.ClearBtn {
+  background: #ff4444;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  margin-top: 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.ButtonRow {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.SaveBtn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  flex: 1;
+}
+
+.SaveBtn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.ClearBtn {
+  background: #ff4444;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 18px;
+  color: #666;
+}
+

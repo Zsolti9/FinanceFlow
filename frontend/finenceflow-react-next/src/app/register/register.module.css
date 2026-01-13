@@ -97,3 +97,17 @@
   filter: drop-shadow(0 0 8px #4ade80);
 }
 
+.ErrorMessage {
+  background: #fee;
+  color: #c33;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border-left: 4px solid #c33;
+}
+
+.Loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+

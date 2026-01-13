@@ -63,8 +63,20 @@ namespace FinanceFlow.Api.Controllers
             var roles = await _userManager.GetRolesAsync(user);
             var token = _jwtService.GenerateToken(user, roles);
 
-            return Ok(new { token });
-        }
+            // ✅ C# NULL COALESCING JAVÍTVA!
+            return Ok(new
+            {
+                token,
+                user = new
+                {
+                    user.Id,
+                    user.Email,
+                    DisplayName = user.DisplayName ?? user.UserName ?? user.Email  // ✅ JÓ!
+                }
+            });
+        
+
+}
 
         // ------------------ GET USER ----------------------
         [HttpGet("user/{id}")]

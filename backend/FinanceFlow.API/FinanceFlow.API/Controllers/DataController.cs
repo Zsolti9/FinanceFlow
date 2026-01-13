@@ -2,8 +2,10 @@
 using FinanceFlow.API.Dtos;
 using FinanceFlow.API.Interfaces;
 using FinanceFlow.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace FinanceFlow.API.Controllers
 {
@@ -20,8 +22,14 @@ namespace FinanceFlow.API.Controllers
 
         // ------------------- CREATE --------------------
         [HttpPost("addUserData")]
+        [Authorize]  // ← EZ KELL A JWT token-hez!
         public async Task<IActionResult> CreateUserDataAsync([FromBody] DataDto dto)
         {
+            // User azonosítás JWT-ből
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId != dto.UserId)
+                return Unauthorized("Nem vagy jogosult!");
+
             var data = new UserData
             {
                 Auto = dto.Auto,

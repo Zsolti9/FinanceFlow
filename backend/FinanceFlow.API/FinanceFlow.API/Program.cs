@@ -17,8 +17,11 @@ var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-
+    options.UseMySql(
+        connectionString,
+        ServerVersion.AutoDetect(connectionString)
+    )
+);
 // --------------------
 // Identity
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>

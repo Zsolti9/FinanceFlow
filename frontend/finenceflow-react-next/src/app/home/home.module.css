@@ -1,29 +1,39 @@
+/* ========================================
+   HOME PAGE - RENDEZETT CSS
+   ======================================== */
+
+/* ANIMÁCIÓK */
+@keyframes bgPulse {
+  0% { background: #0d0d0d; }
+  100% { background: #0f1a0f; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========================================
+   ALAP STÍLUSOK
+   ======================================== */
 .HomeBackground {
   min-height: 100vh;
   background: #0d0d0d;
   animation: bgPulse 8s infinite alternate;
 }
 
-@keyframes bgPulse {
-  0% { background: #0d0d0d; }
-  100% { background: #0f1a0f; }
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 18px;
+  color: #666;
 }
 
-@media (max-width: 600px) {
-  .HomeNavbar {
-    padding: 15px 20px;
-  }
-
-  .HomeContent h1 {
-    font-size: 2rem;
-  }
-
-  .CalcCard {
-    padding: 20px;
-  }
-}
-
-/* NAVBAR */
+/* ========================================
+   NAVBAR
+   ======================================== */
 .HomeNavbar {
   position: fixed;
   top: 0;
@@ -39,33 +49,13 @@
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-.FloatingBurger {
-  position: fixed;
-  top: 20px;
-  right: 25px;
-  width: 40px;
-  height: 30px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  cursor: pointer;
-  z-index: 2000;
-
-  background: rgba(13,13,13,0.6);
-  padding: 8px;
-  border-radius: 10px;
-  backdrop-filter: blur(6px);
-
-  box-shadow: 0 0 20px rgba(74,222,128,0.35);
-  transition: transform 0.3s ease;
+.NavVisible {
+  transform: translateY(0);
 }
 
-.FloatingBurger:hover {
-  box-shadow: 0 0 30px rgba(74,222,128,0.6);
+.NavHidden {
+  transform: translateY(-120%);
 }
-
 
 .HomeNavLeft {
   display: flex;
@@ -78,15 +68,6 @@
   transition: 0.25s;
 }
 
-.NavVisible {
-  transform: translateY(0);
-}
-
-.NavHidden {
-  transform: translateY(-120%);
-}
-
-
 .HomeNavLogo:hover {
   filter: drop-shadow(0 0 8px #4ade80);
 }
@@ -98,14 +79,30 @@
   text-shadow: 0 0 10px rgba(74, 222, 128, 0.7);
 }
 
-/* HAMBURGER */
-.Burger {
-  width: 35px;
-  height: 26px;
+/* ========================================
+   HAMBURGER MENÜ
+   ======================================== */
+.FloatingBurger {
+  position: fixed;
+  top: 20px;
+  right: 25px;
+  width: 40px;
+  height: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  z-index: 2000;
+  background: rgba(13, 13, 13, 0.6);
+  padding: 8px;
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.35);
+  transition: transform 0.3s ease;
+}
+
+.FloatingBurger:hover {
+  box-shadow: 0 0 30px rgba(74, 222, 128, 0.6);
 }
 
 .bar {
@@ -116,18 +113,22 @@
   transition: 0.3s;
 }
 
-/* Hamburger -> X */
+/* Hamburger -> X animáció */
 .open:nth-child(1) {
   transform: translateY(11px) rotate(45deg);
 }
+
 .open:nth-child(2) {
   opacity: 0;
 }
+
 .open:nth-child(3) {
   transform: translateY(-11px) rotate(-45deg);
 }
 
-/* OVERLAY háttér */
+/* ========================================
+   MODAL & OVERLAY
+   ======================================== */
 .Overlay {
   position: fixed;
   top: 0;
@@ -140,26 +141,20 @@
   animation: fadeIn 0.3s ease;
 }
 
-/* BLUR MENÜ */
 .BlurMenu {
   position: fixed;
   top: 0;
   right: -300px;
-
   width: 300px;
   height: 100vh;
-
   backdrop-filter: blur(18px);
   background: rgba(17, 17, 17, 0.45);
-
   border-left: 1px solid rgba(74, 222, 128, 0.3);
   box-shadow: -3px 0 30px rgba(74, 222, 128, 0.25);
-
   padding-top: 120px;
   display: flex;
   flex-direction: column;
   gap: 25px;
-
   transition: right 0.35s ease;
   z-index: 1001;
 }
@@ -182,220 +177,280 @@
   text-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
 }
 
-/* Logout pirosabb árnyalat */
+/* Kijelentkezés stílus */
 .Logout {
-  color: #ff8f8f !important;
+  color: #ff4444 !important;
+  font-weight: bold;
+  border-top: 1px solid rgba(255, 68, 68, 0.3);
+  padding-top: 20px;
+  margin-top: 20px;
 }
 
 .Logout:hover {
-  background: rgba(255, 120, 120, 0.15);
-  color: #ff6c6c !important;
-  text-shadow: 0 0 12px rgba(255, 90, 90, 0.5);
+  background: rgba(255, 68, 68, 0.15);
+  color: #ff6b6b !important;
+  text-shadow: 0 0 12px rgba(255, 68, 68, 0.5);
 }
 
-/* Tartalom */
+/* ========================================
+   TARTALOM
+   ======================================== */
 .HomeContent {
   padding-top: 130px;
   text-align: center;
   color: #c4ffd4;
+  padding-bottom: 40px;
 }
 
 .HomeContent h1 {
   font-size: 2.5rem;
   color: #4ade80;
+  margin-bottom: 10px;
+  text-shadow: 0 0 15px rgba(74, 222, 128, 0.5);
 }
 
 .HomeContent p {
   font-size: 1.2rem;
   opacity: 0.8;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-
-/* KALKULÁTOR DOBOZ */
+/* ========================================
+   KALKULÁTOR
+   ======================================== */
 .CalcCard {
   margin-top: 40px;
-  background: rgba(255,255,255,0.05);
-  padding: 30px;
-  border-radius: 18px;
-  border: 1px solid rgba(74,222,128,0.3);
-  backdrop-filter: blur(8px);
-  max-width: 600px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  backdrop-filter: blur(12px);
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-
 .CalcCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 40px rgba(74,222,128,0.25);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(74, 222, 128, 0.2);
 }
 
 .CalcCard h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 30px 0 20px 0;
   color: #4ade80;
-  text-shadow: 0 0 10px rgba(74,222,128,0.5);
-  margin-top: 30px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(74,222,128,0.25);
+  text-shadow: 0 0 12px rgba(74, 222, 128, 0.5);
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(74, 222, 128, 0.25);
+  font-size: 1.4rem;
+  font-weight: 600;
 }
-
-
 
 .CalcCard label {
   display: block;
-  margin-top: 15px;
-  margin-bottom: 5px;
+  margin: 20px 0 8px 0;
   color: #c8ffd5;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .CalcCard input {
   width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(74,222,128,0.3);
-  background: rgba(255,255,255,0.04);
+  padding: 16px;
+  border-radius: 12px;
+  border: 2px solid rgba(74, 222, 128, 0.2);
+  background: rgba(255, 255, 255, 0.06);
   color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
 }
 
 .CalcCard input:focus {
   outline: none;
   border-color: #4ade80;
-  box-shadow: 0 0 12px rgba(74,222,128,0.35);
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.CalcCard input:hover {
-  border-color: rgba(74,222,128,0.6);
+.CalcCard input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
+/* SWITCH GOMBOK */
 .SwitchRow {
   display: flex;
-  gap: 10px;
-  margin-top: 5px;
+  gap: 12px;
+  margin-top: 8px;
 }
 
 .SwitchRow button {
   flex: 1;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(74,222,128,0.3);
-  background: rgba(255,255,255,0.04);
+  padding: 14px;
+  border-radius: 12px;
+  border: 2px solid rgba(74, 222, 128, 0.3);
+  background: rgba(255, 255, 255, 0.05);
   color: white;
   cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .SwitchRow button:hover {
-  background: rgba(74,222,128,0.12);
+  background: rgba(74, 222, 128, 0.15);
+  border-color: rgba(74, 222, 128, 0.6);
 }
 
 .ActiveBtn {
-  background: #4ade80 !important;
-  color: black !important;
+  background: linear-gradient(135deg, #4ade80, #22c55e) !important;
+  color: #0d0d0d !important;
   font-weight: 700;
+  box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4);
 }
 
+/* GOMBOK */
 .CalcBtn {
   width: 100%;
-  margin-top: 20px;
-  padding: 14px;
-  border-radius: 10px;
-  background: #4ade80;
+  margin-top: 30px;
+  padding: 18px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #4ade80, #22c55e);
   color: #0d0d0d;
-  font-size: 18px;
-  cursor: pointer;
+  font-size: 20px;
   font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(74, 222, 128, 0.3);
 }
 
 .CalcBtn:hover {
-  background: #5ff59c;
-  box-shadow: 0 0 20px rgba(74,222,128,0.6);
+  background: linear-gradient(135deg, #5ff59c, #4ade80);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(74, 222, 128, 0.4);
 }
 
 .CalcBtn:active {
   transform: scale(0.98);
 }
 
+/* EREDMÉNY */
 .ResultBox {
-  margin-top: 20px;
-  padding: 20px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 12px;
-  border: 1px solid rgba(74,222,128,0.3);
+  margin-top: 30px;
+  padding: 25px;
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(34, 197, 94, 0.1));
+  border-radius: 16px;
+  border: 2px solid rgba(74, 222, 128, 0.3);
+  box-shadow: 0 10px 40px rgba(74, 222, 128, 0.15);
+}
+
+.ResultBox h3 {
+  color: #4ade80;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.4);
 }
 
 .ResultBox p {
-  margin: 8px 0;
+  margin: 12px 0;
   font-size: 18px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .Positive {
   color: #4ade80;
-  text-shadow: 0 0 10px rgba(74,222,128,0.5);
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(74, 222, 128, 0.5);
 }
 
 .Negative {
-  color: #ff7b7b;
-  text-shadow: 0 0 10px rgba(255,120,120,0.4);
+  color: #ff6b6b;
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(255, 107, 107, 0.5);
 }
 
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-size: 18px;
-}
-
-.ClearBtn {
-  background: #ff4444;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  margin-top: 12px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
+/* GOMB SOR */
 .ButtonRow {
   display: flex;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.SaveBtn, .ClearBtn {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .SaveBtn {
-  background: #28a745;
+  background: linear-gradient(135deg, #28a745, #20c997);
   color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  flex: 1;
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+}
+
+.SaveBtn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #218838, #28a745);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(40, 167, 69, 0.4);
 }
 
 .SaveBtn:disabled {
   background: #6c757d;
   cursor: not-allowed;
+  transform: none;
 }
 
 .ClearBtn {
-  background: #ff4444;
+  background: linear-gradient(135deg, #dc3545, #c82333);
   color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  cursor: pointer;
-  flex: 1;
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
 }
 
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-size: 18px;
-  color: #666;
+.ClearBtn:hover {
+  background: linear-gradient(135deg, #c82333, #bd2130);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(220, 53, 69, 0.4);
 }
 
+/* RESPONSZIVE */
+@media (max-width: 768px) {
+  .HomeNavbar {
+    padding: 15px 20px;
+  }
+  
+  .HomeContent h1 {
+    font-size: 2rem;
+  }
+  
+  .CalcCard {
+    margin: 20px;
+    padding: 25px;
+  }
+  
+  .BlurMenu {
+    width: 280px;
+  }
+  
+  .ButtonRow {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .CalcCard {
+    padding: 20px;
+    margin: 15px;
+  }
+  
+  .HomeContent h1 {
+    font-size: 1.8rem;
+  }
+}

@@ -117,43 +117,48 @@ export default function HomePage() {
 
   // ✅ DATA CONTROLLER MENTÉS!
   const saveToDatabase = async () => {
-    if (!result) return;
+  if (!result) return;
 
-    setSaving(true);
-    try {
-      const token = localStorage.getItem("token");
-      
-      const response = await fetch("https://localhost:7183/api/Data/addUserData", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          userId: user.id,
-          fizetes: Number(salary),
-          auto: hasCar,
-          benzinKolt: result.monthlyFuelCost,
-          lakasKolt: result.monthlyHomeCost,
-          lakhatas: hasHome,
-          szamlak: Number(utilities),
-          egyeb: result.monthlyFoodCost + result.monthlyFunCost
-        })
-      });
+  setSaving(true);
+  try {
+    const token = localStorage.getItem("token");
+    
+    const response = await fetch("https://localhost:7183/api/Data/addUserData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        userId: user.id,
+        fizetes: Number(salary),
+        auto: hasCar,
+        benzinKolt: result.monthlyFuelCost,
+        lakasKolt: result.monthlyHomeCost,
+        lakhatas: hasHome,
+        szamlak: Number(utilities),
+        egyeb: result.monthlyFoodCost + result.monthlyFunCost
+      })
+    });
 
-      if (response.ok) {
-        alert("✅ Költségvetés elmentve az adatbázisba!");
+    const result = await response.json();
+    
+    if (response.ok) {
+      if (result.message.includes("frissítve")) {
+        alert("✅ Adatok frissítve!");
       } else {
-        const errorData = await response.json();
-        alert(`❌ Mentés sikertelen: ${errorData}`);
+        alert("✅ Új költségvetés létrehozva!");
       }
-    } catch (error) {
-      console.error("Mentés hiba:", error);
-      alert("❌ Hálózati hiba!");
-    } finally {
-      setSaving(false);
+    } else {
+      alert(`❌ Hiba: ${result}`);
     }
-  };
+  } catch (error) {
+    console.error("Mentés hiba:", error);
+    alert("❌ Hálózati hiba!");
+  } finally {
+    setSaving(false);
+  }
+};
 
   // Loading
   if (!isClient || !user) {
@@ -176,31 +181,47 @@ export default function HomePage() {
       </nav>
 
       {/* HAMBURGER */}
-      <div className={styles.FloatingBurger} onClick={() => setMenuOpen(!menuOpen)}>
-        <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
-        <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
-        <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
-      </div>
+<div className={styles.FloatingBurger} onClick={() => setMenuOpen(!menuOpen)}>
+  <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
+  <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
+  <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
+</div>
 
-      {/* OVERLAY */}
-      {menuOpen && <div className={styles.Overlay} onClick={() => setMenuOpen(false)} />}
+{/* OVERLAY */}
+{menuOpen && <div className={styles.Overlay} onClick={() => setMenuOpen(false)} />}
 
-      {/* MENU */}
-      <div className={`${styles.BlurMenu} ${menuOpen ? styles.show : ""}`}>
-        <span onClick={() => {setMenuOpen(false); router.push("/profile");}}>Profil</span>
-        <span onClick={() => {setMenuOpen(false); router.push("/statistics");}}>Statisztikák</span>
-        <span onClick={() => {setMenuOpen(false); router.push("/settings");}}>Beállítások</span>
-        <span 
-          className={styles.Logout}
-          onClick={() => {
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
-            router.push("/login");
-          }}
-        >
-          Kijelentkezés
-        </span>
-      </div>
+/* SLIDE-IN MENU */
+<div className={`${styles.BlurMenu} ${menuOpen ? styles.show : ""}`}>
+  <span onClick={() => { 
+    setMenuOpen(false); 
+    router.push("/profile"); 
+  }}>
+    Profil
+  </span>
+  <span onClick={() => { 
+    setMenuOpen(false); 
+    router.push("/statistics"); 
+  }}>
+    Statisztikák
+  </span>
+  <span onClick={() => { 
+    setMenuOpen(false); 
+    router.push("/settings"); 
+  }}>
+  Beállítások
+  </span>
+  <span 
+    className={styles.Logout}
+    onClick={() => {
+      setMenuOpen(false);        // ✅ Menü bezárása
+      localStorage.removeItem("token");    // ✅ Token törlése
+      localStorage.removeItem("user");     // ✅ User törlése
+      router.push("/");          // ✅ FŐOLDAL ("/")
+    }}
+  >
+    🚪 Kijelentkezés
+  </span>
+</div>
 
       {/* TARTALOM */}
       <div className={styles.HomeContent}>
@@ -287,24 +308,17 @@ export default function HomePage() {
               </p>
               
               <div className={styles.ButtonRow}>
-                <button 
-                  className={styles.SaveBtn}
-                  onClick={saveToDatabase}
-                  disabled={saving}
-                >
-                  {saving ? "💾 Mentés..." : "💾 MENTÉS ADATBÁZISBA"}
-                </button>
-                <button 
-                  className={styles.ClearBtn}
-                  onClick={() => {
-                    ['salary','hasCar','kmPerDay','consumption','fuelPrice','hasHome','homeCost','utilities','foodCost','funCost']
-                      .forEach(key => localStorage.removeItem(`calc_${key}`));
-                    setResult(null);
-                  }}
-                >
-                  🗑️ Újraindítás
-                </button>
-              </div>
+  <button 
+    className={styles.SaveBtn}
+    onClick={saveToDatabase}
+    disabled={saving}
+  >
+    {saving ? "💾 Mentés..." : "💾 MENTÉS/FRISSÍTÉS"}
+  </button>
+  <button className={styles.ClearBtn} onClick={clearCalculator}>
+    🗑️ Újraindítás
+  </button>
+</div>
             </div>
           )}
         </div>

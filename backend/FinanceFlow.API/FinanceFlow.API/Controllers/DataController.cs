@@ -22,31 +22,47 @@ namespace FinanceFlow.API.Controllers
 
         // ------------------- CREATE --------------------
         [HttpPost("addUserData")]
-        [Authorize]  // ← EZ KELL A JWT token-hez!
+        [Authorize]
         public async Task<IActionResult> CreateUserDataAsync([FromBody] DataDto dto)
         {
-            // User azonosítás JWT-ből
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId != dto.UserId)
-                return Unauthorized("Nem vagy jogosult!");
+            // ✅ LÉTEZŐ ADAT KERESÉSE
+            var existingData = await _context.UserData.FirstOrDefaultAsync(x => x.UserId == dto.UserId);
 
-            var data = new UserData
+            if (existingData != null)
             {
-                Auto = dto.Auto,
-                Fizetes = dto.Fizetes,
-                BenzinKolt = dto.Benzinkolt,
-                LakasKolt = dto.Lakaskolt,
-                Lakas = dto.Lakhatas,
-                Egyeb = dto.Egyeb,
-                Szamlak = dto.Szamlak,
-                UserId = dto.UserId
-            };
+                // ✅ MÁR VAN ADAT → UPDATE
+                existingData.Fizetes = dto.Fizetes;
+                existingData.Auto = dto.Auto;
+                existingData.BenzinKolt = dto.Benzinkolt;
+                existingData.LakasKolt = dto.Lakaskolt;
+                existingData.Lakas = dto.Lakhatas;
+                existingData.Egyeb = dto.Egyeb;
+                existingData.Szamlak = dto.Szamlak;
 
-            await _context.UserData.AddAsync(data);
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Adatok frissítve!", id = existingData.Id });
+            }
+            else
+            {
+                // ✅ ÚJ ADAT → CREATE
+                var data = new UserData
+                {
+                    Auto = dto.Auto,
+                    Fizetes = dto.Fizetes,
+                    BenzinKolt = dto.Benzinkolt,
+                    LakasKolt = dto.Lakaskolt,
+                    Lakas = dto.Lakhatas,
+                    Egyeb = dto.Egyeb,
+                    Szamlak = dto.Szamlak,
+                    UserId = dto.UserId
+                };
 
-            return Ok(data);
+                await _context.UserData.AddAsync(data);
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Új adat létrehozva!", id = data.Id });
+            }
         }
+
 
         // ------------------- GET BY USERID --------------------
         [HttpGet("getUserData/{userId}")]

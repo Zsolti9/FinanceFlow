@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinanceFlow.Api.Models
 {
     public class AppUser : IdentityUser
     {
-        // bővíthető: FirstName, LastName, MonthlyNetIncome stb.
-        public string? DisplayName { get; set; }
+        
+            [NotMapped]
+            public string DisplayName { get; set; }
+        
+
     }
 }

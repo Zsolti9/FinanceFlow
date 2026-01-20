@@ -29,30 +29,34 @@ export default function RegisterPage() {
     }
 
     try {
-      const res = await fetch(`${API_URL}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: fullName,
-          email: email,
-          password: password,
-        }),
-      });
+  const res = await fetch(`${API_URL}/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      displayName: fullName,
+      email: email,
+      password: password,
+    }),
+  });
 
-      if (res.ok) {
-        alert("Sikeres regisztráció!");
-        router.push("/login");
-      } else {
-        // ✅ RÉSZLETES HIBAÜZENET!
-        const errorData = await res.json();
-        setError(errorData.message || "Regisztráció sikertelen!");
-      }
-    } catch (error) {
-      setError("Szerver hiba! Ellenőrizd a kapcsolatot.");
-      console.error("Regisztráció hiba:", error);
-    } finally {
-      setLoading(false);
-    }
+  const text = await res.text(); // 🔥 EZ A KULCS
+
+  if (!res.ok) {
+    console.error("BACKEND ERROR:", text);
+    setError(text || "Regisztráció sikertelen!");
+    return;
+  }
+
+  alert("Sikeres regisztráció!");
+  router.push("/login");
+
+} catch (error) {
+  console.error("Fetch hiba:", error);
+  setError("Szerver hiba! Ellenőrizd a kapcsolatot.");
+} finally {
+  setLoading(false);
+}
+
   };
 
   return (

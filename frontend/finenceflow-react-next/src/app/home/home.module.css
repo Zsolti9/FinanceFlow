@@ -216,3 +216,112 @@
   filter: drop-shadow(0 0 10px rgba(74, 222, 128, 0.6));
 }
 
+/* ===== TÉMA VÁLTÓ ===== */
+.ThemeToggle {
+  position: relative;
+  padding: 18px 30px;
+  color: #b4ffc9;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.ThemeToggle::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, 0.3);
+  transition: all 0.3s ease;
+}
+
+.ThemeToggle.active::before {
+  background: #4ade80;
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
+}
+
+.ThemeToggle:hover {
+  background: rgba(74, 222, 128, 0.1);
+}
+
+/* ===== TÉMA VÁLTÓ (frissítve) ===== */
+.ThemeToggle {
+  position: relative;
+  padding: 18px 30px;
+  color: #b4ffc9;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.ThemeToggle::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, 0.3);
+  transition: all 0.3s ease;
+}
+
+.ThemeToggle.active::before {
+  background: #4ade80;
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
+}
+
+.ThemeToggle:hover {
+  background: rgba(74, 222, 128, 0.1);
+}
+
+/* ===== TÉMA CLASSOK (sötétebb szövegek) ===== */
+.dark {
+  /* sötét téma - már megvan */
+}
+
+.light {
+  background: #f8fafc !important;
+}
+
+.light .HomeNavbar,
+.light .BlurMenu,
+.light .AddExpenseModal,
+.light .ExpenseItem {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(74, 222, 128, 0.3) !important;
+  color: #0f172a !important; /* 🆕 SÖTÉTEBB */
+}
+
+.light .Greeting,
+.light .ExpenseItem strong {
+  color: #047857 !important; /* 🆕 MÉG SÖTÉTEBB ZÖLD */
+}
+
+.light .ExpenseItem small {
+  color: #065f46 !important; /* 🆕 SÖTÉTEBB KATEGÓRIA */
+}
+
+.light input,
+.light select {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #0f172a !important; /* 🆕 SÖTÉTEBB INPUT */
+  border-color: rgba(74, 222, 128, 0.4) !important;
+}
+
+.light .BlurMenu span {
+  color: #0f172a !important; /* 🆕 SÖTÉTEBB MENÜ */
+}
+
+.light .ThemeToggle {
+  color: #047857 !important; /* 🆕 SÖTÉTEBB TÉMA KAPCSOLÓ */
+}

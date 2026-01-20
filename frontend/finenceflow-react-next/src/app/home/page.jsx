@@ -10,9 +10,9 @@ export default function HomePage() {
 
   const [user, setUser] = useState(null);
   const [isClient, setIsClient] = useState(false);
-
   const [showNavbar, setShowNavbar] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   const [expenses, setExpenses] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -22,7 +22,7 @@ export default function HomePage() {
     setIsClient(true);
   }, []);
 
-  /* AUTH */
+  /* AUTH - RÉGI landingVisit TÖRÖLVE */
   useEffect(function () {
     if (!isClient) return;
 
@@ -41,6 +41,13 @@ export default function HomePage() {
       router.push("/login");
     }
   }, [isClient, router]);
+
+  /* TÉMA BETÖLTÉS */
+  useEffect(function () {
+    if (!isClient) return;
+    const darkMode = localStorage.getItem("darkMode") !== "false";
+    setIsDarkMode(darkMode);
+  }, [isClient]);
 
   /* NAVBAR SCROLL */
   useEffect(function () {
@@ -62,11 +69,12 @@ export default function HomePage() {
     }
   }, [isClient]);
 
-  /* SAVE EXPENSES */
+  /* SAVE EXPENSES + THEME */
   useEffect(function () {
     if (!isClient) return;
     localStorage.setItem("expenses", JSON.stringify(expenses));
-  }, [expenses, isClient]);
+    localStorage.setItem("darkMode", isDarkMode);
+  }, [expenses, isDarkMode, isClient]);
 
   function addExpense() {
     const title = document.getElementById("title").value;
@@ -89,6 +97,10 @@ export default function HomePage() {
     setShowModal(false);
   }
 
+  function toggleTheme() {
+    setIsDarkMode(!isDarkMode);
+  }
+
   if (!isClient || !user) {
     return (
       <div className={styles.loading}>
@@ -98,27 +110,29 @@ export default function HomePage() {
   }
 
   return (
-    <div className={styles.HomeBackground}>
+    <div className={`${styles.HomeBackground} ${isDarkMode ? styles.dark : styles.light}`}>
       <h1 className={styles.Greeting}>
-  Szia, {user?.username || user?.DisplayName || user?.name || user?.email?.split("@")[0]} 👋
-</h1>
+        Szia, {user?.username || user?.DisplayName || user?.name || user?.email?.split("@")[0]} 👋
+      </h1>
 
-      {/* NAVBAR */}
+      {/* NAVBAR - LOGO */}
       <nav className={`${styles.HomeNavbar} ${showNavbar ? styles.NavVisible : styles.NavHidden}`}>
         <div
-  className={styles.HomeNavLeft}
-  onClick={() => router.push("/")}
-  title="Vissza a főoldalra"
->
-  <Image
-    src="/FinanceFlowLogo.png"
-    width={130}
-    height={130}
-    alt="FinanceFlow"
-    className={styles.Logo}
-  />
-</div>
-
+          className={styles.HomeNavLeft}
+          onClick={() => {
+            localStorage.setItem("isLoggedIn", "true"); // 🆕 LANDING-RE DOB, TOKEN MARAD
+            router.push("/"); 
+          }}
+          title="Vissza a landing page-re"
+        >
+          <Image
+            src="/FinanceFlowLogo.png"
+            width={130}
+            height={130}
+            alt="FinanceFlow"
+            className={styles.Logo}
+          />
+        </div>
       </nav>
 
       {/* HAMBURGER */}
@@ -135,11 +149,19 @@ export default function HomePage() {
         <span onClick={() => router.push("/profile")}>Profil</span>
         <span onClick={() => router.push("/statistics")}>Statisztikák</span>
         <span onClick={() => router.push("/settings")}>Beállítások</span>
+        
+        <span 
+          className={`${styles.ThemeToggle} ${isDarkMode ? styles.active : ""}`}
+          onClick={toggleTheme}
+        >
+          {isDarkMode ? "☀️ Világos" : "🌙 Sötét"}
+        </span>
+        
         <span
           className={styles.Logout}
           onClick={() => {
-            localStorage.clear();
-            router.push("/");
+            localStorage.clear(); // 🆕 MINDEN TÖRLŐDIK
+            router.push("/login"); // 🆕 LOGIN-RE DOB
           }}
         >
           🚪 Kijelentkezés
@@ -182,7 +204,6 @@ export default function HomePage() {
               <option>Shopping</option>
               <option>Bills</option>
             </select>
-
             <button className={styles.SaveExpenseBtn} onClick={addExpense}>
               Mentés
             </button>

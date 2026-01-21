@@ -96,15 +96,15 @@
   },
   {
     "ContainingType": "FinanceFlow.API.Controllers.DataController",
-    "Method": "CreateUserDataAsync",
-    "RelativePath": "api/Data/addUserData",
+    "Method": "AddExpense",
+    "RelativePath": "api/Data",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "FinanceFlow.API.Dtos.DataDto",
+        "Type": "FinanceFlow.API.Dtos.ExpenseDto",
         "IsRequired": true
       }
     ],
@@ -112,8 +112,18 @@
   },
   {
     "ContainingType": "FinanceFlow.API.Controllers.DataController",
-    "Method": "DeleteUserData",
-    "RelativePath": "api/Data/delete/{id}",
+    "Method": "GetExpenses",
+    "RelativePath": "api/Data",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FinanceFlow.API.Controllers.DataController",
+    "Method": "DeleteExpense",
+    "RelativePath": "api/Data/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -121,43 +131,6 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FinanceFlow.API.Controllers.DataController",
-    "Method": "GetUserData",
-    "RelativePath": "api/Data/getUserData/{userId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FinanceFlow.API.Controllers.DataController",
-    "Method": "UpdateUserData",
-    "RelativePath": "api/Data/update/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "FinanceFlow.API.Dtos.DataDto",
         "IsRequired": true
       }
     ],

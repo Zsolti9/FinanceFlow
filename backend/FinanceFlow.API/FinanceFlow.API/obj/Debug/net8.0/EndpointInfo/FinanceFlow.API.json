@@ -164,7 +164,7 @@
         }
       }
     },
-    "/api/Data/addUserData": {
+    "/api/Data": {
       "post": {
         "tags": [
           "Data"
@@ -173,17 +173,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DataDto"
+                "$ref": "#/components/schemas/ExpenseDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/DataDto"
+                "$ref": "#/components/schemas/ExpenseDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/DataDto"
+                "$ref": "#/components/schemas/ExpenseDto"
               }
             }
           }
@@ -193,22 +193,10 @@
             "description": "OK"
           }
         }
-      }
-    },
-    "/api/Data/getUserData/{userId}": {
+      },
       "get": {
         "tags": [
           "Data"
-        ],
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -217,7 +205,7 @@
         }
       }
     },
-    "/api/Data/delete/{id}": {
+    "/api/Data/{id}": {
       "delete": {
         "tags": [
           "Data"
@@ -239,82 +227,18 @@
           }
         }
       }
-    },
-    "/api/Data/update/{id}": {
-      "put": {
-        "tags": [
-          "Data"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DataDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DataDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DataDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
     }
   },
   "components": {
     "schemas": {
-      "DataDto": {
+      "ExpenseDto": {
         "type": "object",
         "properties": {
-          "userId": {
+          "name": {
             "type": "string",
             "nullable": true
           },
-          "fizetes": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "auto": {
-            "type": "boolean"
-          },
-          "benzinkolt": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "lakhatas": {
-            "type": "boolean"
-          },
-          "lakaskolt": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "szamlak": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "egyeb": {
+          "amount": {
             "type": "integer",
             "format": "int32"
           }

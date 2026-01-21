@@ -1,6 +1,5 @@
 ﻿using FinanceFlow.Api.Data;
 using FinanceFlow.API.Dtos;
-using FinanceFlow.API.Interfaces;
 using FinanceFlow.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +10,7 @@ namespace FinanceFlow.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DataController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -20,99 +20,56 @@ namespace FinanceFlow.API.Controllers
             _context = context;
         }
 
-        // ------------------- CREATE --------------------
-        [HttpPost("addUserData")]
-        [Authorize]
-        public async Task<IActionResult> CreateUserDataAsync([FromBody] DataDto dto)
+        private string GetUserId()
         {
-            // ✅ LÉTEZŐ ADAT KERESÉSE
-            var existingData = await _context.UserData.FirstOrDefaultAsync(x => x.UserId == dto.UserId);
-
-            if (existingData != null)
-            {
-                // ✅ MÁR VAN ADAT → UPDATE
-                existingData.Fizetes = dto.Fizetes;
-                existingData.Auto = dto.Auto;
-                existingData.BenzinKolt = dto.Benzinkolt;
-                existingData.LakasKolt = dto.Lakaskolt;
-                existingData.Lakas = dto.Lakhatas;
-                existingData.Egyeb = dto.Egyeb;
-                existingData.Szamlak = dto.Szamlak;
-
-                await _context.SaveChangesAsync();
-                return Ok(new { message = "Adatok frissítve!", id = existingData.Id });
-            }
-            else
-            {
-                // ✅ ÚJ ADAT → CREATE
-                var data = new UserData
-                {
-                    Auto = dto.Auto,
-                    Fizetes = dto.Fizetes,
-                    BenzinKolt = dto.Benzinkolt,
-                    LakasKolt = dto.Lakaskolt,
-                    Lakas = dto.Lakhatas,
-                    Egyeb = dto.Egyeb,
-                    Szamlak = dto.Szamlak,
-                    UserId = dto.UserId
-                };
-
-                await _context.UserData.AddAsync(data);
-                await _context.SaveChangesAsync();
-                return Ok(new { message = "Új adat létrehozva!", id = data.Id });
-            }
+            return User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
 
-
-        // ------------------- GET BY USERID --------------------
-        [HttpGet("getUserData/{userId}")]
-        public async Task<IActionResult> GetUserData(string userId)
+        // ➕ ÚJ KÖLTÉS
+        [HttpPost]
+        public async Task<IActionResult> AddExpense([FromBody] ExpenseDto dto)
         {
-            var data = await _context.UserData
+            var expense = new Expense
+            {
+                UserId = GetUserId(),
+                Name = dto.Name,
+                Amount = dto.Amount
+            };
+
+            await _context.Expenses.AddAsync(expense);
+            await _context.SaveChangesAsync();
+
+            return Ok(expense);
+        }
+
+        // 📄 ÖSSZES KÖLTÉS LEKÉRÉSE
+        [HttpGet]
+        public async Task<IActionResult> GetExpenses()
+        {
+            var userId = GetUserId();
+
+            var expenses = await _context.Expenses
                 .Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.CreatedAt)
                 .ToListAsync();
 
-            if (data == null || data.Count == 0)
-                return NotFound(new { message = "No data found for this user." });
-
-            return Ok(data);
+            return Ok(expenses);
         }
 
-
-        // ------------------- DELETE --------------------
-        [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeleteUserData(int id)
+        // ❌ TÖRLÉS
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteExpense(int id)
         {
-            var data = await _context.UserData.FindAsync(id);
-            if (data == null)
-                return NotFound(new { message = "Data entry not found." });
+            var expense = await _context.Expenses.FindAsync(id);
+            if (expense == null) return NotFound();
 
-            _context.UserData.Remove(data);
+            if (expense.UserId != GetUserId())
+                return Forbid();
+
+            _context.Expenses.Remove(expense);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Data deleted successfully." });
-        }
-
-        // ------------------- UPDATE --------------------
-        [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateUserData(int id, [FromBody] DataDto dto)
-        {
-            var data = await _context.UserData.FindAsync(id);
-            if (data == null)
-                return NotFound(new { message = "Data entry not found." });
-
-            data.Auto = dto.Auto;
-            data.Fizetes = dto.Fizetes;
-            data.BenzinKolt = dto.Benzinkolt;
-            data.LakasKolt = dto.Lakaskolt;
-            data.Lakas = dto.Lakhatas;
-            data.Egyeb = dto.Egyeb;
-            data.Szamlak = dto.Szamlak;
-            // ❗ UserId NEM változik (ahogy kérted)
-
-            await _context.SaveChangesAsync();
-
-            return Ok(new { message = "Data updated successfully." });
+            return Ok();
         }
     }
 }

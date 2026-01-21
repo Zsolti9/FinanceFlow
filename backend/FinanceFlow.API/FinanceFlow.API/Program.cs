@@ -1,11 +1,12 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using FinanceFlow.Api.Data;
+﻿using FinanceFlow.Api.Data;
 using FinanceFlow.Api.Models;
 using FinanceFlow.Api.Services;
 using FinanceFlow.API.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +31,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     options.Password.RequireDigit = true;
     options.Password.RequireNonAlphanumeric = false;
     options.User.RequireUniqueEmail = true;
-    options.SignIn.RequireConfirmedEmail = false; // fejleszt�sn�l false, prodban true javasolt
+    options.SignIn.RequireConfirmedEmail = false; // fejlesztésnél false, prodban true javasolt
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
@@ -56,7 +57,11 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
         ValidateLifetime = true,
-        ClockSkew = TimeSpan.FromSeconds(30)
+        ClockSkew = TimeSpan.FromSeconds(30),
+
+        // ✅ Ez segít, hogy a User.Identity.Name rendes legyen
+        NameClaimType = ClaimTypes.Name,
+        RoleClaimType = ClaimTypes.Role
     };
 });
 

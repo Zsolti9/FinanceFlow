@@ -20,12 +20,20 @@ namespace FinanceFlow.Api.Services
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email ?? ""),
-                new Claim("displayName", user.DisplayName ?? ""),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
+    {
+        // ✅ Identity-hez ez kell leginkább
+        new Claim(ClaimTypes.NameIdentifier, user.Id),
+
+        // ✅ jó, ha a Name is megvan (email)
+        new Claim(ClaimTypes.Name, user.Email ?? ""),
+
+        // ✅ maradhat a standard sub/email is
+        new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+        new Claim(JwtRegisteredClaimNames.Email, user.Email ?? ""),
+
+        new Claim("displayName", user.DisplayName ?? ""),
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+    };
 
             if (roles != null)
             {
@@ -45,5 +53,6 @@ namespace FinanceFlow.Api.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
     }
 }

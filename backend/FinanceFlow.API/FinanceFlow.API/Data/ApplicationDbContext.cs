@@ -7,7 +7,9 @@ namespace FinanceFlow.Api.Data
 {
     public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
-        public DbSet<UserData> UserData { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+
+        
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         // később: DbSet<Transaction>, DbSet<Category> stb.

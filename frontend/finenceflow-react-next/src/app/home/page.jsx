@@ -160,8 +160,10 @@ export default function HomePage() {
         <span
           className={styles.Logout}
           onClick={() => {
-            localStorage.clear(); // 🆕 MINDEN TÖRLŐDIK
-            router.push("/login"); // 🆕 LOGIN-RE DOB
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            localStorage.removeItem("isLoggedIn");
+            router.push("/");
           }}
         >
           🚪 Kijelentkezés

@@ -1,18 +1,21 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";  // ✅ useState MEGVAN
 import styles from "./landing.module.css";
-import logo from "../../public/FinanceFlowLogo.png";
 
 export default function LandingPage() {
   const router = useRouter();
   const navRef = useRef(null);
   const wrapperRef = useRef(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // ✅ useState DEFINIÁLVA
 
-  useEffect(() => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  /* NAVBAR PADDING */
+  useEffect(function () {
     function updatePadding() {
       const navH = navRef.current ? navRef.current.offsetHeight : 0;
       if (wrapperRef.current) {
@@ -22,43 +25,126 @@ export default function LandingPage() {
 
     updatePadding();
     window.addEventListener("resize", updatePadding);
-    return () => window.removeEventListener("resize", updatePadding);
+    return function () {
+      window.removeEventListener("resize", updatePadding);
+    };
   }, []);
 
-  // ✅ EZ A USEFFECT - CSAK EZ KELL!
-  useEffect(() => {
-    if (typeof window === 'undefined') return; // SSR védelem
-    
-    const hasToken = localStorage.getItem("token");
-    const isLoggedInStatus = localStorage.getItem("isLoggedIn") === "true";
-    
-    // 🆗 HELYI VÁLTOZÓ, NEM KÖZVETLEN SET
-    const loggedInStatus = hasToken && isLoggedInStatus;
-    setIsLoggedIn(loggedInStatus);
+  /* AUTH + THEME LOAD */
+  useEffect(function () {
+    if (typeof window === "undefined") return;
+
+    const token = localStorage.getItem("token");
+    const logged = localStorage.getItem("isLoggedIn") === "true";
+    const darkMode = localStorage.getItem("darkMode") !== "false";
+
+    setIsLoggedIn(!!token && logged);
+    setIsDarkMode(darkMode);
   }, []);
+
+  /* THEME TOGGLE */
+  function toggleTheme() {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    localStorage.setItem("darkMode", newMode);
+  }
 
   return (
-    <div ref={wrapperRef} className={styles.LandingWrapper}>
+    <div
+      ref={wrapperRef}
+      className={`${styles.LandingWrapper} ${
+        isDarkMode ? styles.dark : styles.light
+      }`}
+    >
+      {/* NAVBAR */}
       <nav ref={navRef} className={styles.Navbar}>
-        <div className={styles.LogoContainer} onClick={() => router.push("/")}>
-          <Image src={logo} alt="Logo" width={160} height={60} />
+        <div
+          className={styles.LogoContainer}
+          onClick={function () {
+            router.push("/");
+          }}
+        >
+          <Image
+            src="/FinanceFlowLogo.png"
+            width={160}
+            height={60}
+            alt="FinanceFlow"
+            className={styles.Logo}
+          />
         </div>
-        
-        {/* GOMBOK CSAK HA NEM bejelentkezett */}
-        {!isLoggedIn && (
-          <div className={styles.NavLinks}>
-            <span onClick={() => router.push("/login")}>Bejelentkezés</span>
-            <span onClick={() => router.push("/register")}>Regisztráció</span>
-          </div>
-        )}
-        
-        {isLoggedIn && (
-          <div className={styles.NavLoggedIn}>
-            Bejelentkeztél ✅
-          </div>
-        )}
       </nav>
 
+      {/* ===== HAMBURGER – MINDIG LÁTSZIK ===== */}
+      <div
+        className={styles.FloatingBurger}
+        onClick={function () {
+          setMenuOpen(!menuOpen);
+        }}
+      >
+        <span className={styles.bar} />
+        <span className={styles.bar} />
+        <span className={styles.bar} />
+      </div>
+
+      {menuOpen && (
+        <div
+          className={styles.Overlay}
+          onClick={function () {
+            setMenuOpen(false);
+          }}
+        />
+      )}
+
+      {/* ===== SIDE MENU ===== */}
+      <div className={`${styles.BlurMenu} ${menuOpen ? styles.show : ""}`}>
+        {!isLoggedIn && (
+          <>
+            <span onClick={function () { router.push("/login"); }}>
+              Bejelentkezés
+            </span>
+            <span onClick={function () { router.push("/register"); }}>
+              Regisztráció
+            </span>
+          </>
+        )}
+
+        {isLoggedIn && (
+          <>
+            <span onClick={function () { router.push("/home"); }}>
+              Profil
+            </span>
+            <span onClick={function () { router.push("/settings"); }}>
+              Beállítások
+            </span>
+          </>
+        )}
+
+        <span
+          className={`${styles.ThemeToggle} ${
+            isDarkMode ? styles.active : ""
+          }`}
+          onClick={toggleTheme}
+        >
+          {isDarkMode ? "☀️ Világos mód" : "🌙 Sötét mód"}
+        </span>
+
+        {isLoggedIn && (
+          <span
+            className={styles.Logout}
+            onClick={function () {
+              localStorage.removeItem("token");
+              localStorage.removeItem("user");
+              localStorage.removeItem("isLoggedIn");
+              router.push("/");
+              window.location.reload();
+            }}
+          >
+            🚪 Kijelentkezés
+          </span>
+        )}
+      </div>
+
+      {/* ===== TARTALOM ===== */}
       <section className={styles.SectionFeatures}>
         <h2>Miért a FinanceFlow?</h2>
         <div className={styles.FeatureGrid}>
@@ -69,20 +155,16 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className={styles.SectionScreenshots}>
-        <h2>Pillanatképek</h2>
-        <div className={styles.ScreenshotArea}>
-          <div className={styles.CardGlass} style={{ display: "inline-block" }}>
-            Itt majd képek lesznek
-          </div>
-        </div>
-      </section>
-
       <section className={styles.SectionCTA}>
         <h2>Készen állsz?</h2>
         <p>Csatlakozz és kezeld pénzügyeidet profin!</p>
         {!isLoggedIn && (
-          <div className={styles.CTAButton} onClick={() => router.push("/register")}>
+          <div
+            className={styles.CTAButton}
+            onClick={function () {
+              router.push("/register");
+            }}
+          >
             Regisztrálok
           </div>
         )}

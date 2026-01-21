@@ -263,3 +263,262 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(74, 222, 128, 0.3);
 }
+
+/* ===== PROFIL HAMBURGER ===== */
+.ProfileMenuWrapper {
+  position: relative;
+}
+
+.Hamburger {
+  font-size: 28px;
+  color: #4ade80;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ProfileDropdown {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: rgba(10, 20, 15, 0.95);
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  border-radius: 14px;
+  padding: 12px;
+  min-width: 180px;
+  backdrop-filter: blur(12px);
+  z-index: 2000;
+}
+
+.ProfileItem {
+  padding: 10px 14px;
+  color: #c8ffd5;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.25s;
+}
+
+.ProfileItem:hover {
+  background: rgba(74, 222, 128, 0.15);
+}
+
+/* ===== HAMBURGER (HOME STYLE) ===== */
+.FloatingBurger {
+  position: fixed;
+  top: 22px;
+  right: 25px;
+  width: 42px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+.bar {
+  height: 4px;
+  background: #4ade80;
+  border-radius: 4px;
+}
+
+/* ===== OVERLAY ===== */
+.Overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 900;
+}
+
+/* ===== SIDE MENU ===== */
+.BlurMenu {
+  position: fixed;
+  right: -300px;
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(16px);
+  padding-top: 120px;
+  transition: right 0.35s ease;
+  z-index: 1001;
+}
+
+.BlurMenu.show {
+  right: 0;
+}
+
+.BlurMenu span {
+  display: block;
+  padding: 18px 30px;
+  color: #b4ffc9;
+  cursor: pointer;
+}
+
+.Logout {
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+/* ===== HAMBURGER (HOME STYLE) ===== */
+.FloatingBurger {
+  position: fixed;
+  top: 22px;
+  right: 25px;
+  width: 42px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+.bar {
+  height: 4px;
+  background: #4ade80;
+  border-radius: 4px;
+}
+
+/* ===== OVERLAY ===== */
+.Overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 900;
+}
+
+/* ===== SIDE MENU ===== */
+.BlurMenu {
+  position: fixed;
+  right: -300px;
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(16px);
+  padding-top: 120px;
+  transition: right 0.35s ease;
+  z-index: 1001;
+}
+
+.BlurMenu.show {
+  right: 0;
+}
+
+.BlurMenu span {
+  display: block;
+  padding: 18px 30px;
+  color: #b4ffc9;
+  cursor: pointer;
+}
+
+.Logout {
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+/* ===================================================
+   THEME SUPPORT – CSAK HOZZÁADÁS (MERGE)
+   Nem módosít meglévő layoutot
+=================================================== */
+
+/* Sötét téma – alap (meglévő design marad) */
+.dark {
+  background: #0d0d0d;
+}
+
+/* Világos téma – CSAK finom felülírások */
+.light {
+  background: #f8fafc;
+}
+
+/* Navbar világos módban */
+.light .Navbar {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* Glass card-ok világos módban */
+.light .CardGlass {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(74, 222, 128, 0.3);
+  color: #0f172a;
+}
+
+/* Side menu világos módban */
+.light .BlurMenu {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+/* Menü szövegek világos módban */
+.light .BlurMenu span {
+  color: #0f172a;
+}
+
+/* CTA szöveg világos módban */
+.light .SectionCTA p {
+  color: #065f46;
+}
+
+/* Theme toggle kiemelés */
+.ThemeToggle {
+  position: relative;
+}
+
+.ThemeToggle.active {
+  color: #4ade80;
+}
+
+/* ===================================================
+   TEXT COLORS – THEME MERGE (HOME STYLE)
+=================================================== */
+
+/* -------- DARK MODE -------- */
+.dark {
+  color: #c8ffd5; /* alap szöveg */
+}
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4 {
+  color: #4ade80; /* neon zöld címek */
+}
+
+/* Card szövegek */
+.dark .CardGlass {
+  color: #c8ffd5;
+}
+
+/* Menü szöveg */
+.dark .BlurMenu span {
+  color: #b4ffc9;
+}
+
+
+/* -------- LIGHT MODE -------- */
+.light {
+  color: #065f46; /* alap szöveg */
+}
+
+.light h1,
+.light h2,
+.light h3,
+.light h4 {
+  color: #047857; /* sötét zöld címek */
+}
+
+/* Card szöveg */
+.light .CardGlass {
+  color: #0f172a;
+}
+
+/* Menü szöveg */
+.light .BlurMenu span {
+  color: #047857;
+}
+
+/* CTA leírás */
+.light .SectionCTA p {
+  color: #065f46;
+}
+

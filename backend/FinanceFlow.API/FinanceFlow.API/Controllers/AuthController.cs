@@ -1,10 +1,12 @@
-﻿using FinanceFlow.Api.DTOs;
+﻿using FinanceFlow.Api.Data;
+using FinanceFlow.Api.DTOs;
 using FinanceFlow.Api.Models;
 using FinanceFlow.API.Dtos;
 using FinanceFlow.API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace FinanceFlow.Api.Controllers
@@ -125,20 +127,51 @@ namespace FinanceFlow.Api.Controllers
         }
 
         // ------------------ DELETE USER ----------------------
-        [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeleteUser(string id)
+        [HttpDelete("delete-me")]
+        [Authorize]
+        public async Task<IActionResult> DeleteMe([FromBody] DeleteAccountDto dto, [FromServices] ApplicationDbContext db)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            if (dto == null || string.IsNullOrWhiteSpace(dto.Password))
+                return BadRequest(new { message = "Password is required." });
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrWhiteSpace(userId))
+                return Unauthorized(new { message = "Invalid token." });
+
+            var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
-                return NotFound(new { message = "User not found" });
+                return NotFound(new { message = "User not found." });
 
-            var result = await _userManager.DeleteAsync(user);
-            if (!result.Succeeded)
-                return BadRequest(result.Errors);
+            // ✅ jelszó ellenőrzés
+            var ok = await _userManager.CheckPasswordAsync(user, dto.Password);
+            if (!ok)
+                return Unauthorized(new { message = "Wrong password." });
 
-            return Ok(new { message = "User deleted successfully" });
+            // ✅ transaction: vagy minden törlődik, vagy semmi
+            await using var tx = await db.Database.BeginTransactionAsync();
+            try
+            {
+                // 1) kapcsolódó adatok törlése (Expenses)
+                // IMPORTANT: csak akkor, ha így hívod a táblát:
+                // db.Expenses
+                await db.Expenses
+                    .Where(x => x.UserId == userId)
+                    .ExecuteDeleteAsync();
+
+                // 2) Identity user törlése (ez cascade-eli az AspNetUserClaims/Logins/Roles-t)
+                var result = await _userManager.DeleteAsync(user);
+                if (!result.Succeeded)
+                    return BadRequest(result.Errors);
+
+                await tx.CommitAsync();
+                return Ok(new { message = "Account deleted." });
+            }
+            catch (Exception ex)
+            {
+                await tx.RollbackAsync();
+                return StatusCode(500, new { message = "Server error.", details = ex.Message });
+            }
         }
-
 
         [HttpGet("me")]
         [Authorize]

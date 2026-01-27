@@ -1,15 +1,15 @@
 [
   {
     "ContainingType": "FinanceFlow.Api.Controllers.AuthController",
-    "Method": "DeleteUser",
-    "RelativePath": "api/Auth/delete/{id}",
+    "Method": "DeleteMe",
+    "RelativePath": "api/Auth/delete-me",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.String",
+        "Name": "dto",
+        "Type": "FinanceFlow.API.Dtos.DeleteAccountDto",
         "IsRequired": true
       }
     ],

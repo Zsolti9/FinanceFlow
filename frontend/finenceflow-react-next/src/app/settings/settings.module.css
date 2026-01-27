@@ -1,0 +1,206 @@
+.Page {
+  min-height: 100vh;
+  padding: 120px 18px 30px;
+  background: #0d0d0d;
+  color: #c4ffd4;
+}
+
+.dark {
+  background: #0d0d0d;
+}
+
+.light {
+  background: #f5fff8;
+  color: #0b1b10;
+}
+
+.TopBar {
+  max-width: 820px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Title {
+  font-size: 2.2rem;
+  margin: 0;
+  color: #4ade80;
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.6);
+}
+
+.BackBtn {
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  background: rgba(255,255,255,0.05);
+  color: inherit;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.BackBtn:hover {
+  box-shadow: 0 0 16px rgba(74, 222, 128, 0.18);
+}
+
+.Toast {
+  max-width: 820px;
+  margin: 0 auto 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  background: rgba(74, 222, 128, 0.10);
+}
+
+.Card {
+  max-width: 820px;
+  margin: 0 auto 14px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(74, 222, 128, 0.28);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.light .Card {
+  background: rgba(0,0,0,0.04);
+}
+
+.SectionTitle {
+  margin: 0 0 12px;
+  color: #4ade80;
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.35);
+}
+
+.Row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.Label {
+  font-weight: 700;
+}
+
+.SubLabel {
+  opacity: 0.8;
+  margin-top: 4px;
+  font-size: 0.95rem;
+}
+
+.Divider {
+  height: 1px;
+  margin: 14px 0;
+  background: rgba(74, 222, 128, 0.18);
+}
+
+.PrimaryBtn,
+.SecondaryBtn,
+.DangerBtn {
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  background: rgba(255,255,255,0.05);
+  color: inherit;
+  font-weight: 700;
+}
+
+.PrimaryBtn {
+  background: #4ade80;
+  color: #0d0d0d;
+  border: none;
+}
+
+.PrimaryBtn:hover {
+  filter: drop-shadow(0 0 10px rgba(74, 222, 128, 0.5));
+}
+
+.SecondaryBtn:hover {
+  box-shadow: 0 0 16px rgba(74, 222, 128, 0.18);
+}
+
+.DangerBtn {
+  border: 1px solid rgba(255, 120, 120, 0.45);
+  background: rgba(255, 120, 120, 0.10);
+}
+
+.DangerBtn:hover {
+  box-shadow: 0 0 16px rgba(255, 120, 120, 0.18);
+}
+
+.ModalOverlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 2000;
+}
+
+.ModalCard{
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 18px;
+  border: 1px solid rgba(74,222,128,0.28);
+  background: rgba(15, 23, 42, 0.85);
+  padding: 18px;
+}
+
+.light .ModalCard{
+  background: rgba(255,255,255,0.9);
+  color: #0b1b10;
+}
+
+.ModalText{
+  opacity: 0.9;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.ModalLabel{
+  display: block;
+  margin-top: 14px;
+  font-weight: 700;
+}
+
+.ModalInput{
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(74,222,128,0.25);
+  background: rgba(255,255,255,0.05);
+  color: inherit;
+}
+
+.light .ModalInput{
+  background: rgba(0,0,0,0.04);
+}
+
+.ModalActions{
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.CloseModalBtn{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 20px;
+  opacity: 0.7;
+  color: inherit;
+}
+
+.CloseModalBtn:hover{
+  opacity: 1;
+}

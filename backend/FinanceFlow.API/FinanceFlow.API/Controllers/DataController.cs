@@ -29,11 +29,53 @@ namespace FinanceFlow.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddExpense([FromBody] ExpenseDto dto)
         {
+            var userId = GetUserId();
+
+            // 🔹 User betöltése (keret miatt)
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+                return Unauthorized();
+
+            // 🔹 Ha van beállított keret (>0)
+            if (user.MonthlyBudget > 0)
+            {
+                var now = DateTime.UtcNow;
+                var monthStart = new DateTime(now.Year, now.Month, 1);
+                var monthEnd = monthStart.AddMonths(1);
+
+                // 🔹 Aktuális havi költés
+                var currentMonthSpend = await _context.Expenses
+                    .Where(e =>
+                        e.UserId == userId &&
+                        e.CreatedAt >= monthStart &&
+                        e.CreatedAt < monthEnd)
+                    .SumAsync(e => (decimal?)e.Amount) ?? 0;
+
+                // 🔹 Ellenőrzés
+                if (currentMonthSpend + dto.Amount > user.MonthlyBudget)
+                {
+                    var remaining = user.MonthlyBudget - currentMonthSpend;
+
+                    return BadRequest(new
+                    {
+                        message = "Túllépnéd a havi keretedet.",
+                        remaining
+                    });
+                }
+            }
+
+            // 🔹 Mentés
             var expense = new Expense
             {
-                UserId = GetUserId(),
+                UserId = userId,
                 Name = dto.Name,
-                Amount = dto.Amount
+                Amount = dto.Amount,
+                Category = string.IsNullOrWhiteSpace(dto.Category)
+        ? "General"
+        : dto.Category,
+                CreatedAt = DateTime.UtcNow
             };
 
             await _context.Expenses.AddAsync(expense);

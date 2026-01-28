@@ -5,9 +5,11 @@ namespace FinanceFlow.Api.Models
 {
     public class AppUser : IdentityUser
     {
-        
-            [NotMapped]
+        public decimal MonthlyBudget { get; set; }
+
+        [NotMapped]
             public string DisplayName { get; set; }
+
         
 
     }

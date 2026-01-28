@@ -27,6 +27,11 @@ export default function HomePage() {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("Food");
+  const [budget, setBudget] = useState(0);
+  const [showBudgetModal, setShowBudgetModal] = useState(false);
+const [budgetInput, setBudgetInput] = useState("");
+
+
 
   useEffect(() => setIsClient(true), []);
 
@@ -34,6 +39,26 @@ export default function HomePage() {
     if (!isClient) return null;
     return localStorage.getItem("token");
   }, [isClient]);
+
+  useEffect(() => {
+  if (!isClient) return;
+  const b = Number(localStorage.getItem("budget") || 0);
+  setBudget(Number.isFinite(b) ? b : 0);
+}, [isClient]);
+
+function saveBudget() {
+  const b = Number(budgetInput);
+  if (!Number.isFinite(b) || b < 0) {
+    setError("A keret legyen 0 vagy pozitív szám!");
+    return;
+  }
+  setBudget(b);
+  localStorage.setItem("budget", String(b));
+  setBudgetInput("");
+  setShowBudgetModal(false);
+}
+
+
 
   /* AUTH */
   useEffect(() => {
@@ -47,7 +72,12 @@ export default function HomePage() {
       return;
     }
 
-    setUser(JSON.parse(storedUser));
+    try {
+      setUser(JSON.parse(storedUser));
+    } catch {
+      localStorage.clear();
+      router.replace("/login");
+    }
   }, [isClient, router]);
 
   /* THEME LOAD */
@@ -65,6 +95,55 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  function toggleTheme() {
+    const next = !isDarkMode;
+    setIsDarkMode(next);
+    localStorage.setItem("darkMode", String(next));
+  }
+
+  // ---- Helpers ----
+  function calcMonthlySpend(list) {
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = now.getMonth();
+
+    return list
+      .filter(
+        (e) =>
+          e.createdAt &&
+          new Date(e.createdAt).getFullYear() === y &&
+          new Date(e.createdAt).getMonth() === m
+      )
+      .reduce((sum, e) => sum + Number(e.amount || 0), 0);
+  }
+
+  function getCategoryStats(list) {
+    const totals = {};
+    for (const e of list) {
+      const cat = e.category || "General";
+      totals[cat] = (totals[cat] || 0) + Number(e.amount || 0);
+    }
+    const all = Object.values(totals).reduce((a, b) => a + b, 0) || 0;
+
+    const emoji = {
+      Food: "🍔",
+      Transport: "🚗",
+      Shopping: "🛍️",
+      Bills: "🧾",
+      General: "📌",
+    };
+
+    return Object.entries(totals)
+      .map(([name, sum]) => ({
+        name,
+        sum,
+        pct: all === 0 ? 0 : Math.round((sum / all) * 100),
+        emoji: emoji[name] ?? "📌",
+      }))
+      .sort((a, b) => b.sum - a.sum)
+      .slice(0, 4);
+  }
+
   async function loadExpenses() {
     if (!token) return;
 
@@ -76,17 +155,29 @@ export default function HomePage() {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      if (!res.ok) {
+        console.error("LOAD EXPENSES ERROR:", res.status, text);
+        setError(`Nem sikerült betölteni a költéseket. (${res.status})`);
+        setExpenses([]);
+        return;
+      }
+
+      const data = JSON.parse(text);
+
       setExpenses(
-        data.map((x) => ({
+        (data ?? []).map((x) => ({
           id: x.id,
           title: x.name,
           amount: x.amount,
           category: x.category ?? "General",
+          createdAt: x.createdAt ?? x.created_at ?? null,
         }))
       );
-    } catch {
+    } catch (e) {
+      console.error(e);
       setError("Szerver hiba.");
+      setExpenses([]);
     } finally {
       setLoadingExpenses(false);
     }
@@ -95,7 +186,100 @@ export default function HomePage() {
   useEffect(() => {
     if (!isClient || !user) return;
     loadExpenses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClient, user]);
+
+  async function addExpense() {
+    setError("");
+
+    if (!title.trim() || !amount) {
+      setError("Adj meg nevet és összeget!");
+      return;
+    }
+
+    const amountNum = Number(amount);
+    if (!Number.isFinite(amountNum) || amountNum <= 0) {
+      setError("Az összeg legyen pozitív szám!");
+      return;
+    }
+
+    if (!token) {
+      router.replace("/login");
+      return;
+    }
+
+    setSaving(true);
+
+    try {
+      const ADD_URL = DATA_URL; // ha nálad pl: `${DATA_URL}/add`
+      const res = await fetch(ADD_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: title.trim(),
+          amount: amountNum,
+          category,
+        }),
+      });
+
+      const text = await res.text();
+
+      if (!res.ok) {
+  let msg = "Nem sikerült menteni a költést.";
+  try {
+    const err = JSON.parse(text);
+    if (err.message) {
+      msg = `${err.message} (Maradék: ${err.remaining?.toLocaleString("hu-HU")} Ft)`;
+    }
+  } catch {}
+
+  setError(msg);
+  return;
+}
+
+      setTitle("");
+      setAmount("");
+      setCategory("Food");
+      setShowModal(false);
+
+      await loadExpenses();
+    } catch (e) {
+      console.error(e);
+      setError("Szerver hiba mentés közben.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+ async function deleteExpense(id) {
+  setError("");
+  if (!token) return;
+
+  try {
+    const DELETE_URL = `${DATA_URL}/${id}`; // ✅ EZ A LÉNYEG
+
+    const res = await fetch(DELETE_URL, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    const text = await res.text();
+    if (!res.ok) {
+      console.error("DELETE ERROR:", res.status, text);
+      setError(`Nem sikerült törölni. (${res.status})`);
+      return;
+    }
+
+    setExpenses((prev) => prev.filter((x) => x.id !== id));
+  } catch (e) {
+    console.error(e);
+    setError("Szerver hiba törlés közben.");
+  }
+}
+
 
   function logout() {
     localStorage.removeItem("token");
@@ -108,25 +292,24 @@ export default function HomePage() {
   }
 
   const displayName =
-    user?.username || user?.displayName || user?.email?.split("@")[0];
+    user?.username ||
+    user?.displayName ||
+    user?.DisplayName ||
+    user?.email?.split("@")[0];
+
+  const monthlySpend = calcMonthlySpend(expenses);
+  const categoryStats = getCategoryStats(expenses);
+   const remaining = Math.max(0, budget - monthlySpend);
+const usedPct = budget > 0 ? Math.min(100, Math.round((monthlySpend / budget) * 100)) : 0;
+
 
   return (
-    <div
-      className={`${styles.HomeBackground} ${
-        isDarkMode ? styles.dark : styles.light
-      }`}
-    >
+    <div className={`${styles.HomeBackground} ${isDarkMode ? styles.dark : styles.light}`}>
       <h1 className={styles.Greeting}>Szia, {displayName} 👋</h1>
 
-      <nav
-        className={`${styles.HomeNavbar} ${
-          showNavbar ? styles.NavVisible : styles.NavHidden
-        }`}
-      >
-        <div
-          className={styles.HomeNavLeft}
-          onClick={() => router.push("/")}
-        >
+      {/* NAVBAR */}
+      <nav className={`${styles.HomeNavbar} ${showNavbar ? styles.NavVisible : styles.NavHidden}`}>
+        <div className={styles.HomeNavLeft} onClick={() => router.push("/")}>
           <Image
             src="/FinanceFlowLogo.png"
             width={130}
@@ -137,32 +320,356 @@ export default function HomePage() {
         </div>
       </nav>
 
-      <div
-        className={styles.FloatingBurger}
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        <span className={styles.bar} />
-        <span className={styles.bar} />
-        <span className={styles.bar} />
+      {/* HAMBURGER */}
+      <div className={styles.FloatingBurger} onClick={() => setMenuOpen(!menuOpen)}>
+        <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
+        <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
+        <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
       </div>
 
-      {menuOpen && (
-        <div
-          className={styles.Overlay}
-          onClick={() => setMenuOpen(false)}
-        />
-      )}
+      {menuOpen && <div className={styles.Overlay} onClick={() => setMenuOpen(false)} />}
 
+      {/* SIDE MENU */}
       <div className={`${styles.BlurMenu} ${menuOpen ? styles.show : ""}`}>
-        <span onClick={() => router.push("/profile")}>👤Profil</span>
-        <span onClick={() => router.push("/statistics")}>📝Statisztikák</span>
-        <span onClick={() => router.push("/settings")}>⚙️Beállítások</span>
+        <span onClick={() => router.push("/profile")}>👤 Profil</span>
+        <span onClick={() => router.push("/statistics")}>📝 Statisztikák</span>
+        <span onClick={() => router.push("/settings")}>⚙️ Beállítások</span>
+
+        <span
+          className={`${styles.ThemeToggle} ${isDarkMode ? styles.active : ""}`}
+          onClick={toggleTheme}
+        >
+          {isDarkMode ? "☀️ Világos mód" : "🌙 Sötét mód"}
+        </span>
+
         <span className={styles.Logout} onClick={logout}>
           🚪 Kijelentkezés
         </span>
       </div>
 
-      {/* CONTENT marad változatlan */}
+      {/* CONTENT */}
+      <div className={styles.HomeContent}>
+        <div className={styles.SplitGrid}>
+          {/* LEFT: DASHBOARD */}
+          <div className={styles.LeftPanel}>
+            <div className={styles.CardGrid}>
+              {/* Havi költés kártya */}
+              <div className={styles.DashCard}>
+  <div className={styles.CardTop}>
+    <span className={styles.CardTitle}>Havi keret</span>
+    <span className={styles.LiveDot} />
+  </div>
+
+  <div className={styles.BigValue}>
+    {budget > 0 ? `${budget.toLocaleString("hu-HU")} Ft` : "Nincs beállítva"}
+  </div>
+
+  <div className={styles.SubMuted}>
+    Maradék: <strong>{remaining.toLocaleString("hu-HU")} Ft</strong> • Felhasznált: <strong>{usedPct}%</strong>
+  </div>
+
+  <div className={styles.ProgressBar}>
+    <div className={styles.ProgressFill} style={{ width: `${usedPct}%` }} />
+  </div>
+
+  <button className={styles.SetBudgetBtn} onClick={() => setShowBudgetModal(true)}>
+    Keret beállítása
+  </button>
+</div>
+
+              <div className={styles.DashCard}>
+                <div className={styles.CardTop}>
+                  <span className={styles.CardTitle}>Havi költés</span>
+                  <span className={styles.LiveDot} />
+                </div>
+
+                <div className={styles.BigValue}>
+                  {monthlySpend.toLocaleString("hu-HU")} Ft
+                </div>
+
+                <div className={styles.SubMuted}>
+                  (Az aktuális hónapban eddig elköltött összeg)
+                </div>
+
+                {/* ✅ Valódi chart */}
+                <MiniAreaChart values={buildDailySeries(expenses)} />
+              </div>
+
+              {/* Kategóriák */}
+              <div className={styles.DashCard}>
+                <div className={styles.CardTop}>
+                  <span className={styles.CardTitle}>Kategóriák</span>
+                  <span className={styles.LiveDot} />
+                </div>
+
+                <div className={styles.CategoryList}>
+                  {categoryStats.map((c) => (
+                    <div key={c.name} className={styles.CategoryRow}>
+                      <span className={styles.CategoryName}>
+                        {c.emoji} {c.name}
+                      </span>
+                      <span className={styles.CategoryPct}>{c.pct}%</span>
+                    </div>
+                  ))}
+
+                  {expenses.length === 0 && (
+                    <div className={styles.EmptyHint}>Még nincs elég adat.</div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Legutóbbi költések */}
+            <div className={styles.DashCard}>
+              <div className={styles.CardTop}>
+                <span className={styles.CardTitle}>Legutóbbi költések</span>
+                <span className={styles.LiveDot} />
+              </div>
+
+              <div className={styles.RecentList}>
+                {expenses.slice(0, 5).map((e) => (
+                  <div key={e.id} className={styles.RecentItem}>
+                    <div className={styles.RecentLeft}>
+                      <strong>{e.title}</strong>
+                      <small>
+                        {e.createdAt
+                          ? new Date(e.createdAt).toLocaleDateString("hu-HU", {
+                              month: "short",
+                              day: "2-digit",
+                            })
+                          : ""}
+                        {" • "}
+                        {e.category}
+                      </small>
+                    </div>
+                    <span className={styles.RecentAmount}>
+                      -{Number(e.amount || 0).toLocaleString("hu-HU")} Ft
+                    </span>
+                  </div>
+                ))}
+
+                {expenses.length === 0 && (
+                  <div className={styles.EmptyHint}>Nincs még rögzített költés.</div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: EXPENSE MANAGER */}
+          <div className={styles.RightPanel}>
+            <div className={styles.ManagerCard}>
+              <div className={styles.ManagerHeader}>
+                <div>
+                  <h2 className={styles.ManagerTitle}>Költéseid</h2>
+                  <p className={styles.ManagerSub}>
+                    Adj hozzá új költést és kezeld a listát.
+                  </p>
+                </div>
+
+                <button className={styles.AddExpenseBtn} onClick={() => setShowModal(true)}>
+                  + Új költés
+                </button>
+              </div>
+
+              {error && <div className={styles.ErrorMessage}>❌ {error}</div>}
+
+              {!loadingExpenses && expenses.length > 0 && (
+                <div className={styles.ExpenseList}>
+                  {expenses.map((e) => (
+                    <div key={e.id} className={styles.ExpenseItem}>
+                      <div>
+                        <strong>{e.title}</strong>
+                        <small>
+                          {e.createdAt
+                            ? new Date(e.createdAt).toLocaleString("hu-HU", {
+                                year: "numeric",
+                                month: "2-digit",
+                                day: "2-digit",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })
+                            : ""}
+                          {" • "}
+                          {e.category}
+                        </small>
+                      </div>
+
+                      <div className={styles.ExpenseRight}>
+                        <span className={styles.ExpenseAmount}>
+                          -{Number(e.amount || 0).toLocaleString("hu-HU")} Ft
+                        </span>
+
+                        <button
+                          className={styles.DeleteBtn}
+                          onClick={() => deleteExpense(e.id)}
+                          title="Törlés"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {!loadingExpenses && expenses.length === 0 && (
+                <div className={styles.EmptyHint}>Nincs még rögzített költés.</div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* MODAL */}
+      {showModal && (
+        <div className={styles.ModalOverlay} onClick={() => setShowModal(false)}>
+          <div className={styles.AddExpenseModal} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.CloseModalBtn} onClick={() => setShowModal(false)}>
+              ✕
+            </button>
+
+            <h2>Új költés</h2>
+
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Mire költöttél?"
+            />
+
+            <input
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              type="number"
+              placeholder="Összeg (Ft)"
+            />
+
+            <select
+              className={styles.Select}
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option>Food</option>
+              <option>Transport</option>
+              <option>Shopping</option>
+              <option>Bills</option>
+              <option>General</option>
+            </select>
+
+            <button className={styles.SaveExpenseBtn} onClick={addExpense} disabled={saving}>
+              {saving ? "Mentés..." : "Mentés"}
+            </button>
+          </div>
+        </div>
+      )}
+      {showBudgetModal && (
+  <div className={styles.ModalOverlay} onClick={() => setShowBudgetModal(false)}>
+    <div className={styles.AddExpenseModal} onClick={(e) => e.stopPropagation()}>
+      <button className={styles.CloseModalBtn} onClick={() => setShowBudgetModal(false)}>✕</button>
+      <h2>Havi keret beállítása</h2>
+
+      <input
+        value={budgetInput}
+        onChange={(e) => setBudgetInput(e.target.value)}
+        type="number"
+        placeholder="Keret (Ft)"
+      />
+
+      <button className={styles.SaveExpenseBtn} onClick={saveBudget}>
+        Mentés
+      </button>
+    </div>
+  </div>
+)}
+
+    </div>
+    
+  );
+}
+
+/* ===================== CHART HELPERS ===================== */
+
+function buildDailySeries(expenses) {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = now.getMonth();
+  const daysInMonth = new Date(y, m + 1, 0).getDate();
+
+  const perDay = Array(daysInMonth).fill(0);
+
+  for (const e of expenses) {
+    if (!e.createdAt) continue;
+    const d = new Date(e.createdAt);
+    if (d.getFullYear() !== y || d.getMonth() !== m) continue;
+    const dayIdx = d.getDate() - 1;
+    perDay[dayIdx] += Number(e.amount || 0);
+  }
+
+  // Kumulatív görbe (dashboard feeling)
+  let sum = 0;
+  return perDay.map((v) => (sum += v));
+}
+
+function MiniAreaChart({ values }) {
+  const w = 640;
+  const h = 180;
+  const pad = 14;
+
+  const max = Math.max(...values, 1);
+  const min = Math.min(...values, 0);
+
+  const xStep = (w - pad * 2) / Math.max(values.length - 1, 1);
+  const scaleY = (v) => {
+    const t = (v - min) / (max - min || 1);
+    return pad + (1 - t) * (h - pad * 2);
+  };
+
+  const points = values.map((v, i) => ({
+    x: pad + i * xStep,
+    y: scaleY(v),
+  }));
+
+  const lineD = points
+    .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`)
+    .join(" ");
+
+  const areaD = `${lineD} L ${(pad + (values.length - 1) * xStep).toFixed(2)} ${(h - pad).toFixed(
+    2
+  )} L ${pad.toFixed(2)} ${(h - pad).toFixed(2)} Z`;
+ 
+
+
+  return (
+    <div className={styles.ChartWrap}>
+      <svg
+        className={styles.ChartSvg}
+        viewBox={`0 0 ${w} ${h}`}
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="fillGreen" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stopColor="rgb(74,222,128)" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="rgb(74,222,128)" stopOpacity="0" />
+          </linearGradient>
+
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <g className={styles.ChartGrid}>
+          <line x1="0" y1={h - pad} x2={w} y2={h - pad} />
+          <line x1="0" y1={h / 2} x2={w} y2={h / 2} />
+          <line x1="0" y1={pad} x2={w} y2={pad} />
+        </g>
+
+        <path d={areaD} className={styles.ChartArea} />
+        <path d={lineD} className={styles.ChartLine} filter="url(#glow)" />
+      </svg>
     </div>
   );
 }

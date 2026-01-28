@@ -260,6 +260,10 @@
           "amount": {
             "type": "integer",
             "format": "int32"
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

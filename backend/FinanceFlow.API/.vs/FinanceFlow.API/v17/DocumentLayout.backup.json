@@ -114,8 +114,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Dtos\\DeleteAccountDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-27T09:02:26.407Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-27T09:02:26.407Z"
             },
             {
               "$type": "Document",
@@ -197,7 +196,7 @@
               "RelativeDocumentMoniker": "FinanceFlow.API\\Controllers\\AuthController.cs",
               "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\AuthController.cs",
               "RelativeToolTip": "FinanceFlow.API\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAIMAAAAAAAAAAAAkwK0AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAKQAAAAAAAAAAAAkwK0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-21T11:56:39.766Z",
               "EditorCaption": ""
@@ -248,8 +247,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Program.cs",
               "ViewState": "AgIAACoAAAAAAAAAAAAiwEAAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T11:52:39.859Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T11:52:39.859Z"
             },
             {
               "$type": "Document",
@@ -297,8 +295,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Services\\JwtService.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAiwDcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T11:56:07.798Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T11:56:07.798Z"
             },
             {
               "$type": "Document",
@@ -322,8 +319,7 @@
               "RelativeToolTip": "FinanceFlow.API\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-11-25T04:23:19.444Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-25T04:23:19.444Z"
             }
           ]
         }

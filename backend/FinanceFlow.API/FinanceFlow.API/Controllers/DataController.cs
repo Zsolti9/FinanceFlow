@@ -26,14 +26,15 @@ namespace FinanceFlow.API.Controllers
         }
 
         // ➕ ÚJ KÖLTÉS
-        [HttpPost]
+        [HttpPost("add")]
         public async Task<IActionResult> AddExpense([FromBody] ExpenseDto dto)
         {
             var expense = new Expense
             {
                 UserId = GetUserId(),
                 Name = dto.Name,
-                Amount = dto.Amount
+                Amount = dto.Amount,
+                CreatedAt=DateTime.UtcNow,
             };
 
             await _context.Expenses.AddAsync(expense);

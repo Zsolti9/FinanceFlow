@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import styles from "./landing.module.css";
 
 export default function LandingPage() {
   const router = useRouter();
+  const pathname = usePathname();
+
   const navRef = useRef(null);
   const wrapperRef = useRef(null);
 
@@ -15,38 +17,32 @@ export default function LandingPage() {
   const [isDarkMode, setIsDarkMode] = useState(true);
 
   /* NAVBAR PADDING */
-  useEffect(function () {
+  useEffect(() => {
     function updatePadding() {
       const navH = navRef.current ? navRef.current.offsetHeight : 0;
       if (wrapperRef.current) {
         wrapperRef.current.style.paddingTop = `${navH + 24}px`;
       }
     }
-
     updatePadding();
     window.addEventListener("resize", updatePadding);
-    return function () {
-      window.removeEventListener("resize", updatePadding);
-    };
+    return () => window.removeEventListener("resize", updatePadding);
   }, []);
 
-  /* AUTH + THEME LOAD */
-  useEffect(function () {
-    if (typeof window === "undefined") return;
-
+  /* AUTH + THEME */
+  useEffect(() => {
     const token = localStorage.getItem("token");
-    const logged = localStorage.getItem("isLoggedIn") === "true";
     const darkMode = localStorage.getItem("darkMode") !== "false";
-
-    setIsLoggedIn(!!token && logged);
+    setIsLoggedIn(!!token);
     setIsDarkMode(darkMode);
-  }, []);
+  }, [pathname]);
 
-  /* THEME TOGGLE */
-  function toggleTheme() {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-    localStorage.setItem("darkMode", newMode);
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setIsLoggedIn(false);
+    setMenuOpen(false);
+    router.push("/");
   }
 
   return (
@@ -60,9 +56,7 @@ export default function LandingPage() {
       <nav ref={navRef} className={styles.Navbar}>
         <div
           className={styles.LogoContainer}
-          onClick={function () {
-            router.push("/");
-          }}
+          onClick={() => router.push("/")}
         >
           <Image
             src="/FinanceFlowLogo.png"
@@ -74,12 +68,10 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* ===== HAMBURGER – MINDIG LÁTSZIK ===== */}
+      {/* HAMBURGER */}
       <div
         className={styles.FloatingBurger}
-        onClick={function () {
-          setMenuOpen(!menuOpen);
-        }}
+        onClick={() => setMenuOpen(!menuOpen)}
       >
         <span className={styles.bar} />
         <span className={styles.bar} />
@@ -87,88 +79,160 @@ export default function LandingPage() {
       </div>
 
       {menuOpen && (
-        <div
-          className={styles.Overlay}
-          onClick={function () {
-            setMenuOpen(false);
-          }}
-        />
+        <div className={styles.Overlay} onClick={() => setMenuOpen(false)} />
       )}
 
-      {/* ===== SIDE MENU ===== */}
+      {/* SIDE MENU */}
       <div className={`${styles.BlurMenu} ${menuOpen ? styles.show : ""}`}>
         {!isLoggedIn && (
           <>
-            <span onClick={function () { router.push("/login"); }}>
-              Bejelentkezés
-            </span>
-            <span onClick={function () { router.push("/register"); }}>
-              Regisztráció
-            </span>
+            <span onClick={() => router.push("/login")}>🔑 Bejelentkezés</span>
+            <span onClick={() => router.push("/register")}>📝 Regisztráció</span>
           </>
         )}
 
         {isLoggedIn && (
           <>
-            <span onClick={function () { router.push("/home"); }}>
-              Profil
-            </span>
-            <span onClick={function () { router.push("/settings"); }}>
-              Beállítások
+            <span onClick={() => router.push("/home")}>🏠 Home</span>
+            <span onClick={() => router.push("/profile")}>👤 Profil</span>
+            <span onClick={() => router.push("/settings")}>⚙️ Beállítások</span>
+            <span className={styles.Logout} onClick={logout}>
+              🚪 Kijelentkezés
             </span>
           </>
         )}
-
-        <span
-          className={`${styles.ThemeToggle} ${
-            isDarkMode ? styles.active : ""
-          }`}
-          onClick={toggleTheme}
-        >
-          {isDarkMode ? "☀️ Világos mód" : "🌙 Sötét mód"}
-        </span>
-
-        {isLoggedIn && (
-          <span
-            className={styles.Logout}
-            onClick={function () {
-              localStorage.removeItem("token");
-              localStorage.removeItem("user");
-              localStorage.removeItem("isLoggedIn");
-              router.push("/");
-              window.location.reload();
-            }}
-          >
-            🚪 Kijelentkezés
-          </span>
-        )}
       </div>
 
-      {/* ===== TARTALOM ===== */}
-      <section className={styles.SectionFeatures}>
-        <h2>Miért a FinanceFlow?</h2>
-        <div className={styles.FeatureGrid}>
-          <div className={styles.CardGlass}>Kiadások követése</div>
-          <div className={styles.CardGlass}>Bevétel kezelése</div>
-          <div className={styles.CardGlass}>Automatikus grafikonok</div>
-          <div className={styles.CardGlass}>Okos kategorizálás</div>
+      {/* ===== HERO ===== */}
+      <section className={styles.Hero}>
+        <div className={styles.HeroLeft}>
+          <h1>
+            Kezeld a pénzügyeid <br />
+            <span>egyszerűen.</span>
+          </h1>
+
+          <p>
+            A FinanceFlow segít átlátni a kiadásaid, tervezni a jövőt
+            és kézben tartani a pénzed.
+          </p>
+
+          <div className={styles.HeroActions}>
+            {!isLoggedIn && (
+              <button
+                className={styles.PrimaryBtn}
+                onClick={() => router.push("/register")}
+              >
+                Ingyen kipróbálom
+              </button>
+            )}
+
+            <button
+              className={styles.SecondaryBtn}
+              onClick={() =>
+                isLoggedIn ? router.push("/home") : router.push("/login")
+              }
+            >
+              {isLoggedIn ? "Ugrás a Home-ra" : "Bejelentkezés"}
+            </button>
+          </div>
+        </div>
+
+        <div className={styles.HeroRight}>
+          <div className={styles.MockupGlow} />
+
+          <img
+            src="/dashboard-mockup.png"
+            alt="FinanceFlow dashboard"
+            className={styles.Mockup}
+          />
+
+          {/* FEATURE DOTS */}
+          <div
+            className={styles.FeatureDot}
+            style={{ top: "22%", left: "25%" }}
+          >
+            <span>📊 Valós idejű statisztikák</span>
+          </div>
+
+          <div
+            className={styles.FeatureDot}
+            style={{ top: "70%", left: "25%" }}
+          >
+            <span>💸 Kategorizált kiadások</span>
+          </div>
+
+          <div
+            className={styles.FeatureDot}
+            style={{ top: "21%", left: "80%" }}
+          >
+            <span>📈 Havi trendek</span>
+          </div>
         </div>
       </section>
 
-      <section className={styles.SectionCTA}>
-        <h2>Készen állsz?</h2>
-        <p>Csatlakozz és kezeld pénzügyeidet profin!</p>
-        {!isLoggedIn && (
+      {/* ===== TRUST ===== */}
+      <section className={styles.TrustStrip}>
+        <div>🔒 Biztonságos adatkezelés</div>
+        <div>📊 Valós idejű költéskövetés</div>
+        <div>⚡ Gyors és letisztult</div>
+        <div>📱 Mobilbarát</div>
+      </section>
+
+      {/* ===== FEATURE SHOWCASE ===== */}
+      <section className={styles.FeatureShowcase}>
+        <div className={styles.FeatureItem}>
+          <div>
+            <h3>📊 Lásd, mire megy el a pénzed</h3>
+            <p>Áttekinthető listák és statisztikák egy helyen.</p>
+          </div>
+          <img src="/mockup-expenses.png" alt="Kiadások" className={styles.Mockup}/>
+        </div>
+
+        <div className={`${styles.FeatureItem} ${styles.reverse}`}>
+          <div>
+            <h3>📈 Tervezz előre okosan</h3>
+            <p>Kategóriák és trendek segítik a döntéseid.</p>
+          </div>
+          <img src="/mockup-stats.png" alt="Statisztikák" className={styles.Mockup}/>
+        </div>
+      </section>
+
+      {/* ===== HOW IT WORKS ===== */}
+      <section className={styles.HowItWorks}>
+        <h2>Így működik</h2>
+
+        <div className={styles.Steps}>
+          <div className={styles.StepCard}>
+            <span>1</span>
+            <h4>Regisztrálsz</h4>
+            <p>Gyors és ingyenes.</p>
+          </div>
+          <div className={styles.StepCard}>
+            <span>2</span>
+            <h4>Rögzíted a költéseid</h4>
+            <p>Pár kattintás.</p>
+          </div>
+          <div className={styles.StepCard}>
+            <span>3</span>
+            <h4>Átlátod a pénzügyeid</h4>
+            <p>Grafikonok és összesítések.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== CTA ===== */}
+      {!isLoggedIn && (
+        <section className={styles.SectionCTA}>
+          <h2>Készen állsz?</h2>
+          <p>Csatlakozz és kezeld pénzügyeidet profin!</p>
           <div
             className={styles.CTAButton}
-            onClick={function () {
-              router.push("/register");
-            }}
+            onClick={() => router.push("/register")}
           >
             Regisztrálok
           </div>
-        )}
-      </section>
+        </section>
+      )}
     </div>
   );
 }

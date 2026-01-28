@@ -25,7 +25,14 @@ export default function LoginPage() {
 
       if (res.ok) {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem(
+          "user", 
+          JSON.stringify({
+            id: data.user.id,
+            email: data.user.email,
+            username: data.user.username
+          })
+        );
         alert("Sikeres bejelentkezés!");
         router.push("/home");
       } else {

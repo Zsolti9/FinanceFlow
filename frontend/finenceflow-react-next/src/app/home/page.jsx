@@ -335,13 +335,6 @@ const usedPct = budget > 0 ? Math.min(100, Math.round((monthlySpend / budget) * 
         <span onClick={() => router.push("/statistics")}>📝 Statisztikák</span>
         <span onClick={() => router.push("/settings")}>⚙️ Beállítások</span>
 
-        <span
-          className={`${styles.ThemeToggle} ${isDarkMode ? styles.active : ""}`}
-          onClick={toggleTheme}
-        >
-          {isDarkMode ? "☀️ Világos mód" : "🌙 Sötét mód"}
-        </span>
-
         <span className={styles.Logout} onClick={logout}>
           🚪 Kijelentkezés
         </span>

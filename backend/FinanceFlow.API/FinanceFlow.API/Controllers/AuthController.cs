@@ -32,7 +32,7 @@ namespace FinanceFlow.Api.Controllers
             var existing = await _userManager.FindByEmailAsync(dto.Email);
             if (existing != null) return BadRequest(new { error = "E-mail already registered" });
 
-            var user = new AppUser { UserName = dto.Email, Email = dto.Email, DisplayName = dto.DisplayName };
+            var user = new AppUser { UserName = dto.DisplayName ?? dto.Email.Split('@')[0], Email = dto.Email, DisplayName = dto.DisplayName };
             var result = await _userManager.CreateAsync(user, dto.Password);
 
             if (!result.Succeeded) return BadRequest(result.Errors);

@@ -1,0 +1,171 @@
+.ProfileBackground {
+  min-height: 100vh;
+  padding-top: 120px;
+}
+
+.loading {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.7;
+}
+
+/* NAVBAR */
+.Navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 90px;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0d0d0d;
+  border-bottom: 1px solid rgba(74, 222, 128, 0.35);
+  z-index: 1000;
+}
+
+.NavLeft {
+  cursor: pointer;
+}
+
+.BackBtn {
+  padding: 10px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  background: transparent;
+  color: #4ade80;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.BackBtn:hover {
+  background: rgba(74, 222, 128, 0.12);
+}
+
+/* CONTENT */
+.Content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.ProfileCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: 22px;
+  padding: 40px 30px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+/* AVATAR */
+.Avatar {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  cursor: pointer;
+  overflow: hidden;
+  border: 2px solid rgba(74, 222, 128, 0.35);
+}
+
+.Avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.UploadHint {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin-bottom: 24px;
+}
+
+.ProfileCard h1 {
+  color: #4ade80;
+  margin-bottom: 6px;
+}
+
+.Email {
+  opacity: 0.75;
+  margin-bottom: 30px;
+}
+
+/* INFO */
+.InfoGrid {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.InfoGrid div {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid rgba(74, 222, 128, 0.18);
+}
+
+.InfoGrid span {
+  display: block;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.InfoGrid strong {
+  font-size: 1.05rem;
+}
+
+/* ACTIONS */
+.Actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+.Actions button {
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: none;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.Actions button:first-child {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+}
+
+.Logout {
+  background: rgba(255, 107, 107, 0.18);
+  color: #ff6b6b;
+}
+
+/* THEMES */
+.dark {
+  background: #0d0d0d;
+  color: #eafff0;
+}
+
+.light {
+  background: #f8fafc;
+  color: #065f46;
+}
+
+.light .Navbar {
+  background: #ffffff;
+}
+
+.light .ProfileCard {
+  background: #ffffff;
+}
+
+.light h1 {
+  color: #047857;
+}

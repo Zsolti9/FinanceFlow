@@ -7,6 +7,8 @@ namespace FinanceFlow.Api.Models
     {
         public decimal MonthlyBudget { get; set; }
 
+        public string? ProfileImagePath { get; set; }
+
         [NotMapped]
             public string DisplayName { get; set; }
 

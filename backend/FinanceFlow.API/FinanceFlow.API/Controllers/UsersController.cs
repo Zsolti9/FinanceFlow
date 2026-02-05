@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using FinanceFlow.Api.Models;
+using FinanceFlow.API.Dtos;
 
 [Authorize]
 [ApiController]
@@ -69,4 +70,91 @@ public class UsersController : ControllerBase
 
         return Ok(new { imageUrl = user.ProfileImagePath });
     }
+
+    [HttpPut("username")]
+    public async Task<IActionResult> UpdateUsername([FromBody] UpdateUsernameDto dto)
+    {
+        if (string.IsNullOrWhiteSpace(dto.Username))
+            return BadRequest("Felhasználónév nem lehet üres.");
+
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null) return Unauthorized();
+
+        user.UserName = dto.Username;
+        user.NormalizedUserName = dto.Username.ToUpperInvariant();
+
+        var result = await _userManager.UpdateAsync(user);
+
+        if (!result.Succeeded)
+        {
+            return BadRequest(string.Join(", ",
+                result.Errors.Select(e => e.Description)));
+        }
+
+        return Ok(new { username = user.UserName });
+    }
+
+
+    [HttpPut("password")]
+    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto dto)
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null) return Unauthorized();
+
+        // 🔍 KÉZI ELLENŐRZÉS (debug + stabil)
+        var ok = await _userManager.CheckPasswordAsync(user, dto.CurrentPassword);
+        if (!ok)
+            return BadRequest("Hibás jelenlegi jelszó.");
+
+        var result = await _userManager.ChangePasswordAsync(
+            user,
+            dto.CurrentPassword,
+            dto.NewPassword
+        );
+
+        if (!result.Succeeded)
+            return BadRequest(string.Join(", ",
+                result.Errors.Select(e => e.Description)));
+
+        return Ok();
+    }
+
+
+    [HttpPut("preferences")]
+    public async Task<IActionResult> UpdatePreferences(UpdatePreferencesDto dto)
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null) return Unauthorized();
+
+        user.Language = dto.Language;
+        user.DefaultCurrency = dto.DefaultCurrency;
+
+        var result = await _userManager.UpdateAsync(user);
+        if (!result.Succeeded)
+        {
+            return BadRequest(string.Join(", ",
+                result.Errors.Select(e => e.Description)));
+        }
+
+        return Ok(new
+        {
+            user.Language,
+            user.DefaultCurrency
+        });
+    }
+
+    [HttpGet("settings")]
+    public async Task<IActionResult> GetSettings()
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null) return Unauthorized();
+
+        return Ok(new
+        {
+            language = user.Language,
+            defaultCurrency = user.DefaultCurrency,
+            notificationsEnabled = user.NotificationsEnabled
+        });
+    }
+
 }

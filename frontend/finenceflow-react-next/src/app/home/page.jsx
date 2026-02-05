@@ -189,6 +189,26 @@ function saveBudget() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClient, user]);
 
+  useEffect(() => {
+    if (!isClient || !token) return;
+
+    fetch("https://localhost:7183/api/users/me", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        if (!data) return;
+
+        setUser(data);
+        localStorage.setItem("user", JSON.stringify(data));
+      })
+      .catch((err) => {
+        console.error("LOAD USER ERROR:", err);
+      });
+  }, [isClient, token]);
+
   async function addExpense() {
     setError("");
 
@@ -292,7 +312,7 @@ function saveBudget() {
   }
 
   const displayName =
-    user?.username ||
+    user?.userName ||
     user?.displayName ||
     user?.DisplayName ||
     user?.email?.split("@")[0];

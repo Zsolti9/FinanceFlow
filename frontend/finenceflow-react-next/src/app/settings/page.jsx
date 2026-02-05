@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./settings.module.css";
 
+const API_BASE = "https://localhost:7183";
+
 export default function SettingsPage() {
   const router = useRouter();
 
@@ -11,24 +13,60 @@ export default function SettingsPage() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [message, setMessage] = useState("");
 
+  /* ===== PROFILE ===== */
+  const [username, setUsername] = useState("");
+
+  /* ===== PASSWORD ===== */
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
+
+  /* ===== PREFERENCES ===== */
+  const [language, setLanguage] = useState("hu");
+  const [currency, setCurrency] = useState("HUF");
+
+  /* ===== NOTIFICATIONS ===== */
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+
+  /* ===== ACCOUNT DELETE ===== */
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletePassword, setDeletePassword] = useState("");
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => setIsClient(true), []);
 
-  // Auth check
+  /* AUTH */
   useEffect(() => {
     if (!isClient) return;
     const token = localStorage.getItem("token");
     if (!token) router.replace("/login");
   }, [isClient, router]);
 
-  // Theme load
+  /* THEME */
   useEffect(() => {
     if (!isClient) return;
-    const dark = localStorage.getItem("darkMode") !== "false";
-    setIsDarkMode(dark);
+    setIsDarkMode(localStorage.getItem("darkMode") !== "false");
+  }, [isClient]);
+
+  /* LOAD SETTINGS */
+  useEffect(() => {
+    if (!isClient) return;
+
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    fetch(`${API_BASE}/api/users/settings`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!data) return;
+
+        setLanguage(data.language ?? "hu");
+        setCurrency(data.defaultCurrency ?? "HUF");
+        setNotificationsEnabled(data.notificationsEnabled ?? true);
+      })
+      .catch((err) => console.error("LOAD SETTINGS ERROR:", err));
   }, [isClient]);
 
   const themeLabel = useMemo(
@@ -36,38 +74,107 @@ export default function SettingsPage() {
     [isDarkMode]
   );
 
+  function toast(text) {
+    setMessage(text);
+    setTimeout(() => setMessage(""), 2200);
+  }
+
   function toggleTheme() {
     const next = !isDarkMode;
     setIsDarkMode(next);
     localStorage.setItem("darkMode", String(next));
-    setMessage(next ? "Sötét mód bekapcsolva." : "Világos mód bekapcsolva.");
-    setTimeout(() => setMessage(""), 2000);
+    toast(next ? "Sötét mód bekapcsolva." : "Világos mód bekapcsolva.");
   }
 
-  function clearExpensesOnly() {
-    localStorage.removeItem("expenses");
-    setMessage("A helyi (localStorage) költések törölve.");
-    setTimeout(() => setMessage(""), 2000);
+  /* ===== API CALLS ===== */
+
+  async function saveUsername() {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(`${API_BASE}/api/users/username`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ username }),
+    });
+
+    if (!res.ok) {
+      toast("❌ Nem sikerült a felhasználónév módosítása.");
+      return;
+    }
+
+    setUsername("");
+    toast("✅ Felhasználónév frissítve.");
   }
 
-  function clearAllLocal() {
-    localStorage.clear();
-    router.replace("/login");
+  async function changePassword() {
+    if (newPassword.length < 8) {
+      toast("❌ Az új jelszónak legalább 8 karakteresnek kell lennie.");
+      return;
+    }
+
+    if (newPassword !== newPasswordConfirm) {
+      toast("❌ A jelszavak nem egyeznek.");
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(`${API_BASE}/api/users/password`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        currentPassword,
+        newPassword,
+      }),
+    });
+
+    if (!res.ok) {
+      toast("❌ Hibás jelenlegi jelszó.");
+      return;
+    }
+
+    setCurrentPassword("");
+    setNewPassword("");
+    setNewPasswordConfirm("");
+    toast("✅ Jelszó sikeresen módosítva.");
   }
 
-  function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    router.replace("/login");
+  async function savePreferences() {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(`${API_BASE}/api/users/preferences`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        language,
+        defaultCurrency: currency,
+        notificationsEnabled,
+      }),
+    });
+
+    if (!res.ok) {
+      toast("❌ Nem sikerült elmenteni.");
+      return;
+    }
+
+    toast("✅ Beállítások elmentve.");
   }
 
   async function deleteAccount() {
     try {
       setDeleting(true);
-      setMessage("");
-
       const token = localStorage.getItem("token");
-      const res = await fetch("https://localhost:7183/api/auth/delete-me", {
+
+      const res = await fetch(`${API_BASE}/api/auth/delete-me`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -76,22 +183,21 @@ export default function SettingsPage() {
         body: JSON.stringify({ password: deletePassword }),
       });
 
-      const text = await res.text();
-
       if (!res.ok) {
-        console.error("DELETE ACCOUNT ERROR:", res.status, text);
-        setMessage("❌ Hibás jelszó vagy szerver hiba.");
+        toast("❌ Hibás jelszó.");
         return;
       }
 
       localStorage.clear();
       router.replace("/login");
-    } catch (e) {
-      console.error(e);
-      setMessage("❌ Szerver hiba.");
     } finally {
       setDeleting(false);
     }
+  }
+
+  function logout() {
+    localStorage.clear();
+    router.replace("/login");
   }
 
   if (!isClient) {
@@ -113,8 +219,118 @@ export default function SettingsPage() {
 
       {message && <div className={styles.Toast}>{message}</div>}
 
+      {/* ===== PROFIL ===== */}
+      <div className={styles.Card}>
+        <h2 className={styles.SectionTitle}>Profil</h2>
+
+        <div className={styles.Row}>
+          <input
+            className={styles.ModalInput}
+            placeholder="Új felhasználónév"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <button
+            className={styles.PrimaryBtn}
+            disabled={!username}
+            onClick={saveUsername}
+          >
+            💾 Mentés
+          </button>
+        </div>
+      </div>
+
+      {/* ===== BIZTONSÁG ===== */}
+      <div className={styles.Card}>
+        <h2 className={styles.SectionTitle}>Biztonság</h2>
+
+        <input
+          className={styles.ModalInput}
+          type="password"
+          placeholder="Jelenlegi jelszó"
+          value={currentPassword}
+          onChange={(e) => setCurrentPassword(e.target.value)}
+        />
+
+        <input
+          className={styles.ModalInput}
+          type="password"
+          placeholder="Új jelszó"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+        />
+
+        <input
+          className={styles.ModalInput}
+          type="password"
+          placeholder="Új jelszó megerősítése"
+          value={newPasswordConfirm}
+          onChange={(e) => setNewPasswordConfirm(e.target.value)}
+        />
+
+        <div style={{ marginTop: "12px" }}>
+          <button
+            className={styles.PrimaryBtn}
+            disabled={!currentPassword || !newPassword}
+            onClick={changePassword}
+          >
+            🔑 Jelszó módosítása
+          </button>
+        </div>
+      </div>
+
+      {/* ===== ÁLTALÁNOS ===== */}
+      <div className={styles.Card}>
+        <h2 className={styles.SectionTitle}>Általános</h2>
+
+        <div className={styles.Row}>
+          <select
+            className={styles.ModalInput}
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+          >
+            <option value="hu">Magyar</option>
+            <option value="en">English</option>
+          </select>
+
+          <select
+            className={styles.ModalInput}
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+          >
+            <option value="HUF">HUF (Ft)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="USD">USD ($)</option>
+          </select>
+
+          <button className={styles.PrimaryBtn} onClick={savePreferences}>
+            💾 Mentés
+          </button>
+        </div>
+      </div>
+
+      {/* ===== ÉRTESÍTÉSEK ===== */}
+      <div className={styles.Card}>
+        <h2 className={styles.SectionTitle}>Értesítések</h2>
+
+        <div className={styles.Row}>
+          <span>Értesítések engedélyezése</span>
+
+          <label className={styles.Switch}>
+            <input
+              type="checkbox"
+              checked={notificationsEnabled}
+              onChange={(e) => setNotificationsEnabled(e.target.checked)}
+            />
+            <span className={styles.Slider} />
+          </label>
+        </div>
+      </div>
+
+      {/* ===== MEGJELENÉS ===== */}
       <div className={styles.Card}>
         <h2 className={styles.SectionTitle}>Megjelenés</h2>
+
         <div className={styles.Row}>
           <div>
             <div className={styles.Label}>Téma</div>
@@ -127,63 +343,25 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      <div className={styles.Card}>
-        <h2 className={styles.SectionTitle}>Adatok</h2>
-
-        <div className={styles.Row}>
-          <div>
-            <div className={styles.Label}>Helyi költések</div>
-            <div className={styles.SubLabel}>
-              (Régi localStorage mentések, ha maradtak.)
-            </div>
-          </div>
-
-          <button className={styles.SecondaryBtn} onClick={clearExpensesOnly}>
-            🧹 Törlés
-          </button>
-        </div>
-
-        <div className={styles.Divider} />
-
-        <div className={styles.Row}>
-          <div>
-            <div className={styles.Label}>Minden helyi adat</div>
-            <div className={styles.SubLabel}>
-              Token + user + beállítások törlése, majd kiléptet.
-            </div>
-          </div>
-
-          <button className={styles.DangerBtn} onClick={clearAllLocal}>
-            ⚠️ Mindent töröl
-          </button>
-        </div>
-      </div>
-
+      {/* ===== FIÓK ===== */}
       <div className={styles.Card}>
         <h2 className={styles.SectionTitle}>Fiók</h2>
 
         <div className={styles.Row}>
-          <div>
-            <div className={styles.Label}>Kijelentkezés</div>
-            <div className={styles.SubLabel}>Token törlése és login oldal.</div>
-          </div>
+          <button className={styles.DangerBtn} onClick={logout}>
+            🚪 Kilépés
+          </button>
 
-          <div style={{ display: "flex", gap: 10 }}>
-            <button className={styles.DangerBtn} onClick={logout}>
-              🚪 Kilépés
-            </button>
-
-            <button
-              className={styles.DangerBtn}
-              onClick={() => setShowDeleteModal(true)}
-            >
-              🗑 Fiók törlése
-            </button>
-          </div>
+          <button
+            className={styles.DangerBtn}
+            onClick={() => setShowDeleteModal(true)}
+          >
+            🗑 Fiók törlése
+          </button>
         </div>
       </div>
 
-      {/* ✅ MODAL ITT VAN A RETURN-BEN */}
+      {/* ===== DELETE MODAL ===== */}
       {showDeleteModal && (
         <div
           className={styles.ModalOverlay}
@@ -201,38 +379,26 @@ export default function SettingsPage() {
             </button>
 
             <h2>Fiók törlése</h2>
-            <p className={styles.ModalText}>
-              Biztosan törlöd a fiókodat? Ez végleges, és az összes költésed is
-              törlődni fog.
-            </p>
-
-            <label className={styles.ModalLabel}>
-              Add meg a jelszavad a megerősítéshez:
-            </label>
 
             <input
               className={styles.ModalInput}
               type="password"
+              placeholder="Jelszó"
               value={deletePassword}
               onChange={(e) => setDeletePassword(e.target.value)}
-              placeholder="Jelszó"
             />
 
             <div className={styles.ModalActions}>
               <button
                 className={styles.SecondaryBtn}
-                onClick={() => {
-                  setShowDeleteModal(false);
-                  setDeletePassword("");
-                }}
-                disabled={deleting}
+                onClick={() => setShowDeleteModal(false)}
               >
                 Mégse
               </button>
 
               <button
                 className={styles.DangerBtn}
-                disabled={deleting || !deletePassword}
+                disabled={!deletePassword || deleting}
                 onClick={deleteAccount}
               >
                 {deleting ? "Törlés..." : "Végleges törlés"}

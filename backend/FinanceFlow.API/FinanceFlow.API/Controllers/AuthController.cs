@@ -19,28 +19,39 @@ namespace FinanceFlow.Api.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IJwtService _jwtService;
 
-        public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtService jwtService)
+        public AuthController(
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
+            IJwtService jwtService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtService = jwtService;
         }
 
+        // =========================
+        // REGISTER
+        // =========================
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto dto)
         {
             var existing = await _userManager.FindByEmailAsync(dto.Email);
-            if (existing != null) return BadRequest(new { error = "E-mail already registered" });
+            if (existing != null)
+                return BadRequest(new { error = "E-mail already registered" });
 
-            var user = new AppUser { UserName = dto.DisplayName ?? dto.Email.Split('@')[0], Email = dto.Email, DisplayName = dto.DisplayName };
+            var user = new AppUser
+            {
+                UserName = dto.DisplayName ?? dto.Email.Split('@')[0],
+                Email = dto.Email,
+                DisplayName = dto.DisplayName
+            };
+
             var result = await _userManager.CreateAsync(user, dto.Password);
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
 
-            if (!result.Succeeded) return BadRequest(result.Errors);
-
-            // opcionális: email confirmation token küldése itt
-
-            // automatikus beléptetés / token kiadása
             var token = _jwtService.GenerateToken(user);
+
             return Ok(new
             {
                 token,
@@ -48,24 +59,34 @@ namespace FinanceFlow.Api.Controllers
                 {
                     user.Id,
                     user.Email,
-                    user.DisplayName
+                    user.UserName,
+                    DisplayName = user.DisplayName ?? user.UserName
                 }
             });
         }
 
+        // =========================
+        // LOGIN
+        // =========================
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto dto)
         {
             var user = await _userManager.FindByEmailAsync(dto.Email);
-            if (user == null) return Unauthorized(new { error = "Invalid credentials" });
+            if (user == null)
+                return Unauthorized(new { error = "Invalid credentials" });
 
-            var result = await _signInManager.CheckPasswordSignInAsync(user, dto.Password, lockoutOnFailure: true);
-            if (!result.Succeeded) return Unauthorized(new { error = "Invalid credentials" });
+            var result = await _signInManager.CheckPasswordSignInAsync(
+                user,
+                dto.Password,
+                lockoutOnFailure: false
+            );
+
+            if (!result.Succeeded)
+                return Unauthorized(new { error = "Invalid credentials" });
 
             var roles = await _userManager.GetRolesAsync(user);
             var token = _jwtService.GenerateToken(user, roles);
 
-            // ✅ C# NULL COALESCING JAVÍTVA!
             return Ok(new
             {
                 token,
@@ -73,12 +94,11 @@ namespace FinanceFlow.Api.Controllers
                 {
                     user.Id,
                     user.Email,
-                    DisplayName = user.DisplayName ?? user.UserName ?? user.Email  // ✅ JÓ!
+                    user.UserName,
+                    DisplayName = user.DisplayName ?? user.UserName
                 }
             });
-        
-
-}
+        }
 
         // ------------------ GET USER ----------------------
         [HttpGet("user/{id}")]
@@ -92,11 +112,12 @@ namespace FinanceFlow.Api.Controllers
             {
                 user.Id,
                 user.Email,
-                user.DisplayName
+                user.UserName,
+                DisplayName = user.DisplayName ?? user.UserName
             });
         }
 
-        // ------------------ UPDATE USER ----------------------
+        // ------------------ UPDATE USER (NO PASSWORD HERE!) ----------------------
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateUser(string id, [FromBody] UpdateUserDto dto)
         {
@@ -104,34 +125,31 @@ namespace FinanceFlow.Api.Controllers
             if (user == null)
                 return NotFound(new { message = "User not found" });
 
-            // Email és DisplayName frissítése
             user.DisplayName = dto.DisplayName ?? user.DisplayName;
             user.Email = dto.Email ?? user.Email;
-            user.UserName = dto.Email ?? user.UserName;
+
+            if (!string.IsNullOrWhiteSpace(dto.Email))
+            {
+                user.UserName = dto.Email;
+                user.NormalizedEmail = dto.Email.ToUpperInvariant();
+                user.NormalizedUserName = dto.Email.ToUpperInvariant();
+            }
 
             var updateResult = await _userManager.UpdateAsync(user);
             if (!updateResult.Succeeded)
                 return BadRequest(updateResult.Errors);
 
-            // Jelszó csak akkor, ha meg van adva
-            if (!string.IsNullOrWhiteSpace(dto.NewPassword))
-            {
-                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var passwordResult = await _userManager.ResetPasswordAsync(user, token, dto.NewPassword);
-
-                if (!passwordResult.Succeeded)
-                    return BadRequest(passwordResult.Errors);
-            }
-
             return Ok(new { message = "User updated successfully" });
         }
 
         // ------------------ DELETE USER ----------------------
-        [HttpDelete("delete-me")]
         [Authorize]
-        public async Task<IActionResult> DeleteMe([FromBody] DeleteAccountDto dto, [FromServices] ApplicationDbContext db)
+        [HttpDelete("delete-me")]
+        public async Task<IActionResult> DeleteMe(
+            [FromBody] DeleteAccountDto dto,
+            [FromServices] ApplicationDbContext db)
         {
-            if (dto == null || string.IsNullOrWhiteSpace(dto.Password))
+            if (string.IsNullOrWhiteSpace(dto.Password))
                 return BadRequest(new { message = "Password is required." });
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -142,23 +160,17 @@ namespace FinanceFlow.Api.Controllers
             if (user == null)
                 return NotFound(new { message = "User not found." });
 
-            // ✅ jelszó ellenőrzés
             var ok = await _userManager.CheckPasswordAsync(user, dto.Password);
             if (!ok)
                 return Unauthorized(new { message = "Wrong password." });
 
-            // ✅ transaction: vagy minden törlődik, vagy semmi
             await using var tx = await db.Database.BeginTransactionAsync();
             try
             {
-                // 1) kapcsolódó adatok törlése (Expenses)
-                // IMPORTANT: csak akkor, ha így hívod a táblát:
-                // db.Expenses
                 await db.Expenses
                     .Where(x => x.UserId == userId)
                     .ExecuteDeleteAsync();
 
-                // 2) Identity user törlése (ez cascade-eli az AspNetUserClaims/Logins/Roles-t)
                 var result = await _userManager.DeleteAsync(user);
                 if (!result.Succeeded)
                     return BadRequest(result.Errors);
@@ -169,25 +181,32 @@ namespace FinanceFlow.Api.Controllers
             catch (Exception ex)
             {
                 await tx.RollbackAsync();
-                return StatusCode(500, new { message = "Server error.", details = ex.Message });
+                return StatusCode(500, new
+                {
+                    message = "Server error.",
+                    details = ex.Message
+                });
             }
         }
 
-        [HttpGet("me")]
+        // ------------------ ME ----------------------
         [Authorize]
+        [HttpGet("me")]
         public async Task<IActionResult> Me()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await _userManager.FindByIdAsync(userId);
 
+            if (user == null)
+                return Unauthorized();
+
             return Ok(new
             {
                 user.Id,
                 user.Email,
-                user.DisplayName
+                user.UserName,
+                DisplayName = user.DisplayName ?? user.UserName
             });
         }
-
-
     }
 }

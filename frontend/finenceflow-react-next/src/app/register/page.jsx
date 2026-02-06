@@ -4,6 +4,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./register.module.css";
+import AppLogo from "../components/AppLogo";
+
+
+
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -63,12 +67,7 @@ export default function RegisterPage() {
     <div className={styles.RegisterWrapper}>
       {/* BAL FELSŐ FIX LOGO */}
       <div className={styles.TopLogo} onClick={() => router.push("/")}>
-        <Image 
-          src="/FinanceFlowLogo.png"
-          width={100}
-          height={100}
-          alt="FinanceFlow Logo"
-        />
+        <AppLogo fixed size="sm" href="/" />
       </div>
 
       <div className={styles.RegisterBox}>

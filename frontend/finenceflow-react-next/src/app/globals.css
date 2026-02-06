@@ -1,7 +1,15 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root{
+  --bg:#0d0d0d;
+  --panel:rgba(255,255,255,0.05);
+  --accent:#4ade80;
+  --accent2:#22c55e;
+  --text:#c8ffd5;
+  --border:rgba(74,222,128,0.25);
+  --shadow:0 6px 24px rgba(0,0,0,0.45);
+  --r-lg:18px;
+  --r-xl:22px;
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -41,3 +49,49 @@ a {
     color-scheme: dark;
   }
 }
+
+.appLogoFixed{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 2000;
+  transition: 0.25s;
+}
+
+.appLogoInline{
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.appLogoFixed:hover,
+.appLogoInline:hover{
+  filter: drop-shadow(0 0 10px rgba(74, 222, 128, 0.75));
+  transform: scale(1.02);
+}.appLogoFixed{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 2000;
+  transition: 0.25s;
+}
+
+.appLogoInline{
+  position: relative; /* kell a next/image fill-hez */
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.appLogoFixed,
+.appLogoInline{
+  display: inline-block;
+}
+
+.appLogoFixed:hover,
+.appLogoInline:hover{
+  filter: drop-shadow(0 0 10px rgba(74, 222, 128, 0.75));
+  transform: scale(1.02);
+}
+
+

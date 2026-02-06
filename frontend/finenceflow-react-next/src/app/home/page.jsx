@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styles from "./home.module.css";
+import AppLogo from "../components/AppLogo";
+
 
 export default function HomePage() {
   const router = useRouter();
@@ -330,13 +332,7 @@ const usedPct = budget > 0 ? Math.min(100, Math.round((monthlySpend / budget) * 
       {/* NAVBAR */}
       <nav className={`${styles.HomeNavbar} ${showNavbar ? styles.NavVisible : styles.NavHidden}`}>
         <div className={styles.HomeNavLeft} onClick={() => router.push("/")}>
-          <Image
-            src="/FinanceFlowLogo.png"
-            width={130}
-            height={130}
-            alt="FinanceFlow"
-            className={styles.Logo}
-          />
+          <AppLogo fixed size="sm" href="/" />
         </div>
       </nav>
 

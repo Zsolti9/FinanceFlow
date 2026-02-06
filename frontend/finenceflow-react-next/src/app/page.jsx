@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import styles from "./landing.module.css";
+import AppLogo from "./components/AppLogo";
+
 
 export default function LandingPage() {
   const router = useRouter();
@@ -58,13 +59,7 @@ export default function LandingPage() {
           className={styles.LogoContainer}
           onClick={() => router.push("/")}
         >
-          <Image
-            src="/FinanceFlowLogo.png"
-            width={160}
-            height={60}
-            alt="FinanceFlow"
-            className={styles.Logo}
-          />
+          <AppLogo size="lg" href="/" />
         </div>
       </nav>
 

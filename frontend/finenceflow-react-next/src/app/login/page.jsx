@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import AppLogo from "../components/AppLogo";
 import styles from "./login.module.css";
 
 export default function LoginPage() {
@@ -48,12 +48,7 @@ export default function LoginPage() {
     <div className={styles.LoginWrapper}>
       {/* BAL FELSŐ FIX LOGO */}
       <div className={styles.TopLogo} onClick={() => router.push("/")}>
-        <Image
-          src="/FinanceFlowLogo.png"
-          width={100}
-          height={100}
-          alt="FinanceFlow Logo"
-        />
+        <AppLogo fixed size="sm" href="/" />
       </div>
 
       <div className={styles.LoginBox}>

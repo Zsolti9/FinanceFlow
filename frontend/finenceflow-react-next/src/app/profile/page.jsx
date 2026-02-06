@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./profile.module.css";
+import AppLogo from "../components/AppLogo";
 
 const API_BASE = "https://localhost:7183";
 
@@ -109,12 +110,7 @@ export default function ProfilePage() {
       {/* NAVBAR */}
       <nav className={styles.Navbar}>
         <div className={styles.NavLeft} onClick={() => router.push("/home")}>
-          <Image
-            src="/FinanceFlowLogo.png"
-            width={120}
-            height={40}
-            alt="FinanceFlow"
-          />
+          <AppLogo fixed size="sm" href="/" />
         </div>
 
         <button className={styles.BackBtn} onClick={() => router.push("/home")}>

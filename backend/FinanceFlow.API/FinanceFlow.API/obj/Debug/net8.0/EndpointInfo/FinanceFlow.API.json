@@ -473,6 +473,9 @@
           "defaultCurrency": {
             "type": "string",
             "nullable": true
+          },
+          "notificationsEnabled": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false

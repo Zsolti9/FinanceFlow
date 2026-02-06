@@ -540,3 +540,4 @@ C:\Laskovics Zsolt\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\obj\Debug
 C:\Laskovics Zsolt\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\obj\Debug\net8.0\FinanceFlow.API.pdb
 C:\Laskovics Zsolt\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\obj\Debug\net8.0\FinanceFlow.API.genruntimeconfig.cache
 C:\Laskovics Zsolt\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\obj\Debug\net8.0\ref\FinanceFlow.API.dll
+C:\13D\Mestermunka\MainBranch\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\bin\Debug\net8.0\FinanceFlow.API.staticwebassets.runtime.json

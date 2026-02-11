@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Google.Apis.Auth;
+
 
 namespace FinanceFlow.Api.Controllers
 {
@@ -206,6 +208,65 @@ namespace FinanceFlow.Api.Controllers
                 user.Email,
                 user.UserName,
                 DisplayName = user.DisplayName ?? user.UserName
+            });
+        }
+
+        [HttpPost("google-login")]
+        public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginDto dto)
+        {
+            Console.WriteLine("===== GOOGLE LOGIN =====");
+            Console.WriteLine("DTO NULL? " + (dto == null));
+            Console.WriteLine("ID TOKEN: " + dto?.IdToken);
+            Console.WriteLine(DateTime.UtcNow);
+
+            GoogleJsonWebSignature.Payload payload;
+
+            try
+            {
+                var settings = new GoogleJsonWebSignature.ValidationSettings
+                {
+                    Audience = new[]
+                    {
+                        "18483632227-umaqlh1pv0s9stnnej3ttkhkb1hv8pca.apps.googleusercontent.com"
+                    },
+                    IssuedAtClockTolerance = TimeSpan.FromMinutes(5),
+                    ExpirationTimeClockTolerance = TimeSpan.FromMinutes(5)
+                };
+
+                payload = await GoogleJsonWebSignature.ValidateAsync(dto.IdToken, settings);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("VALIDATION ERROR: " + ex.Message);
+                return Unauthorized(new { message = "Invalid Google token" });
+            }
+
+            var user = await _userManager.FindByEmailAsync(payload.Email);
+
+            if (user == null)
+            {
+                user = new AppUser
+                {
+                    UserName = payload.Email,
+                    Email = payload.Email,
+                    GoogleId = payload.Subject
+                };
+
+                await _userManager.CreateAsync(user);
+            }
+
+            var token = _jwtService.GenerateToken(user);
+
+            return Ok(new
+            {
+                token,
+                user = new
+                {
+                    user.Id,
+                    user.Email,
+                    user.UserName
+                }
             });
         }
     }

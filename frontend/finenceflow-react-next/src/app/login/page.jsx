@@ -1,16 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
 import AppLogo from "../components/AppLogo";
 import styles from "./login.module.css";
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const { data: session, status } = useSession();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
- 
+  /* ============================= */
+  /*  EMAIL / JELSZÓ LOGIN        */
+  /* ============================= */
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -18,35 +25,76 @@ export default function LoginPage() {
       const res = await fetch("https://localhost:7183/api/Auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
 
-      if (res.ok) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem(
-          "user", 
-          JSON.stringify({
-            id: data.user.id,
-            email: data.user.email,
-            username: data.user.username
-          })
-        );
-        alert("Sikeres bejelentkezés!");
-        router.push("/home");
-      } else {
+      if (!res.ok) {
         alert("Hibás adatok!");
+        return;
       }
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      router.push("/home");
     } catch (error) {
-      console.error("Hiba a bejelentkezéskor:", error);
+      console.error(error);
       alert("Hiba történt a bejelentkezés során.");
     }
   };
 
+  /* ============================= */
+  /*  GOOGLE LOGIN BACKEND CONNECT */
+  /* ============================= */
+
+  useEffect(() => {
+    // 🔥 CSAK akkor fusson, ha Google redirecttel jöttünk vissza
+    const isGoogleLogin = searchParams.get("google") === "true";
+    if (!isGoogleLogin) return;
+
+    if (status !== "authenticated") return;
+    if (!session?.idToken) return;
+
+    async function loginWithBackend() {
+      try {
+        const res = await fetch(
+          "https://localhost:7183/api/auth/google-login",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ idToken: session.idToken }),
+          }
+        );
+
+        const text = await res.text();
+
+        if (!res.ok) {
+          console.error("Backend error:", text);
+          return;
+        }
+
+        const data = JSON.parse(text);
+
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        router.push("/home");
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    loginWithBackend();
+  }, [status, session?.idToken, searchParams, router]);
+
+  /* ============================= */
+  /*              UI               */
+  /* ============================= */
+
   return (
     <div className={styles.LoginWrapper}>
-      {/* BAL FELSŐ FIX LOGO */}
       <div className={styles.TopLogo} onClick={() => router.push("/")}>
         <AppLogo fixed size="sm" href="/" />
       </div>
@@ -75,6 +123,23 @@ export default function LoginPage() {
             Bejelentkezés
           </button>
         </form>
+
+        <div className={styles.Divider}>
+          <span>vagy</span>
+        </div>
+
+        <button
+          type="button"
+          className={styles.GoogleBtn}
+          onClick={() =>
+            signIn("google", {
+              callbackUrl: "/login?google=true",
+              prompt: "select_account",
+            })
+          }
+        >
+          Folytatás Google-lel
+        </button>
 
         <span
           className={styles.LoginSwitchLink}

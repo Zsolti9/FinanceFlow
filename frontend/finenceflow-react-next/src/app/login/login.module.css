@@ -69,3 +69,41 @@
 .TopLogo:hover {
   filter: drop-shadow(0 0 8px #4ade80);
 }
+
+.Divider {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.Divider::before,
+.Divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #333;
+}
+
+.Divider span {
+  margin: 0 10px;
+}
+
+.GoogleBtn {
+  width: 100%;
+  padding: 12px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.GoogleBtn:hover {
+  background: #f2f2f2;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}

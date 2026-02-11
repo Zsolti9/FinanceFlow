@@ -25,5 +25,8 @@ namespace FinanceFlow.Api.Models
         // 🧾 Csak frontend / JWT célra (NEM DB mező)
         [NotMapped]
         public string? DisplayName { get; set; }
+
+        public string? GoogleId { get; set; }
+
     }
 }

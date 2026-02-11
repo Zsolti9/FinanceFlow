@@ -541,3 +541,10 @@ C:\Laskovics Zsolt\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\obj\Debug
 C:\Laskovics Zsolt\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\obj\Debug\net8.0\FinanceFlow.API.genruntimeconfig.cache
 C:\Laskovics Zsolt\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\obj\Debug\net8.0\ref\FinanceFlow.API.dll
 C:\13D\Mestermunka\MainBranch\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\bin\Debug\net8.0\FinanceFlow.API.staticwebassets.runtime.json
+C:\Laskovics Zsot\Mestermunka\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\bin\Debug\net8.0\Google.Apis.dll
+C:\Laskovics Zsot\Mestermunka\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\bin\Debug\net8.0\Google.Apis.Auth.dll
+C:\Laskovics Zsot\Mestermunka\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\bin\Debug\net8.0\Google.Apis.Core.dll
+C:\Laskovics Zsot\Mestermunka\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Laskovics Zsot\Mestermunka\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\bin\Debug\net8.0\System.Management.dll
+C:\Laskovics Zsot\Mestermunka\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Management.dll
+C:\Laskovics Zsot\Mestermunka\FinanceFlow\backend\FinanceFlow.API\FinanceFlow.API\bin\Debug\net8.0\Google.Apis.Auth.PlatformServices.dll

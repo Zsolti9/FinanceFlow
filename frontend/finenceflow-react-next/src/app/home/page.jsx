@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import styles from "./home.module.css";
+
+import DashboardHero from "../components/DashboardHero";
 import AppLogo from "../components/AppLogo";
 
+import styles from "./home.module.css";
 
 export default function HomePage() {
   const router = useRouter();
@@ -29,11 +30,10 @@ export default function HomePage() {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("Food");
+
   const [budget, setBudget] = useState(0);
   const [showBudgetModal, setShowBudgetModal] = useState(false);
-const [budgetInput, setBudgetInput] = useState("");
-
-
+  const [budgetInput, setBudgetInput] = useState("");
 
   useEffect(() => setIsClient(true), []);
 
@@ -42,25 +42,24 @@ const [budgetInput, setBudgetInput] = useState("");
     return localStorage.getItem("token");
   }, [isClient]);
 
+  // Budget load
   useEffect(() => {
-  if (!isClient) return;
-  const b = Number(localStorage.getItem("budget") || 0);
-  setBudget(Number.isFinite(b) ? b : 0);
-}, [isClient]);
+    if (!isClient) return;
+    const b = Number(localStorage.getItem("budget") || 0);
+    setBudget(Number.isFinite(b) ? b : 0);
+  }, [isClient]);
 
-function saveBudget() {
-  const b = Number(budgetInput);
-  if (!Number.isFinite(b) || b < 0) {
-    setError("A keret legyen 0 vagy pozitív szám!");
-    return;
+  function saveBudget() {
+    const b = Number(budgetInput);
+    if (!Number.isFinite(b) || b < 0) {
+      setError("A keret legyen 0 vagy pozitív szám!");
+      return;
+    }
+    setBudget(b);
+    localStorage.setItem("budget", String(b));
+    setBudgetInput("");
+    setShowBudgetModal(false);
   }
-  setBudget(b);
-  localStorage.setItem("budget", String(b));
-  setBudgetInput("");
-  setShowBudgetModal(false);
-}
-
-
 
   /* AUTH */
   useEffect(() => {
@@ -96,12 +95,6 @@ function saveBudget() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  function toggleTheme() {
-    const next = !isDarkMode;
-    setIsDarkMode(next);
-    localStorage.setItem("darkMode", String(next));
-  }
 
   // ---- Helpers ----
   function calcMonthlySpend(list) {
@@ -191,25 +184,21 @@ function saveBudget() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClient, user]);
 
+  // user refresh
   useEffect(() => {
     if (!isClient || !token) return;
 
-    fetch("https://localhost:7183/api/users/me", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+    fetch(`${API_BASE}/api/users/me`, {
+      headers: { Authorization: `Bearer ${token}` },
     })
-      .then((res) => res.ok ? res.json() : null)
+      .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (!data) return;
-
         setUser(data);
         localStorage.setItem("user", JSON.stringify(data));
       })
-      .catch((err) => {
-        console.error("LOAD USER ERROR:", err);
-      });
-  }, [isClient, token]);
+      .catch((err) => console.error("LOAD USER ERROR:", err));
+  }, [isClient, token, API_BASE]);
 
   async function addExpense() {
     setError("");
@@ -233,8 +222,7 @@ function saveBudget() {
     setSaving(true);
 
     try {
-      const ADD_URL = DATA_URL; // ha nálad pl: `${DATA_URL}/add`
-      const res = await fetch(ADD_URL, {
+      const res = await fetch(DATA_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -250,17 +238,18 @@ function saveBudget() {
       const text = await res.text();
 
       if (!res.ok) {
-  let msg = "Nem sikerült menteni a költést.";
-  try {
-    const err = JSON.parse(text);
-    if (err.message) {
-      msg = `${err.message} (Maradék: ${err.remaining?.toLocaleString("hu-HU")} Ft)`;
-    }
-  } catch {}
-
-  setError(msg);
-  return;
-}
+        let msg = "Nem sikerült menteni a költést.";
+        try {
+          const err = JSON.parse(text);
+          if (err.message) {
+            msg = `${err.message} (Maradék: ${err.remaining?.toLocaleString(
+              "hu-HU"
+            )} Ft)`;
+          }
+        } catch {}
+        setError(msg);
+        return;
+      }
 
       setTitle("");
       setAmount("");
@@ -276,32 +265,29 @@ function saveBudget() {
     }
   }
 
- async function deleteExpense(id) {
-  setError("");
-  if (!token) return;
+  async function deleteExpense(id) {
+    setError("");
+    if (!token) return;
 
-  try {
-    const DELETE_URL = `${DATA_URL}/${id}`; // ✅ EZ A LÉNYEG
+    try {
+      const res = await fetch(`${DATA_URL}/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    const res = await fetch(DELETE_URL, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+      const text = await res.text();
+      if (!res.ok) {
+        console.error("DELETE ERROR:", res.status, text);
+        setError(`Nem sikerült törölni. (${res.status})`);
+        return;
+      }
 
-    const text = await res.text();
-    if (!res.ok) {
-      console.error("DELETE ERROR:", res.status, text);
-      setError(`Nem sikerült törölni. (${res.status})`);
-      return;
+      setExpenses((prev) => prev.filter((x) => x.id !== id));
+    } catch (e) {
+      console.error(e);
+      setError("Szerver hiba törlés közben.");
     }
-
-    setExpenses((prev) => prev.filter((x) => x.id !== id));
-  } catch (e) {
-    console.error(e);
-    setError("Szerver hiba törlés közben.");
   }
-}
-
 
   function logout() {
     localStorage.removeItem("token");
@@ -320,30 +306,51 @@ function saveBudget() {
     user?.email?.split("@")[0];
 
   const monthlySpend = calcMonthlySpend(expenses);
-  const categoryStats = getCategoryStats(expenses);
-   const remaining = Math.max(0, budget - monthlySpend);
-const usedPct = budget > 0 ? Math.min(100, Math.round((monthlySpend / budget) * 100)) : 0;
+  const remaining = budget - monthlySpend; // ✅ ez kell a herohoz
 
+  const categoryStats = getCategoryStats(expenses);
+
+  const recentSorted = [...expenses].sort(
+    (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
+  );
+
+  // A te régi kártyáidhoz (lent)
+  const remainingForBudgetCard = Math.max(0, budget - monthlySpend);
+  const usedPct =
+    budget > 0 ? Math.min(100, Math.round((monthlySpend / budget) * 100)) : 0;
 
   return (
-    <div className={`${styles.HomeBackground} ${isDarkMode ? styles.dark : styles.light}`}>
+    <div
+      className={`${styles.HomeBackground} ${
+        isDarkMode ? styles.dark : styles.light
+      }`}
+    >
       <h1 className={styles.Greeting}>Szia, {displayName} 👋</h1>
 
       {/* NAVBAR */}
-      <nav className={`${styles.HomeNavbar} ${showNavbar ? styles.NavVisible : styles.NavHidden}`}>
-        <div className={styles.HomeNavLeft} onClick={() => router.push("/")}>
-          <AppLogo fixed size="sm" href="/" />
+      <nav
+        className={`${styles.HomeNavbar} ${
+          showNavbar ? styles.NavVisible : styles.NavHidden
+        }`}
+      >
+        <div className={styles.HomeNavLeft}>
+          <AppLogo size="sm" href="/" />
         </div>
       </nav>
 
       {/* HAMBURGER */}
-      <div className={styles.FloatingBurger} onClick={() => setMenuOpen(!menuOpen)}>
+      <div
+        className={styles.FloatingBurger}
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
         <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
         <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
         <span className={`${styles.bar} ${menuOpen ? styles.open : ""}`} />
       </div>
 
-      {menuOpen && <div className={styles.Overlay} onClick={() => setMenuOpen(false)} />}
+      {menuOpen && (
+        <div className={styles.Overlay} onClick={() => setMenuOpen(false)} />
+      )}
 
       {/* SIDE MENU */}
       <div className={`${styles.BlurMenu} ${menuOpen ? styles.show : ""}`}>
@@ -356,36 +363,62 @@ const usedPct = budget > 0 ? Math.min(100, Math.round((monthlySpend / budget) * 
         </span>
       </div>
 
-      {/* CONTENT */}
+      {/* ✅ HERO DASHBOARD: itt jelenik meg a "keretből maradt" */}
+      <DashboardHero
+        remainingFt={remaining}
+        budgetFt={budget}
+        categoryStats={categoryStats}
+        recent={recentSorted.slice(0, 3).map((e) => ({
+          title: e.title,
+          amount: e.amount,
+        }))}
+        seriesValues={buildDailyDaily(expenses)}
+        trendText="+12% az előző hónaphoz képest"
+      />
+
+      {/* CONTENT (a te meglévő dashboard részed lent marad) */}
       <div className={styles.HomeContent}>
         <div className={styles.SplitGrid}>
-          {/* LEFT: DASHBOARD */}
+          {/* LEFT */}
           <div className={styles.LeftPanel}>
             <div className={styles.CardGrid}>
-              {/* Havi költés kártya */}
+              {/* Havi keret */}
               <div className={styles.DashCard}>
-  <div className={styles.CardTop}>
-    <span className={styles.CardTitle}>Havi keret</span>
-    <span className={styles.LiveDot} />
-  </div>
+                <div className={styles.CardTop}>
+                  <span className={styles.CardTitle}>Havi keret</span>
+                  <span className={styles.LiveDot} />
+                </div>
 
-  <div className={styles.BigValue}>
-    {budget > 0 ? `${budget.toLocaleString("hu-HU")} Ft` : "Nincs beállítva"}
-  </div>
+                <div className={styles.BigValue}>
+                  {budget > 0
+                    ? `${budget.toLocaleString("hu-HU")} Ft`
+                    : "Nincs beállítva"}
+                </div>
 
-  <div className={styles.SubMuted}>
-    Maradék: <strong>{remaining.toLocaleString("hu-HU")} Ft</strong> • Felhasznált: <strong>{usedPct}%</strong>
-  </div>
+                <div className={styles.SubMuted}>
+                  Maradék:{" "}
+                  <strong>
+                    {remainingForBudgetCard.toLocaleString("hu-HU")} Ft
+                  </strong>{" "}
+                  • Felhasznált: <strong>{usedPct}%</strong>
+                </div>
 
-  <div className={styles.ProgressBar}>
-    <div className={styles.ProgressFill} style={{ width: `${usedPct}%` }} />
-  </div>
+                <div className={styles.ProgressBar}>
+                  <div
+                    className={styles.ProgressFill}
+                    style={{ width: `${usedPct}%` }}
+                  />
+                </div>
 
-  <button className={styles.SetBudgetBtn} onClick={() => setShowBudgetModal(true)}>
-    Keret beállítása
-  </button>
-</div>
+                <button
+                  className={styles.SetBudgetBtn}
+                  onClick={() => setShowBudgetModal(true)}
+                >
+                  Keret beállítása
+                </button>
+              </div>
 
+              {/* Havi költés */}
               <div className={styles.DashCard}>
                 <div className={styles.CardTop}>
                   <span className={styles.CardTitle}>Havi költés</span>
@@ -400,7 +433,6 @@ const usedPct = budget > 0 ? Math.min(100, Math.round((monthlySpend / budget) * 
                   (Az aktuális hónapban eddig elköltött összeg)
                 </div>
 
-                {/* ✅ Valódi chart */}
                 <MiniAreaChart values={buildDailySeries(expenses)} />
               </div>
 
@@ -436,7 +468,7 @@ const usedPct = budget > 0 ? Math.min(100, Math.round((monthlySpend / budget) * 
               </div>
 
               <div className={styles.RecentList}>
-                {expenses.slice(0, 5).map((e) => (
+                {recentSorted.slice(0, 5).map((e) => (
                   <div key={e.id} className={styles.RecentItem}>
                     <div className={styles.RecentLeft}>
                       <strong>{e.title}</strong>
@@ -458,7 +490,9 @@ const usedPct = budget > 0 ? Math.min(100, Math.round((monthlySpend / budget) * 
                 ))}
 
                 {expenses.length === 0 && (
-                  <div className={styles.EmptyHint}>Nincs még rögzített költés.</div>
+                  <div className={styles.EmptyHint}>
+                    Nincs még rögzített költés.
+                  </div>
                 )}
               </div>
             </div>
@@ -475,7 +509,10 @@ const usedPct = budget > 0 ? Math.min(100, Math.round((monthlySpend / budget) * 
                   </p>
                 </div>
 
-                <button className={styles.AddExpenseBtn} onClick={() => setShowModal(true)}>
+                <button
+                  className={styles.AddExpenseBtn}
+                  onClick={() => setShowModal(true)}
+                >
                   + Új költés
                 </button>
               </div>
@@ -522,18 +559,26 @@ const usedPct = budget > 0 ? Math.min(100, Math.round((monthlySpend / budget) * 
               )}
 
               {!loadingExpenses && expenses.length === 0 && (
-                <div className={styles.EmptyHint}>Nincs még rögzített költés.</div>
+                <div className={styles.EmptyHint}>
+                  Nincs még rögzített költés.
+                </div>
               )}
             </div>
           </div>
         </div>
       </div>
 
-      {/* MODAL */}
+      {/* MODAL: új költés */}
       {showModal && (
         <div className={styles.ModalOverlay} onClick={() => setShowModal(false)}>
-          <div className={styles.AddExpenseModal} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.CloseModalBtn} onClick={() => setShowModal(false)}>
+          <div
+            className={styles.AddExpenseModal}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className={styles.CloseModalBtn}
+              onClick={() => setShowModal(false)}
+            >
               ✕
             </button>
 
@@ -564,40 +609,56 @@ const usedPct = budget > 0 ? Math.min(100, Math.round((monthlySpend / budget) * 
               <option>General</option>
             </select>
 
-            <button className={styles.SaveExpenseBtn} onClick={addExpense} disabled={saving}>
+            <button
+              className={styles.SaveExpenseBtn}
+              onClick={addExpense}
+              disabled={saving}
+            >
               {saving ? "Mentés..." : "Mentés"}
             </button>
           </div>
         </div>
       )}
+
+      {/* MODAL: keret */}
       {showBudgetModal && (
-  <div className={styles.ModalOverlay} onClick={() => setShowBudgetModal(false)}>
-    <div className={styles.AddExpenseModal} onClick={(e) => e.stopPropagation()}>
-      <button className={styles.CloseModalBtn} onClick={() => setShowBudgetModal(false)}>✕</button>
-      <h2>Havi keret beállítása</h2>
+        <div
+          className={styles.ModalOverlay}
+          onClick={() => setShowBudgetModal(false)}
+        >
+          <div
+            className={styles.AddExpenseModal}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className={styles.CloseModalBtn}
+              onClick={() => setShowBudgetModal(false)}
+            >
+              ✕
+            </button>
+            <h2>Havi keret beállítása</h2>
 
-      <input
-        value={budgetInput}
-        onChange={(e) => setBudgetInput(e.target.value)}
-        type="number"
-        placeholder="Keret (Ft)"
-      />
+            <input
+              value={budgetInput}
+              onChange={(e) => setBudgetInput(e.target.value)}
+              type="number"
+              placeholder="Keret (Ft)"
+            />
 
-      <button className={styles.SaveExpenseBtn} onClick={saveBudget}>
-        Mentés
-      </button>
+            <button className={styles.SaveExpenseBtn} onClick={saveBudget}>
+              Mentés
+            </button>
+          </div>
+        </div>
+      )}
     </div>
-  </div>
-)}
-
-    </div>
-    
   );
 }
 
 /* ===================== CHART HELPERS ===================== */
 
-function buildDailySeries(expenses) {
+// Hero-hoz: napi érték (nem kumulatív) - szebb görbe
+function buildDailyDaily(expenses) {
   const now = new Date();
   const y = now.getFullYear();
   const m = now.getMonth();
@@ -609,43 +670,52 @@ function buildDailySeries(expenses) {
     if (!e.createdAt) continue;
     const d = new Date(e.createdAt);
     if (d.getFullYear() !== y || d.getMonth() !== m) continue;
-    const dayIdx = d.getDate() - 1;
-    perDay[dayIdx] += Number(e.amount || 0);
+    perDay[d.getDate() - 1] += Number(e.amount || 0);
   }
 
-  // Kumulatív görbe (dashboard feeling)
+  return perDay;
+}
+
+// A te lentebbi chartodhoz (kumulatív)
+function buildDailySeries(expenses) {
+  const perDay = buildDailyDaily(expenses);
   let sum = 0;
   return perDay.map((v) => (sum += v));
 }
 
+// Home kártya chartja (a te meglévő CSS-edhez)
 function MiniAreaChart({ values }) {
   const w = 640;
   const h = 180;
   const pad = 14;
 
-  const max = Math.max(...values, 1);
-  const min = Math.min(...values, 0);
+  const safe =
+    Array.isArray(values) && values.length ? values : [0, 0, 0, 0, 0];
 
-  const xStep = (w - pad * 2) / Math.max(values.length - 1, 1);
+  const max = Math.max(...safe, 1);
+  const min = Math.min(...safe, 0);
+
+  const xStep = (w - pad * 2) / Math.max(safe.length - 1, 1);
   const scaleY = (v) => {
     const t = (v - min) / (max - min || 1);
     return pad + (1 - t) * (h - pad * 2);
   };
 
-  const points = values.map((v, i) => ({
+  const points = safe.map((v, i) => ({
     x: pad + i * xStep,
     y: scaleY(v),
   }));
 
   const lineD = points
-    .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`)
+    .map(
+      (p, i) =>
+        `${i === 0 ? "M" : "L"} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`
+    )
     .join(" ");
 
-  const areaD = `${lineD} L ${(pad + (values.length - 1) * xStep).toFixed(2)} ${(h - pad).toFixed(
+  const areaD = `${lineD} L ${(pad + (safe.length - 1) * xStep).toFixed(
     2
-  )} L ${pad.toFixed(2)} ${(h - pad).toFixed(2)} Z`;
- 
-
+  )} ${(h - pad).toFixed(2)} L ${pad.toFixed(2)} ${(h - pad).toFixed(2)} Z`;
 
   return (
     <div className={styles.ChartWrap}>
@@ -657,8 +727,16 @@ function MiniAreaChart({ values }) {
       >
         <defs>
           <linearGradient id="fillGreen" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="rgb(74,222,128)" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="rgb(74,222,128)" stopOpacity="0" />
+            <stop
+              offset="0%"
+              stopColor="rgb(74,222,128)"
+              stopOpacity="0.35"
+            />
+            <stop
+              offset="100%"
+              stopColor="rgb(74,222,128)"
+              stopOpacity="0"
+            />
           </linearGradient>
 
           <filter id="glow">

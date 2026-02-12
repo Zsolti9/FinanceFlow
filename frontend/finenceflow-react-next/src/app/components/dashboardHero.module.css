@@ -1,0 +1,229 @@
+/* =========================
+   WRAPPER
+========================= */
+
+.Wrapper {
+  max-width: 1200px;
+  margin: 0 auto 32px;
+  padding: 0 16px;
+}
+
+/* =========================
+   GRID LAYOUT
+========================= */
+
+.Grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  grid-template-rows: auto auto;
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* Bal felső – Havi egyenleg */
+.LeftTop {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+/* Bal alsó – Legutóbbi költések */
+.LeftBottom {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+/* Jobb oldali magas – Kategóriák */
+.RightTall {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+}
+
+/* =========================
+   PANEL (glass card)
+========================= */
+
+.Panel {
+  position: relative;
+  border-radius: 18px;
+  padding: 16px 18px;
+
+  background: radial-gradient(
+      circle at top,
+      rgba(74, 222, 128, 0.08),
+      rgba(0, 0, 0, 0.05)
+    ),
+    rgba(255, 255, 255, 0.03);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================
+   PANEL HEADER
+========================= */
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.Title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #eafff0;
+}
+
+.LiveDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #4ade80;
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.7);
+}
+
+/* =========================
+   HAVI EGYENLEG
+========================= */
+
+.BalanceValue {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #4ade80;
+  margin-bottom: 4px;
+}
+
+.BalanceSub {
+  font-size: 0.9rem;
+  color: #9cffc2;
+  opacity: 0.85;
+  margin-bottom: 10px;
+}
+
+/* =========================
+   MINI LINE CHART
+========================= */
+
+.ChartWrap {
+  height: 120px;
+  border-radius: 14px;
+  overflow: hidden;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(74, 222, 128, 0.15),
+    rgba(0, 0, 0, 0.05)
+  );
+
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+/* =========================
+   RECENT LIST
+========================= */
+
+.RecentList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.RecentItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 12px;
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.RecentItem strong {
+  font-weight: 700;
+  color: #eafff0;
+}
+
+.RecentAmount {
+  font-weight: 900;
+  color: #ff6b6b;
+}
+
+/* =========================
+   KATEGÓRIÁK
+========================= */
+
+.CategoryWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.DonutWrap {
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
+.DonutCenter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #eafff0;
+}
+
+.CategoryList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.CategoryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+
+.CategoryName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #eafff0;
+  font-weight: 600;
+}
+
+.CategoryPct {
+  font-weight: 900;
+  color: #c8ffd5;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+  .Grid {
+    grid-template-columns: 1fr;
+  }
+
+  .LeftTop,
+  .LeftBottom,
+  .RightTall {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}

@@ -155,12 +155,11 @@
               "Title": "BudgetController.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\BudgetController.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Controllers\\BudgetController.cs",
-              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\BudgetController.cs*",
-              "RelativeToolTip": "FinanceFlow.API\\Controllers\\BudgetController.cs*",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\BudgetController.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Controllers\\BudgetController.cs",
               "ViewState": "AgIAAEsAAAAAAAAAAAAMwBUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T08:54:10.597Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T08:54:10.597Z"
             },
             {
               "$type": "Document",
@@ -172,8 +171,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Dtos\\CategoryBudgetItemDto.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAIBAwBcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T08:53:38.731Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T08:53:38.731Z"
             },
             {
               "$type": "Document",
@@ -181,9 +179,9 @@
               "Title": "CategoryBudget.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Models\\CategoryBudget.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Models\\CategoryBudget.cs",
-              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Models\\CategoryBudget.cs*",
-              "RelativeToolTip": "FinanceFlow.API\\Models\\CategoryBudget.cs*",
-              "ViewState": "AgIAAAwAAAAAAAAAAAA7wAkAAAAVAAAAAAAAAA==",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Models\\CategoryBudget.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Models\\CategoryBudget.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAIwAkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-17T08:51:49.755Z",
               "EditorCaption": ""
@@ -258,8 +256,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Models\\AppUser.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAywBIAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T11:54:17.549Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T11:54:17.549Z"
             },
             {
               "$type": "Document",
@@ -331,8 +328,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Models\\Expense.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-21T08:58:06.533Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-21T08:58:06.533Z"
             },
             {
               "$type": "Document",
@@ -380,8 +376,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Program.cs",
               "ViewState": "AgIAAHcAAAAAAAAAAAAAABoAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T11:52:39.859Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T11:52:39.859Z"
             },
             {
               "$type": "Document",
@@ -405,8 +400,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T11:53:34.229Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T11:53:34.229Z"
             },
             {
               "$type": "Document",

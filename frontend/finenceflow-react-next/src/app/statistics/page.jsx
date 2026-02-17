@@ -207,11 +207,10 @@ export default function StatisticsPage() {
       Transport: "🚗",
       Shopping: "🛍️",
       Bills: "🏠",
-      General: "📌",
     };
 
     // plan kulcsok sorrendje
-    const order = ["Food", "Transport", "Shopping", "Bills", "General"];
+    const order = ["Food", "Transport", "Shopping", "Bills"];
 
     return order.map((name) => {
       const budget = Math.max(0, Number(plan[name] || 0));
@@ -238,7 +237,7 @@ export default function StatisticsPage() {
 
   const qLabel = useMemo(() => {
     const q = Math.floor(monthIdx0 / 3) + 1;
-    return `${year} Q${q}`;
+    return `${year}`;
   }, [year, monthIdx0]);
 
   return (

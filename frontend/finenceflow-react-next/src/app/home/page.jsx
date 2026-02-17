@@ -436,8 +436,7 @@ export default function HomePage() {
                 <MiniAreaChart values={buildDailySeries(expenses)} />
               </div>
 
-              {/* Kategóriák */}
-              <div className={styles.DashCard}>
+              {/*<div className={styles.DashCard}>
                 <div className={styles.CardTop}>
                   <span className={styles.CardTitle}>Kategóriák</span>
                   <span className={styles.LiveDot} />
@@ -457,7 +456,8 @@ export default function HomePage() {
                     <div className={styles.EmptyHint}>Még nincs elég adat.</div>
                   )}
                 </div>
-              </div>
+              </div>*/}
+              
             </div>
 
             {/* Legutóbbi költések */}

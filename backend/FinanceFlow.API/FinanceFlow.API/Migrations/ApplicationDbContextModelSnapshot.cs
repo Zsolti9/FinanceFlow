@@ -65,7 +65,7 @@ namespace FinanceFlow.API.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Currency")
+                    b.Property<string>("DefaultCurrency")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -75,6 +75,9 @@ namespace FinanceFlow.API.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("GoogleId")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Language")
                         .IsRequired()
@@ -97,6 +100,9 @@ namespace FinanceFlow.API.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
+                    b.Property<bool>("NotificationsEnabled")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("PasswordHash")
                         .HasColumnType("longtext");
 
@@ -108,6 +114,9 @@ namespace FinanceFlow.API.Migrations
 
                     b.Property<string>("ProfileImagePath")
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime>("RegisteredAt")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");

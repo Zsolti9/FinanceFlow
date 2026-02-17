@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceFlow.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260128111133_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260217073512_Friss")]
+    partial class Friss
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,10 @@ namespace FinanceFlow.API.Migrations
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -64,12 +68,23 @@ namespace FinanceFlow.API.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("DefaultCurrency")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("GoogleId")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -88,6 +103,9 @@ namespace FinanceFlow.API.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
+                    b.Property<bool>("NotificationsEnabled")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("PasswordHash")
                         .HasColumnType("longtext");
 
@@ -96,6 +114,12 @@ namespace FinanceFlow.API.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ProfileImagePath")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("RegisteredAt")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");

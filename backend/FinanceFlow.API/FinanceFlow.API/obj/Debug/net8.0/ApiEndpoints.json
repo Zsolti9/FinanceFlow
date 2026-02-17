@@ -111,6 +111,63 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "FinanceFlow.API.Controllers.BudgetsController",
+    "Method": "GetBudgets",
+    "RelativePath": "api/budgets/categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "year",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "FinanceFlow.API.Dtos.CategoryBudgetsResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FinanceFlow.API.Controllers.BudgetsController",
+    "Method": "SaveBudgets",
+    "RelativePath": "api/budgets/categories",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "year",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "dto",
+        "Type": "FinanceFlow.API.Dtos.SaveCategoryBudgetsDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FinanceFlow.API.Controllers.DataController",
     "Method": "AddExpense",
     "RelativePath": "api/Data",

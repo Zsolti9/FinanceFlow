@@ -1,0 +1,384 @@
+.Page{
+  min-height: 100vh;
+  padding: 26px 0 40px;
+  background: #0d0d0d;
+  color: #c8ffd5;
+}
+
+.dark{ background:#0d0d0d; color:#c8ffd5; }
+.light{ background:#f6fff8; color:#0b1b10; }
+
+.TopBar{
+  max-width: 1200px;
+  margin: 0 auto 16px;
+  padding: 0 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.TopLeft{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+.BackBtn{
+  border: 1px solid rgba(74,222,128,0.35);
+  background: rgba(255,255,255,0.04);
+  color: inherit;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 800;
+}
+.BackBtn:hover{
+  box-shadow: 0 0 18px rgba(74,222,128,0.18);
+}
+
+.Shell{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.Error{
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,120,120,0.35);
+  background: rgba(255,120,120,0.12);
+}
+
+/* ===== GRID (mint a mockup) ===== */
+.Grid{
+  display:grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-rows: auto auto;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.LeftTop{ grid-column: 1 / 2; grid-row: 1 / 2; }
+.LeftBottom{ grid-column: 1 / 2; grid-row: 2 / 3; }
+.RightTall{ grid-column: 2 / 3; grid-row: 1 / 3; }
+
+/* ===== CARD (glass) ===== */
+.Card{
+  position:relative;
+  border-radius: 18px;
+  padding: 16px 18px;
+
+  background:
+    radial-gradient(circle at top, rgba(74,222,128,0.10), rgba(0,0,0,0.04)),
+    rgba(255,255,255,0.03);
+
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 22px 70px rgba(0,0,0,0.55),
+    inset 0 0 0 1px rgba(0,0,0,0.35);
+}
+
+.light .Card{
+  background:
+    radial-gradient(circle at top, rgba(74,222,128,0.10), rgba(255,255,255,0.7)),
+    rgba(255,255,255,0.9);
+  border-color: rgba(74,222,128,0.18);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.12);
+}
+
+/* header */
+.CardHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom: 12px;
+}
+.CardTitle{
+  margin:0;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #eafff0;
+}
+.light .CardTitle{ color:#0b1b10; }
+
+.SubTitle{
+  font-weight: 900;
+  opacity: .9;
+}
+
+.LiveDot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:#4ade80;
+  box-shadow: 0 0 14px rgba(74,222,128,0.7);
+}
+
+/* ===== Stat card layout ===== */
+.StatRow{
+  display:grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.ChartBox{
+  border-radius: 16px;
+  height: 250px;
+  overflow:hidden;
+
+  border: 1px solid rgba(74,222,128,0.18);
+  background: rgba(0,0,0,0.18);
+}
+.light .ChartBox{
+  background: rgba(0,0,0,0.03);
+}
+
+.Loading{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:.75;
+}
+
+.StatBig{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap: 6px;
+  padding-right: 6px;
+}
+
+.BigNumber{
+  font-size: 3.2rem;
+  font-weight: 900;
+  color:#4ade80;
+  text-shadow: 0 0 18px rgba(74,222,128,0.35);
+}
+.BigLabel{
+  font-size: 1rem;
+  opacity: .9;
+  text-align:right;
+}
+.BigAccent{
+  color:#4ade80;
+  font-weight: 900;
+}
+
+/* ===== Chart svg ===== */
+.ChartSvg{
+  width: 100%;
+  height: 100%;
+  display:block;
+}
+
+.ChartGrid line{
+  stroke: rgba(255,255,255,0.06);
+  stroke-width: 1;
+}
+.light .ChartGrid line{
+  stroke: rgba(0,0,0,0.06);
+}
+
+.ChartLine{
+  fill:none;
+  stroke:#4ade80;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.HighlightDot{
+  fill:#4ade80;
+  stroke: rgba(0,0,0,0.25);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 10px rgba(74,222,128,0.8));
+}
+
+/* ===== Plan (right card) ===== */
+.PlanSubtitle{
+  margin-top: -4px;
+  margin-bottom: 12px;
+  opacity:.85;
+  font-size:.95rem;
+}
+
+.PlanList{
+  display:flex;
+  flex-direction:column;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.PlanRow{
+  display:grid;
+  grid-template-columns: 160px 1fr 160px 110px;
+  gap: 12px;
+  align-items:center;
+}
+
+.PlanLeft{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  font-weight: 800;
+}
+
+.PlanEmoji{
+  width: 26px;
+  text-align:center;
+}
+
+.PlanName{
+  opacity:.95;
+}
+
+.PlanBarWrap{
+  height: 12px;
+  border-radius: 999px;
+  overflow:hidden;
+  border: 1px solid rgba(74,222,128,0.18);
+  background: rgba(255,255,255,0.04);
+}
+
+.PlanBar{
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(74,222,128,0.15), rgba(74,222,128,1));
+  box-shadow: 0 0 18px rgba(74,222,128,0.25);
+}
+
+.PlanRight{
+  text-align:right;
+}
+
+.PlanAmount{
+  font-weight: 900;
+  color:#4ade80;
+}
+
+.light .PlanAmount{ color:#047857; }
+
+.PlanSpent{
+  font-size: 0.82rem;
+  opacity: 0.75;
+  margin-top: 4px;
+}
+
+.PlanInput{
+  width: 110px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(74,222,128,0.25);
+  background: rgba(255,255,255,0.05);
+  color: inherit;
+  outline: none;
+  font-weight: 800;
+}
+
+.light .PlanInput{
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(74,222,128,0.25);
+}
+
+.PlanActions{
+  margin-top: 14px;
+  display:flex;
+  justify-content:flex-end;
+}
+
+.SaveBtn{
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  border: none;
+  background: #4ade80;
+  color: #0d0d0d;
+  font-weight: 900;
+}
+
+.SaveBtn:hover{
+  filter: drop-shadow(0 0 12px rgba(74,222,128,0.35));
+}
+
+/* ===== Bottom info ===== */
+.InfoLine{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03);
+  margin-top: 10px;
+}
+.light .InfoLine{
+  border-color: rgba(0,0,0,0.06);
+  background: rgba(0,0,0,0.03);
+}
+
+.Hint{
+  margin-top: 12px;
+  opacity: .75;
+  font-size: .95rem;
+  line-height: 1.35;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 980px){
+  .Grid{
+    grid-template-columns: 1fr;
+  }
+  .LeftTop, .LeftBottom, .RightTall{
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .StatRow{
+    grid-template-columns: 1fr;
+  }
+  .StatBig{
+    align-items:flex-start;
+  }
+  .PlanRow{
+    grid-template-columns: 1fr;
+  }
+  .PlanRight{
+    text-align:left;
+  }
+  .PlanInput{
+    width: 100%;
+  }
+  .PlanActions{
+    justify-content:stretch;
+  }
+  .SaveBtn{
+    width: 100%;
+  }
+}
+
+.Toast{
+  max-width: 1200px;
+  margin: 0 auto 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  background: rgba(74, 222, 128, 0.10);
+}
+
+.Error{
+  max-width: 1200px;
+  margin: 0 auto 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,120,120,0.35);
+  background: rgba(255,120,120,0.12);
+}
+
+.Loading{
+  opacity: 0.75;
+}
+

@@ -11,5 +11,7 @@ namespace FinanceFlow.Api.Data
             : base(options) { }
 
         public DbSet<Expense> Expenses { get; set; }
+        public DbSet<CategoryBudget> CategoryBudgets { get; set; }
+
     }
 }

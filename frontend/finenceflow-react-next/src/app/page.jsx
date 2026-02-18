@@ -136,7 +136,7 @@ export default function LandingPage() {
           <div className={styles.MockupGlow} />
 
           <img
-            src="/dashboard-mockup.png"
+            src="/home page 1.png"
             alt="FinanceFlow dashboard"
             className={styles.Mockup}
           />
@@ -151,14 +151,14 @@ export default function LandingPage() {
 
           <div
             className={styles.FeatureDot}
-            style={{ top: "70%", left: "25%" }}
+            style={{ top: "60%", left: "25%" }}
           >
             <span>💸 Kategorizált kiadások</span>
           </div>
 
           <div
             className={styles.FeatureDot}
-            style={{ top: "21%", left: "80%" }}
+            style={{ top: "14%", left: "80%" }}
           >
             <span>📈 Havi trendek</span>
           </div>
@@ -180,7 +180,7 @@ export default function LandingPage() {
             <h3>📊 Lásd, mire megy el a pénzed</h3>
             <p>Áttekinthető listák és statisztikák egy helyen.</p>
           </div>
-          <img src="/mockup-expenses.png" alt="Kiadások" className={styles.Mockup}/>
+          <img src="/home page 2.png" alt="Kiadások" className={styles.Mockup}/>
         </div>
 
         <div className={`${styles.FeatureItem} ${styles.reverse}`}>
@@ -188,7 +188,7 @@ export default function LandingPage() {
             <h3>📈 Tervezz előre okosan</h3>
             <p>Kategóriák és trendek segítik a döntéseid.</p>
           </div>
-          <img src="/mockup-stats.png" alt="Statisztikák" className={styles.Mockup}/>
+          <img src="/Statisztikak 1.png" alt="Statisztikák" className={styles.Mockup}/>
         </div>
       </section>
 

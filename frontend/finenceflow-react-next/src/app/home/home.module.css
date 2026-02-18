@@ -619,6 +619,11 @@
 .HomeContent,
 .HomeContent * {
   opacity: 1;
+  
+}
+
+.HomeContent {
+  padding-bottom: 40px;
 }
 
 .DashCard,
@@ -638,4 +643,8 @@
 .RecentLeft small {
   opacity: 1;
   color: #9cffc2;
+}
+
+.BottomFullRow {
+  margin-top: 22px;
 }

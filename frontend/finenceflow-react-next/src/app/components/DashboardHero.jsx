@@ -74,27 +74,7 @@ export default function DashboardHero({
         </div>
 
         {/* BAL ALSÓ: Legutóbbi költések */}
-        <div className={`${styles.Panel} ${styles.LeftBottom}`}>
-          <div className={styles.Header}>
-            <div className={styles.Title}>Legutóbbi költések</div>
-            <span className={styles.LiveDot} />
-          </div>
-
-          <div className={styles.RecentList}>
-            {recent.slice(0, 3).map((r, idx) => (
-              <div key={idx} className={styles.RecentItem}>
-                <strong>{r.title}</strong>
-                <span className={styles.RecentAmount}>
-                  -{Number(r.amount || 0).toLocaleString("hu-HU")} Ft
-                </span>
-              </div>
-            ))}
-
-            {recent.length === 0 && (
-              <div style={{ opacity: 0.7 }}>Nincs még rögzített költés.</div>
-            )}
-          </div>
-        </div>
+        
       </div>
     </div>
   );

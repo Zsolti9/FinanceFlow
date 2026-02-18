@@ -1,3 +1,4 @@
+// app/home/page.jsx
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -5,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import DashboardHero from "../components/DashboardHero";
 import AppLogo from "../components/AppLogo";
+import HomeExpensesCard from "../components/HomeExpensesCard";
 
 import styles from "./home.module.css";
 
@@ -13,6 +15,7 @@ export default function HomePage() {
 
   const API_BASE = "https://localhost:7183";
   const DATA_URL = `${API_BASE}/api/data`;
+  const HOME_EXPENSES_URL = `${API_BASE}/api/home/expenses?limit=3`;
 
   const [user, setUser] = useState(null);
   const [isClient, setIsClient] = useState(false);
@@ -25,6 +28,10 @@ export default function HomePage() {
   const [loadingExpenses, setLoadingExpenses] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+
+  // ✅ Home "Kiadások" (backend aggregált)
+  const [homeExpenses, setHomeExpenses] = useState(null);
+  const [loadingHomeExpenses, setLoadingHomeExpenses] = useState(true);
 
   const [showModal, setShowModal] = useState(false);
   const [title, setTitle] = useState("");
@@ -178,9 +185,38 @@ export default function HomePage() {
     }
   }
 
+  // ✅ backend aggregált home kiadások betöltése
+  async function loadHomeExpenses() {
+    if (!token) return;
+
+    setLoadingHomeExpenses(true);
+
+    try {
+      const res = await fetch(HOME_EXPENSES_URL, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        console.error("HOME EXPENSES ERROR:", res.status, text);
+        setHomeExpenses(null);
+        return;
+      }
+
+      const data = await res.json();
+      setHomeExpenses(data);
+    } catch (e) {
+      console.error(e);
+      setHomeExpenses(null);
+    } finally {
+      setLoadingHomeExpenses(false);
+    }
+  }
+
   useEffect(() => {
     if (!isClient || !user) return;
     loadExpenses();
+    loadHomeExpenses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClient, user]);
 
@@ -198,7 +234,7 @@ export default function HomePage() {
         localStorage.setItem("user", JSON.stringify(data));
       })
       .catch((err) => console.error("LOAD USER ERROR:", err));
-  }, [isClient, token, API_BASE]);
+  }, [isClient, token]); // API_BASE konstans
 
   async function addExpense() {
     setError("");
@@ -257,6 +293,7 @@ export default function HomePage() {
       setShowModal(false);
 
       await loadExpenses();
+      await loadHomeExpenses();
     } catch (e) {
       console.error(e);
       setError("Szerver hiba mentés közben.");
@@ -283,6 +320,7 @@ export default function HomePage() {
       }
 
       setExpenses((prev) => prev.filter((x) => x.id !== id));
+      await loadHomeExpenses();
     } catch (e) {
       console.error(e);
       setError("Szerver hiba törlés közben.");
@@ -306,7 +344,7 @@ export default function HomePage() {
     user?.email?.split("@")[0];
 
   const monthlySpend = calcMonthlySpend(expenses);
-  const remaining = budget - monthlySpend; // ✅ ez kell a herohoz
+  const remaining = budget - monthlySpend;
 
   const categoryStats = getCategoryStats(expenses);
 
@@ -314,7 +352,6 @@ export default function HomePage() {
     (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
   );
 
-  // A te régi kártyáidhoz (lent)
   const remainingForBudgetCard = Math.max(0, budget - monthlySpend);
   const usedPct =
     budget > 0 ? Math.min(100, Math.round((monthlySpend / budget) * 100)) : 0;
@@ -363,7 +400,7 @@ export default function HomePage() {
         </span>
       </div>
 
-      {/* ✅ HERO DASHBOARD: itt jelenik meg a "keretből maradt" */}
+      {/* HERO DASHBOARD */}
       <DashboardHero
         remainingFt={remaining}
         budgetFt={budget}
@@ -376,7 +413,7 @@ export default function HomePage() {
         trendText="+12% az előző hónaphoz képest"
       />
 
-      {/* CONTENT (a te meglévő dashboard részed lent marad) */}
+      {/* CONTENT */}
       <div className={styles.HomeContent}>
         <div className={styles.SplitGrid}>
           {/* LEFT */}
@@ -434,66 +471,6 @@ export default function HomePage() {
                 </div>
 
                 <MiniAreaChart values={buildDailySeries(expenses)} />
-              </div>
-
-              {/*<div className={styles.DashCard}>
-                <div className={styles.CardTop}>
-                  <span className={styles.CardTitle}>Kategóriák</span>
-                  <span className={styles.LiveDot} />
-                </div>
-
-                <div className={styles.CategoryList}>
-                  {categoryStats.map((c) => (
-                    <div key={c.name} className={styles.CategoryRow}>
-                      <span className={styles.CategoryName}>
-                        {c.emoji} {c.name}
-                      </span>
-                      <span className={styles.CategoryPct}>{c.pct}%</span>
-                    </div>
-                  ))}
-
-                  {expenses.length === 0 && (
-                    <div className={styles.EmptyHint}>Még nincs elég adat.</div>
-                  )}
-                </div>
-              </div>*/}
-              
-            </div>
-
-            {/* Legutóbbi költések */}
-            <div className={styles.DashCard}>
-              <div className={styles.CardTop}>
-                <span className={styles.CardTitle}>Legutóbbi költések</span>
-                <span className={styles.LiveDot} />
-              </div>
-
-              <div className={styles.RecentList}>
-                {recentSorted.slice(0, 5).map((e) => (
-                  <div key={e.id} className={styles.RecentItem}>
-                    <div className={styles.RecentLeft}>
-                      <strong>{e.title}</strong>
-                      <small>
-                        {e.createdAt
-                          ? new Date(e.createdAt).toLocaleDateString("hu-HU", {
-                              month: "short",
-                              day: "2-digit",
-                            })
-                          : ""}
-                        {" • "}
-                        {e.category}
-                      </small>
-                    </div>
-                    <span className={styles.RecentAmount}>
-                      -{Number(e.amount || 0).toLocaleString("hu-HU")} Ft
-                    </span>
-                  </div>
-                ))}
-
-                {expenses.length === 0 && (
-                  <div className={styles.EmptyHint}>
-                    Nincs még rögzített költés.
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -565,6 +542,22 @@ export default function HomePage() {
               )}
             </div>
           </div>
+        </div>
+
+        {/* ✅ ALULRA: HOME KIADÁSOK KÁRTYA (a pirossal jelölt részre) */}
+        <div className={styles.BottomFullRow}>
+          {loadingHomeExpenses ? (
+            <div className={styles.ManagerCard}>
+              <div className={styles.ManagerHeader}>
+                <div>
+                  <h2 className={styles.ManagerTitle}>Kiadások</h2>
+                  <p className={styles.ManagerSub}>Betöltés...</p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <HomeExpensesCard data={homeExpenses} />
+          )}
         </div>
       </div>
 
@@ -657,7 +650,6 @@ export default function HomePage() {
 
 /* ===================== CHART HELPERS ===================== */
 
-// Hero-hoz: napi érték (nem kumulatív) - szebb görbe
 function buildDailyDaily(expenses) {
   const now = new Date();
   const y = now.getFullYear();
@@ -676,14 +668,12 @@ function buildDailyDaily(expenses) {
   return perDay;
 }
 
-// A te lentebbi chartodhoz (kumulatív)
 function buildDailySeries(expenses) {
   const perDay = buildDailyDaily(expenses);
   let sum = 0;
   return perDay.map((v) => (sum += v));
 }
 
-// Home kártya chartja (a te meglévő CSS-edhez)
 function MiniAreaChart({ values }) {
   const w = 640;
   const h = 180;
@@ -727,16 +717,8 @@ function MiniAreaChart({ values }) {
       >
         <defs>
           <linearGradient id="fillGreen" x1="0" x2="0" y1="0" y2="1">
-            <stop
-              offset="0%"
-              stopColor="rgb(74,222,128)"
-              stopOpacity="0.35"
-            />
-            <stop
-              offset="100%"
-              stopColor="rgb(74,222,128)"
-              stopOpacity="0"
-            />
+            <stop offset="0%" stopColor="rgb(74,222,128)" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="rgb(74,222,128)" stopOpacity="0" />
           </linearGradient>
 
           <filter id="glow">

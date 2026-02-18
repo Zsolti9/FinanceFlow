@@ -180,7 +180,23 @@ export default function LandingPage() {
             <h3>📊 Lásd, mire megy el a pénzed</h3>
             <p>Áttekinthető listák és statisztikák egy helyen.</p>
           </div>
-          <img src="/home page 2.png" alt="Kiadások" className={styles.Mockup}/>
+          <div className={styles.FeatureMockupWrap}>
+            <img src="/home page 2.png" alt="Kiadások" className={styles.Mockup}/>
+
+            <div
+              className={`${styles.FeatureDot} ${styles.ShowcaseDot}`}
+              style={{ top: "28%", left: "18%" }}
+            >
+              <span>🏷️ Azonnali kategória címkék</span>
+            </div>
+
+            <div
+              className={`${styles.FeatureDot} ${styles.ShowcaseDot}`}
+              style={{ top: "72%", left: "72%" }}
+            >
+              <span>✅ Gyors költés-ellenőrzés</span>
+            </div>
+          </div>
         </div>
 
         <div className={`${styles.FeatureItem} ${styles.reverse}`}>
@@ -188,7 +204,23 @@ export default function LandingPage() {
             <h3>📈 Tervezz előre okosan</h3>
             <p>Kategóriák és trendek segítik a döntéseid.</p>
           </div>
-          <img src="/Statisztikak 1.png" alt="Statisztikák" className={styles.Mockup}/>
+          <div className={styles.FeatureMockupWrap}>
+            <img src="/Statisztikak 1.png" alt="Statisztikák" className={styles.Mockup}/>
+
+            <div
+              className={`${styles.FeatureDot} ${styles.ShowcaseDot}`}
+              style={{ top: "20%", left: "74%" }}
+            >
+              <span>📉 Trend elemzés egy nézetben</span>
+            </div>
+
+            <div
+              className={`${styles.FeatureDot} ${styles.ShowcaseDot}`}
+              style={{ top: "66%", left: "20%" }}
+            >
+              <span>🎯 Célok követése hónapról hónapra</span>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -17,6 +17,12 @@ const DEFAULT_PLAN = {
   General: 0,
 };
 
+const CATEGORY_ALIASES = {
+  food: "Food",
+  transport: "Transport",
+  shopping: "Shopping",
+  bills: "Bills",
+};
 export default function StatisticsPage() {
   const router = useRouter();
 
@@ -195,7 +201,7 @@ export default function StatisticsPage() {
   const spentByCategory = useMemo(() => {
     const totals = {};
     for (const e of monthExpenses) {
-      const cat = e.category || "General";
+      const cat = normalizeCategory(e.category);
       totals[cat] = (totals[cat] || 0) + Number(e.amount || 0);
     }
     return totals;
@@ -223,6 +229,7 @@ export default function StatisticsPage() {
         budget,
         spent,
         pct,
+        isOverBudget: budget > 0 && spent > budget,
       };
     });
   }, [plan, spentByCategory]);
@@ -316,12 +323,16 @@ export default function StatisticsPage() {
                       c.budget
                     )} Ft`}
                   >
-                    <div className={styles.PlanBar} style={{ width: `${c.pct}%` }} />
+                    <div
+                      className={`${styles.PlanBar} ${c.isOverBudget ? styles.PlanBarOver : ""}`}
+                      style={{ width: `${c.pct}%` }}
+                    />
                   </div>
 
                   <div className={styles.PlanRight}>
                     <div className={styles.PlanAmount}>{formatHu(c.budget)} Ft</div>
                     <div className={styles.PlanSpent}>Költés: {formatHu(c.spent)} Ft</div>
+                    <div className={styles.PlanPct}>{c.pct}% felhasználva</div>
                   </div>
 
                   <input
@@ -373,6 +384,11 @@ export default function StatisticsPage() {
 
 function formatHu(n) {
   return Number(n || 0).toLocaleString("hu-HU");
+}
+
+function normalizeCategory(category) {
+  const key = String(category || "General").trim().toLowerCase();
+  return CATEGORY_ALIASES[key] ?? "General";
 }
 
 function buildDailySeries(list, y, m0) {

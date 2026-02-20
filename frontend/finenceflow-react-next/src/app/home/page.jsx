@@ -394,6 +394,7 @@ export default function HomePage() {
         <span onClick={() => router.push("/profile")}>👤 Profil</span>
         <span onClick={() => router.push("/statistics")}>📝 Statisztikák</span>
         <span onClick={() => router.push("/settings")}>⚙️ Beállítások</span>
+        <span onClick={() => router.push("/savings")}>💰 Megtakarítások</span>
 
         <span className={styles.Logout} onClick={logout}>
           🚪 Kijelentkezés

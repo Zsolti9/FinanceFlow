@@ -145,6 +145,7 @@
 .Item {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 16px;
   border: 1px solid #334155;
   border-radius: 12px;
@@ -156,8 +157,8 @@
 }
 
 .ItemMain {
-  flex: 1;
-  min-width: 260px;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .ItemName {
@@ -202,7 +203,8 @@
 }
 
 .Actions {
-  width: 220px;
+  flex: 0 1 220px;
+  min-width: 0;
   display: grid;
   align-content: center;
   gap: 10px;
@@ -210,7 +212,7 @@
 
 .DepositRow {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
 }
 
@@ -220,7 +222,11 @@
   padding: 8px 10px;
   font-size: 0.95rem;
   background: transparent;
-  color: inherit;
+  color: inherit;min-width: 0;
+}
+
+.DepositBtn {
+  white-space: nowrap;
 }
 
 .light .DepositInput {
@@ -234,6 +240,7 @@
   border-radius: 8px;
   padding: 8px 12px;
   cursor: pointer;
+  width: 100%;
 }
 
 .Empty {
@@ -243,6 +250,11 @@
 
 .light .Empty {
   color: #64748b;
+}
+@media (max-width: 900px) {
+  .Actions {
+    flex-basis: 190px;
+  }
 }
 
 @media (max-width: 760px) {

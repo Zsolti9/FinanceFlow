@@ -124,6 +124,16 @@ export default function SavingsPage() {
     }
   }
 
+  function subtractFromMonthlyBudget(amountToSubtract) {
+    if (typeof window === "undefined") return;
+
+    const currentBudget = Number(localStorage.getItem("budget") || 0);
+    if (!Number.isFinite(currentBudget)) return;
+
+    const nextBudget = Math.max(0, currentBudget - amountToSubtract);
+    localStorage.setItem("budget", String(nextBudget));
+  }
+
   async function handleAddDeposit(goalId) {
     const raw = depositInputs[goalId] ?? "";
     const amount = Number(raw);
@@ -156,6 +166,7 @@ export default function SavingsPage() {
       const updated = await res.json();
       setGoals((prev) => prev.map((g) => (g.id === goalId ? updated : g)));
       setDepositInputs((prev) => ({ ...prev, [goalId]: "" }));
+      subtractFromMonthlyBudget(amount);
     } catch (e) {
       console.error(e);
       setError("Szerver hiba történt.");

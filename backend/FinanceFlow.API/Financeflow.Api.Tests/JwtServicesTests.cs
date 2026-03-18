@@ -1,10 +1,7 @@
-﻿using FinanceFlow.Api.Models;
-using FinanceFlow.Api.Services;
-using Microsoft.Extensions.Configuration;
-using System.IdentityModel.Tokens.Jwt;
+﻿using FinanceFlow.Api.Services;
 using System.Security.Claims;
 
-namespace FinanceFlow.Api.Tests;
+namespace FinanceFlow.API.Tests;
 
 public class JwtServiceTests
 {

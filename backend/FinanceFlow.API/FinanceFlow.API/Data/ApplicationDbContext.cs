@@ -13,5 +13,6 @@ namespace FinanceFlow.Api.Data
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<CategoryBudget> CategoryBudgets { get; set; }
         public DbSet<SavingsGoal> SavingsGoals { get; set; }
+        public object UserData { get; set; }
     }
 }

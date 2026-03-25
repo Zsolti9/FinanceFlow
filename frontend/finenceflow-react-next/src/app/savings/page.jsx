@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import useCurrencyDisplay from "../hooks/useCurrencyDisplay";
 
 import AppLogo from "../components/AppLogo";
 import styles from "./savings.module.css";
@@ -11,6 +12,8 @@ const SAVINGS_URL = `${API_BASE}/api/savings`;
 
 export default function SavingsPage() {
   const router = useRouter();
+  const { formatFromHuf } = useCurrencyDisplay();
+
 
   const [isDarkMode] = useState(() => {
     if (typeof window === "undefined") return true;
@@ -226,7 +229,7 @@ export default function SavingsPage() {
             </label>
 
             <label className={styles.Label}>
-              Cél összeg (Ft)
+              Cél összeg (alap: Ft)
               <input
                 type="number"
                 min="1"
@@ -250,7 +253,7 @@ export default function SavingsPage() {
           <div className={styles.ListHeader}>
             <h2 className={styles.ListTitle}>Célok</h2>
             <span className={styles.Total}>
-              Összesen: {formatFt(totalSaved)} / {formatFt(totalTarget)}
+              Összesen: {formatFromHuf(totalSaved)} / {formatFromHuf(totalTarget)}
             </span>
           </div>
 
@@ -271,7 +274,7 @@ export default function SavingsPage() {
                     <div className={styles.ItemMain}>
                       <p className={styles.ItemName}>{goal.name}</p>
                       <p className={styles.ItemAmount}>
-                        {formatFt(goal.savedAmount)} / {formatFt(goal.targetAmount)}
+                         {formatFromHuf(goal.savedAmount)} / {formatFromHuf(goal.targetAmount)}
                       </p>
 
                       <div className={styles.ProgressTrack}>
@@ -326,12 +329,4 @@ export default function SavingsPage() {
       </main>
     </div>
   );
-}
-
-function formatFt(amount) {
-  return new Intl.NumberFormat("hu-HU", {
-    style: "currency",
-    currency: "HUF",
-    maximumFractionDigits: 0,
-  }).format(Number(amount || 0));
 }

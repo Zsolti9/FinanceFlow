@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import AppLogo from "../components/AppLogo";
 import styles from "./statistics.module.css";
+import useCurrencyDisplay from "../hooks/useCurrencyDisplay";
 
 const API_BASE = "https://localhost:7183";
 const DATA_URL = `${API_BASE}/api/data`;
@@ -25,6 +26,7 @@ const CATEGORY_ALIASES = {
 };
 export default function StatisticsPage() {
   const router = useRouter();
+  const { formatFromHuf } = useCurrencyDisplay();
 
   const [isClient, setIsClient] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -318,10 +320,9 @@ export default function StatisticsPage() {
                   </div>
 
                   <div
-                    className={styles.PlanBarWrap}
-                    title={`${c.pct}% • Költés: ${formatHu(c.spent)} Ft / Keret: ${formatHu(
+                    className={styles.PlanBarWrap}title={`${c.pct}% • Költés: ${formatFromHuf(c.spent)} / Keret: ${formatFromHuf(
                       c.budget
-                    )} Ft`}
+                    )} `}
                   >
                     <div
                       className={`${styles.PlanBar} ${c.isOverBudget ? styles.PlanBarOver : ""}`}
@@ -330,8 +331,8 @@ export default function StatisticsPage() {
                   </div>
 
                   <div className={styles.PlanRight}>
-                    <div className={styles.PlanAmount}>{formatHu(c.budget)} Ft</div>
-                    <div className={styles.PlanSpent}>Költés: {formatHu(c.spent)} Ft</div>
+                    <div className={styles.PlanAmount}>{formatFromHuf(c.budget)}</div>
+                    <div className={styles.PlanSpent}>Költés: {formatFromHuf(c.spent)}</div>
                     <div className={styles.PlanPct}>{c.pct}% felhasználva</div>
                   </div>
 
@@ -367,7 +368,7 @@ export default function StatisticsPage() {
 
             <div className={styles.InfoLine}>
               <span>Havi költés összesen:</span>
-              <strong>{formatHu(monthlySum)} Ft</strong>
+              <strong>{formatFromHuf(monthlySum)}</strong>
             </div>
 
             <div className={styles.Hint}>
@@ -382,9 +383,6 @@ export default function StatisticsPage() {
 
 /* ===================== HELPERS ===================== */
 
-function formatHu(n) {
-  return Number(n || 0).toLocaleString("hu-HU");
-}
 
 function normalizeCategory(category) {
   const key = String(category || "General").trim().toLowerCase();

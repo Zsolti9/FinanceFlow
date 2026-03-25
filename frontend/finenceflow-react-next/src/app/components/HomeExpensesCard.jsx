@@ -1,6 +1,7 @@
 import styles from "./HomeExpensesCard.module.css";
 
-export default function HomeExpensesCard({ data }) {
+export default function HomeExpensesCard({ data, formatFromHuf }) {
+  const formatMoney = formatFromHuf ?? ((v) => `${Number(v || 0).toLocaleString("hu-HU")} Ft`);
   if (!data) {
     return (
       <div className={styles.card}>
@@ -19,9 +20,7 @@ export default function HomeExpensesCard({ data }) {
           </div>
         </div>
 
-        <div className={styles.total}>
-          -{data.total.toLocaleString("hu-HU")} Ft
-        </div>
+        <div className={styles.total}>-{formatMoney(data.total)}</div>
       </div>
 
       <div className={styles.tableHeader}>
@@ -39,7 +38,7 @@ export default function HomeExpensesCard({ data }) {
             <div className={styles.categoryHeader}>
               <span>{c.category}</span>
               <span className={styles.categoryTotal}>
-                -{c.categoryTotal.toLocaleString("hu-HU")} Ft
+                -{formatMoney(c.categoryTotal)}
               </span>
             </div>
 
@@ -55,7 +54,7 @@ export default function HomeExpensesCard({ data }) {
                   </div>
                   <div className={styles.category}>{c.category}</div>
                   <div className={styles.amount}>
-                    -{e.amount.toLocaleString("hu-HU")} Ft
+                    -{formatMoney(e.amount)}
                   </div>
                 </div>
               ))}

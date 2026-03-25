@@ -107,15 +107,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "FinanceFlow.API.Tests",
+              "Title": "FinanceFlow.API.Tests.csproj",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj",
               "RelativeDocumentMoniker": "FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj",
               "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj",
               "RelativeToolTip": "FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-03-25T07:46:26.223Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-25T07:46:26.223Z"
             },
             {
               "$type": "Document",
@@ -127,8 +126,7 @@
               "RelativeToolTip": "FinanceFlow.API.Tests\\UserDataServiceTests.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T07:31:20.701Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-25T07:31:20.701Z"
             },
             {
               "$type": "Document",
@@ -140,8 +138,7 @@
               "RelativeToolTip": "FinanceFlow.API.Tests\\JwtServiceTests.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T07:30:40.382Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-25T07:30:40.382Z"
             },
             {
               "$type": "Document",
@@ -153,8 +150,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Program.cs",
               "ViewState": "AgIAAGMAAAAAAAAAAAAcwEkAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T07:17:13.671Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-25T07:17:13.671Z"
             },
             {
               "$type": "Document",
@@ -179,8 +175,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Interfaces\\IExpenseService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T07:16:22.308Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-25T07:16:22.308Z"
             },
             {
               "$type": "Document",
@@ -192,8 +187,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Services\\ExpenseService.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAywEYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T07:16:04.835Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-25T07:16:04.835Z"
             },
             {
               "$type": "Document",
@@ -205,8 +199,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Controllers\\DataController.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAowDEAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T07:06:39.825Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-25T07:06:39.825Z"
             },
             {
               "$type": "Document",
@@ -218,8 +211,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Migrations\\20260220114246_AddSavingsGoals.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T11:42:46.481Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-20T11:42:46.481Z"
             },
             {
               "$type": "Document",
@@ -231,8 +223,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Controllers\\SavingsController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T11:22:47.272Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-20T11:22:47.272Z"
             },
             {
               "$type": "Document",
@@ -244,8 +235,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T11:22:19.399Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-20T11:22:19.399Z"
             },
             {
               "$type": "Document",
@@ -257,8 +247,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Dtos\\SavingsDtos.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T11:21:56.034Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-20T11:21:56.034Z"
             },
             {
               "$type": "Document",
@@ -270,8 +259,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-18T09:10:36.834Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-18T09:10:36.834Z"
             },
             {
               "$type": "Document",
@@ -283,8 +271,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Migrations\\ApplicationDbContextModelSnapshot.cs",
               "ViewState": "AgIAAFUAAAAAAAAAAAAxwH0AAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T11:20:26.558Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-20T11:20:26.558Z"
             },
             {
               "$type": "Document",
@@ -296,8 +283,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Models\\SavingsGoal.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T11:20:01.907Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-20T11:20:01.907Z"
             },
             {
               "$type": "Document",
@@ -309,8 +295,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Dtos\\HomeExpensesDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-18T09:09:48.504Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-18T09:09:48.504Z"
             },
             {
               "$type": "Document",
@@ -322,8 +307,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Dtos\\ExpenseDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-18T09:05:11.958Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-18T09:05:11.958Z"
             },
             {
               "$type": "Document",
@@ -335,8 +319,7 @@
               "RelativeToolTip": "FinanceFlow.API\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-18T09:05:08.905Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-18T09:05:08.905Z"
             }
           ]
         }

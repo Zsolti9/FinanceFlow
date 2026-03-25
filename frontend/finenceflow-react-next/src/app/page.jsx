@@ -6,6 +6,7 @@ import styles from "./landing.module.css";
 import AppLogo from "./components/AppLogo";
 
 
+
 export default function LandingPage() {
   const router = useRouter();
   const pathname = usePathname();

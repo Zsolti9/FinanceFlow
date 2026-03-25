@@ -9,7 +9,9 @@ export default function DashboardHero({
   recent = [],                     // [{ title, amount }]
   seriesValues = [],               // number[]
   trendText = "",
+  formatFromHuf,
 }) {
+  const formatMoney = formatFromHuf ?? ((v) => `${Number(v || 0).toLocaleString("hu-HU")} Ft`);
   const rem = Number(remainingFt || 0);
   const sign = rem >= 0 ? "+" : "-";
   const abs = Math.abs(rem);
@@ -31,7 +33,7 @@ export default function DashboardHero({
             style={{ color: rem >= 0 ? "#4ade80" : "#ff6b6b" }}
           >
             {sign}
-            {abs.toLocaleString("hu-HU")} Ft
+            {formatMoney(abs)}
           </div>
 
           <div className={styles.BalanceSub}>
@@ -168,7 +170,23 @@ function MultiDonut({ items = [], centerText = "0%" }) {
   const C = 2 * Math.PI * radius;
   const gap = 2.2;
 
-  let offset = 0;
+ const segments = data.reduce(
+    (acc, seg) => {
+      const segLen = (seg.pct / 100) * C;
+      if (segLen > gap + 0.5) {
+        const dash = Math.max(0, segLen - gap);
+        acc.items.push({
+          key: seg.name,
+          strokeColor: colors[seg.name] ?? "#4ade80",
+          dasharray: `${dash} ${C - dash}`,
+          dashoffset: -acc.offset,
+        });
+      }
+      return { items: acc.items, offset: acc.offset + segLen };
+    },
+    { items: [], offset: 0 }
+  ).items;
+
 
   return (
     <div className={styles.DonutWrap} aria-hidden="true">
@@ -183,34 +201,20 @@ function MultiDonut({ items = [], centerText = "0%" }) {
         />
 
         <g transform="rotate(-90 60 60)">
-          {data.map((seg) => {
-            const segLen = (seg.pct / 100) * C;
-
-            if (segLen <= gap + 0.5) {
-              offset += segLen;
-              return null;
-            }
-
-            const dash = Math.max(0, segLen - gap);
-            const dasharray = `${dash} ${C - dash}`;
-            const dashoffset = -offset;
-
-            offset += segLen;
-
-            const strokeColor = colors[seg.name] ?? "#4ade80";
+          {segments.map((seg) => {
 
             return (
               <circle
-                key={seg.name}
+                key={seg.key}
                 cx={cx}
                 cy={cy}
                 r={radius}
-                stroke={strokeColor}
+                stroke={seg.strokeColor}
                 strokeWidth={stroke}
                 strokeLinecap="round"
                 fill="none"
-                strokeDasharray={dasharray}
-                strokeDashoffset={dashoffset}
+                strokeDasharray={seg.dasharray}
+                strokeDashoffset={seg.dashoffset}
               />
             );
           })}

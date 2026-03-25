@@ -22,6 +22,18 @@
   justify-content: space-between;
 }
 
+.HomeLikeSelect,
+.HomeLikeSelect option {
+  background: #111;
+  color: #fff;
+}
+
+.light .HomeLikeSelect,
+.light .HomeLikeSelect option {
+  background: #fff;
+  color: #000;
+}
+
 .Title {
   font-size: 2.2rem;
   margin: 0;

@@ -63,7 +63,9 @@ export default function SettingsPage() {
         if (!data) return;
 
         setLanguage(data.language ?? "hu");
-        setCurrency(data.defaultCurrency ?? "HUF");
+         const nextCurrency = data.defaultCurrency ?? "HUF";
+        setCurrency(nextCurrency);
+        localStorage.setItem("defaultCurrency", nextCurrency);
         setNotificationsEnabled(data.notificationsEnabled ?? true);
       })
       .catch((err) => console.error("LOAD SETTINGS ERROR:", err));
@@ -166,6 +168,7 @@ export default function SettingsPage() {
       return;
     }
 
+    localStorage.setItem("defaultCurrency", currency);
     toast("✅ Beállítások elmentve.");
   }
 
@@ -285,7 +288,7 @@ export default function SettingsPage() {
 
         <div className={styles.Row}>
           <select
-            className={styles.ModalInput}
+            className={`${styles.ModalInput} ${styles.HomeLikeSelect}`}
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
           >
@@ -294,7 +297,7 @@ export default function SettingsPage() {
           </select>
 
           <select
-            className={styles.ModalInput}
+            className={`${styles.ModalInput} ${styles.HomeLikeSelect}`}
             value={currency}
             onChange={(e) => setCurrency(e.target.value)}
           >

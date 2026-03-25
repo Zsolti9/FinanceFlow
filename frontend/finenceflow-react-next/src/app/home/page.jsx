@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import DashboardHero from "../components/DashboardHero";
 import AppLogo from "../components/AppLogo";
 import HomeExpensesCard from "../components/HomeExpensesCard";
+import useCurrencyDisplay from "../hooks/useCurrencyDisplay";
 
 import styles from "./home.module.css";
 
@@ -39,6 +40,7 @@ export default function HomePage() {
   const [category, setCategory] = useState("Food");
 
   const [budget, setBudget] = useState(0);
+  const { formatFromHuf } = useCurrencyDisplay();
   const [showBudgetModal, setShowBudgetModal] = useState(false);
   const [budgetInput, setBudgetInput] = useState("");
 
@@ -278,9 +280,7 @@ export default function HomePage() {
         try {
           const err = JSON.parse(text);
           if (err.message) {
-            msg = `${err.message} (Maradék: ${err.remaining?.toLocaleString(
-              "hu-HU"
-            )} Ft)`;
+            msg = `${err.message} (Maradék: ${formatFromHuf(err.remaining)})`;
           }
         } catch {}
         setError(msg);
@@ -405,6 +405,7 @@ export default function HomePage() {
       <DashboardHero
         remainingFt={remaining}
         budgetFt={budget}
+        formatFromHuf={formatFromHuf}
         categoryStats={categoryStats}
         recent={recentSorted.slice(0, 3).map((e) => ({
           title: e.title,
@@ -429,14 +430,14 @@ export default function HomePage() {
 
                 <div className={styles.BigValue}>
                   {budget > 0
-                    ? `${budget.toLocaleString("hu-HU")} Ft`
+                    ? formatFromHuf(budget)
                     : "Nincs beállítva"}
                 </div>
 
                 <div className={styles.SubMuted}>
                   Maradék:{" "}
                   <strong>
-                    {remainingForBudgetCard.toLocaleString("hu-HU")} Ft
+                    {formatFromHuf(remainingForBudgetCard)}
                   </strong>{" "}
                   • Felhasznált: <strong>{usedPct}%</strong>
                 </div>
@@ -464,7 +465,7 @@ export default function HomePage() {
                 </div>
 
                 <div className={styles.BigValue}>
-                  {monthlySpend.toLocaleString("hu-HU")} Ft
+                  {formatFromHuf(monthlySpend)}
                 </div>
 
                 <div className={styles.SubMuted}>
@@ -520,7 +521,7 @@ export default function HomePage() {
 
                       <div className={styles.ExpenseRight}>
                         <span className={styles.ExpenseAmount}>
-                          -{Number(e.amount || 0).toLocaleString("hu-HU")} Ft
+                          -{formatFromHuf(e.amount)}
                         </span>
 
                         <button
@@ -557,7 +558,7 @@ export default function HomePage() {
               </div>
             </div>
           ) : (
-            <HomeExpensesCard data={homeExpenses} />
+            <HomeExpensesCard data={homeExpenses} formatFromHuf={formatFromHuf} />
           )}
         </div>
       </div>
@@ -588,7 +589,7 @@ export default function HomePage() {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               type="number"
-              placeholder="Összeg (Ft)"
+              placeholder="Összeg (alap: Ft)"
             />
 
             <select
@@ -636,7 +637,7 @@ export default function HomePage() {
               value={budgetInput}
               onChange={(e) => setBudgetInput(e.target.value)}
               type="number"
-              placeholder="Keret (Ft)"
+              placeholder="Keret (alap: Ft)"
             />
 
             <button className={styles.SaveExpenseBtn} onClick={saveBudget}>

@@ -2,12 +2,13 @@
 using FinanceFlow.Api.Models;
 using FinanceFlow.Api.Services;
 using FinanceFlow.API.Interfaces;
+using FinanceFlow.API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.Extensions.FileProviders;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -70,6 +71,8 @@ builder.Services.AddAuthentication(options =>
 // --------------------
 // Services
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IExpenseService, ExpenseService>();
+
 
 // --------------------
 // Controllers & Swagger

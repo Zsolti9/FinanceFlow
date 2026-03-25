@@ -3,6 +3,42 @@
   "WorkspaceRootPath": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{63FA824D-DC1C-4E56-9136-DCB4185B32CD}|FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api.tests\\expenseservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FA824D-DC1C-4E56-9136-DCB4185B32CD}|FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj|solutionrelative:financeflow.api.tests\\expenseservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FA824D-DC1C-4E56-9136-DCB4185B32CD}|FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api.tests\\jwtservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FA824D-DC1C-4E56-9136-DCB4185B32CD}|FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj|solutionrelative:financeflow.api.tests\\jwtservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FA824D-DC1C-4E56-9136-DCB4185B32CD}|FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api.tests\\userdataservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FA824D-DC1C-4E56-9136-DCB4185B32CD}|FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj|solutionrelative:financeflow.api.tests\\userdataservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FA824D-DC1C-4E56-9136-DCB4185B32CD}|FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api.tests\\financeflow.api.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{63FA824D-DC1C-4E56-9136-DCB4185B32CD}|FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj|solutionrelative:financeflow.api.tests\\financeflow.api.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api\\controllers\\datacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\controllers\\datacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api\\services\\expenseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\services\\expenseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api\\interfaces\\iexpenseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\interfaces\\iexpenseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api\\migrations\\20260220114246_addsavingsgoals.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\migrations\\20260220114246_addsavingsgoals.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,10 +63,6 @@
       "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\models\\savingsgoal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|c:\\13d\\mestermunka\\mainbranch\\financeflow\\backend\\financeflow.api\\financeflow.api\\dtos\\homeexpensesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{34AF618D-1D8D-43BB-BDA3-E4E73AD217C2}|FinanceFlow.API\\FinanceFlow.API.csproj|solutionrelative:financeflow.api\\dtos\\homeexpensesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -53,8 +85,116 @@
           "SelectedChildIndex": 6,
           "Children": [
             {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FinanceFlow.API.Tests",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj",
+              "RelativeDocumentMoniker": "FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj",
+              "RelativeToolTip": "FinanceFlow.API.Tests\\FinanceFlow.API.Tests.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-03-25T07:46:26.223Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserDataServiceTests.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API.Tests\\UserDataServiceTests.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API.Tests\\UserDataServiceTests.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API.Tests\\UserDataServiceTests.cs",
+              "RelativeToolTip": "FinanceFlow.API.Tests\\UserDataServiceTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T07:31:20.701Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "JwtServiceTests.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API.Tests\\JwtServiceTests.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API.Tests\\JwtServiceTests.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API.Tests\\JwtServiceTests.cs",
+              "RelativeToolTip": "FinanceFlow.API.Tests\\JwtServiceTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T07:30:40.382Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Program.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Program.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Program.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Program.cs",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAcwEkAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T07:17:13.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ExpenseServiceTests.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API.Tests\\ExpenseServiceTests.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API.Tests\\ExpenseServiceTests.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API.Tests\\ExpenseServiceTests.cs*",
+              "RelativeToolTip": "FinanceFlow.API.Tests\\ExpenseServiceTests.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T07:27:28.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IExpenseService.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Interfaces\\IExpenseService.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Interfaces\\IExpenseService.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Interfaces\\IExpenseService.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Interfaces\\IExpenseService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T07:16:22.308Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ExpenseService.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Services\\ExpenseService.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Services\\ExpenseService.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Services\\ExpenseService.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Services\\ExpenseService.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAywEYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T07:16:04.835Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DataController.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\DataController.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Controllers\\DataController.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\DataController.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Controllers\\DataController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAowDEAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T07:06:39.825Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -69,16 +209,8 @@
               "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
               "Title": "20260220114246_AddSavingsGoals.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Migrations\\20260220114246_AddSavingsGoals.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Migrations\\20260220114246_AddSavingsGoals.cs",
@@ -91,7 +223,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
               "Title": "SavingsController.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\SavingsController.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Controllers\\SavingsController.cs",
@@ -99,11 +231,12 @@
               "RelativeToolTip": "FinanceFlow.API\\Controllers\\SavingsController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T11:22:47.272Z"
+              "WhenOpened": "2026-02-20T11:22:47.272Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 11,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Data\\ApplicationDbContext.cs",
@@ -111,11 +244,12 @@
               "RelativeToolTip": "FinanceFlow.API\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T11:22:19.399Z"
+              "WhenOpened": "2026-02-20T11:22:19.399Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 12,
               "Title": "SavingsDtos.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Dtos\\SavingsDtos.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Dtos\\SavingsDtos.cs",
@@ -123,35 +257,12 @@
               "RelativeToolTip": "FinanceFlow.API\\Dtos\\SavingsDtos.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T11:21:56.034Z"
+              "WhenOpened": "2026-02-20T11:21:56.034Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ApplicationDbContextModelSnapshot.cs",
-              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Migrations\\ApplicationDbContextModelSnapshot.cs",
-              "RelativeDocumentMoniker": "FinanceFlow.API\\Migrations\\ApplicationDbContextModelSnapshot.cs",
-              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Migrations\\ApplicationDbContextModelSnapshot.cs",
-              "RelativeToolTip": "FinanceFlow.API\\Migrations\\ApplicationDbContextModelSnapshot.cs",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAxwH0AAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T11:20:26.558Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SavingsGoal.cs",
-              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Models\\SavingsGoal.cs",
-              "RelativeDocumentMoniker": "FinanceFlow.API\\Models\\SavingsGoal.cs",
-              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Models\\SavingsGoal.cs",
-              "RelativeToolTip": "FinanceFlow.API\\Models\\SavingsGoal.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T11:20:01.907Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Controllers\\HomeController.cs",
@@ -159,11 +270,38 @@
               "RelativeToolTip": "FinanceFlow.API\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-18T09:10:36.834Z"
+              "WhenOpened": "2026-02-18T09:10:36.834Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
+              "Title": "ApplicationDbContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAxwH0AAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-20T11:20:26.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SavingsGoal.cs",
+              "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Models\\SavingsGoal.cs",
+              "RelativeDocumentMoniker": "FinanceFlow.API\\Models\\SavingsGoal.cs",
+              "ToolTip": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Models\\SavingsGoal.cs",
+              "RelativeToolTip": "FinanceFlow.API\\Models\\SavingsGoal.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-20T11:20:01.907Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "HomeExpensesDto.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Dtos\\HomeExpensesDto.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Dtos\\HomeExpensesDto.cs",
@@ -171,11 +309,12 @@
               "RelativeToolTip": "FinanceFlow.API\\Dtos\\HomeExpensesDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-18T09:09:48.504Z"
+              "WhenOpened": "2026-02-18T09:09:48.504Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 16,
               "Title": "ExpenseDto.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Dtos\\ExpenseDto.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Dtos\\ExpenseDto.cs",
@@ -183,11 +322,12 @@
               "RelativeToolTip": "FinanceFlow.API\\Dtos\\ExpenseDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-18T09:05:11.958Z"
+              "WhenOpened": "2026-02-18T09:05:11.958Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 17,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\13D\\Mestermunka\\MainBranch\\FinanceFlow\\backend\\FinanceFlow.API\\FinanceFlow.API\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "FinanceFlow.API\\Controllers\\AuthController.cs",
@@ -195,7 +335,8 @@
               "RelativeToolTip": "FinanceFlow.API\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-18T09:05:08.905Z"
+              "WhenOpened": "2026-02-18T09:05:08.905Z",
+              "EditorCaption": ""
             }
           ]
         }
